@@ -1,0 +1,7 @@
+{
+  "name": "selfcare-monorepo-poc",
+  "private": true,
+  "type": "module",
+  "description": "PoC for SelfCare Monorepo structure",
+  "license": "UNLICENSED"
+}
