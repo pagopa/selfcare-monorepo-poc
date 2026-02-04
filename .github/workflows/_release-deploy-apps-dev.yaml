@@ -1,0 +1,167 @@
+name: "[PoC Mock] Deploy Apps to DEV"
+
+# PoC MOCK WORKFLOW - For demonstration purposes only
+# This simulates selective application deployment without real Azure resources
+#
+# IN PRODUCTION: Uncomment the real workflow sections below
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/**"
+      - ".github/workflows/_release-deploy-apps-dev.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Step 1: Detect which apps changed
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      onboarding: ${{ steps.filter.outputs.onboarding }}
+      product: ${{ steps.filter.outputs.product }}
+      iam: ${{ steps.filter.outputs.iam }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect changed apps
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            onboarding:
+              - 'apps/onboarding-ms/**'
+            product:
+              - 'apps/product-ms/**'
+            iam:
+              - 'apps/iam-ms/**'
+
+      - name: Show detection results
+        run: |
+          echo "🔍 Path Detection Results:"
+          echo "  onboarding-ms: ${{ steps.filter.outputs.onboarding }}"
+          echo "  product-ms: ${{ steps.filter.outputs.product }}"
+          echo "  iam-ms: ${{ steps.filter.outputs.iam }}"
+
+  # Step 2: Mock deploy onboarding-ms
+  deploy-onboarding:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.onboarding == 'true'
+    name: "[Mock] Deploy Onboarding MS"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mock deployment
+        run: |
+          echo "🚀 [MOCK] Deploying onboarding-ms to DEV"
+          echo ""
+          echo "In production, this would execute:"
+          echo "  - Build Docker image from apps/onboarding-ms"
+          echo "  - Push to Azure Container Registry"
+          echo "  - Deploy to Container App: selc-d-onboarding-ca"
+          echo "  - Health check: /health endpoint"
+          echo ""
+          echo "✅ Mock deployment successful"
+
+      # PRODUCTION VERSION (commented for PoC):
+      # uses: pagopa/dx/.github/workflows/release-azure-appsvc-v1.yaml@main
+      # secrets: inherit
+      # with:
+      #   environment: app-dev
+      #   resource_group_name: selc-d-onboarding-rg
+      #   app_name: selc-d-onboarding-ca
+      #   package_path: "apps/onboarding-ms"
+      #   health_check_path: "/health"
+      #   use_private_agent: false
+
+  # Step 3: Mock deploy product-ms
+  deploy-product:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.product == 'true'
+    name: "[Mock] Deploy Product MS"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mock deployment
+        run: |
+          echo "🚀 [MOCK] Deploying product-ms to DEV"
+          echo ""
+          echo "In production, this would execute:"
+          echo "  - Build Docker image from apps/product-ms"
+          echo "  - Push to Azure Container Registry"
+          echo "  - Deploy to Container App: selc-d-product-ca"
+          echo "  - Health check: /health endpoint"
+          echo ""
+          echo "✅ Mock deployment successful"
+
+      # PRODUCTION VERSION (commented for PoC):
+      # uses: pagopa/dx/.github/workflows/release-azure-appsvc-v1.yaml@main
+      # secrets: inherit
+      # with:
+      #   environment: app-dev
+      #   resource_group_name: selc-d-product-rg
+      #   app_name: selc-d-product-ca
+      #   package_path: "apps/product-ms"
+      #   health_check_path: "/health"
+      #   use_private_agent: false
+
+  # Step 4: Mock deploy iam-ms
+  deploy-iam:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.iam == 'true'
+    name: "[Mock] Deploy IAM MS"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mock deployment
+        run: |
+          echo "🚀 [MOCK] Deploying iam-ms to DEV"
+          echo ""
+          echo "In production, this would execute:"
+          echo "  - Build Docker image from apps/iam-ms"
+          echo "  - Push to Azure Container Registry"
+          echo "  - Deploy to Container App: selc-d-iam-ca"
+          echo "  - Health check: /health endpoint"
+          echo ""
+          echo "✅ Mock deployment successful"
+
+      # PRODUCTION VERSION (commented for PoC):
+      # uses: pagopa/dx/.github/workflows/release-azure-appsvc-v1.yaml@main
+      # secrets: inherit
+      # with:
+      #   environment: app-dev
+      #   resource_group_name: selc-d-iam-rg
+      #   app_name: selc-d-iam-ca
+      #   package_path: "apps/iam-ms"
+      #   health_check_path: "/health"
+      #   use_private_agent: false
+
+  # Summary
+  summary:
+    needs: [detect-changes, deploy-onboarding, deploy-product, deploy-iam]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployment Summary
+        run: |
+          echo "## 📦 [PoC Mock] Application Deployment Summary - DEV" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This is a **mock workflow** for demonstration purposes." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Change Detection Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Microservice | Changed | Would Deploy |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------------|---------|--------------|" >> $GITHUB_STEP_SUMMARY
+          echo "| onboarding-ms | \`${{ needs.detect-changes.outputs.onboarding }}\` | ${{ needs.deploy-onboarding.result || '⏭️ skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| product-ms | \`${{ needs.detect-changes.outputs.product }}\` | ${{ needs.deploy-product.result || '⏭️ skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| iam-ms | \`${{ needs.detect-changes.outputs.iam }}\` | ${{ needs.deploy-iam.result || '⏭️ skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Production Setup Required" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "To make this workflow functional in production:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Uncomment the DX reusable workflow calls" >> $GITHUB_STEP_SUMMARY
+          echo "2. Configure GitHub Environment: \`app-dev-cd\`" >> $GITHUB_STEP_SUMMARY
+          echo "3. Set up Azure Federated Identity Credentials" >> $GITHUB_STEP_SUMMARY
+          echo "4. Configure secrets: ARM_TENANT_ID, ARM_SUBSCRIPTION_ID, ARM_CLIENT_ID" >> $GITHUB_STEP_SUMMARY

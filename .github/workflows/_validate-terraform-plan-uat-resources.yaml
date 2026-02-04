@@ -1,0 +1,76 @@
+name: "[PoC Mock] Terraform Plan - UAT Resources"
+
+# PoC MOCK WORKFLOW - For demonstration purposes only
+
+on:
+  merge_group:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - "infra/resources/uat/**"
+      - "infra/resources/_modules/**"
+      - ".github/workflows/_validate-terraform-plan-uat-resources.yaml"
+
+jobs:
+  mock_terraform_plan:
+    name: "[Mock] Terraform Plan UAT"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/resources/uat
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.6"
+
+      - name: Terraform Init (Local Backend)
+        run: |
+          echo "🔧 [MOCK] Initializing Terraform UAT (local backend for PoC)"
+          terraform init -backend=false
+
+      - name: Terraform Validate
+        run: |
+          echo "✅ [MOCK] Validating Terraform configuration"
+          terraform validate
+
+      - name: Mock Terraform Plan
+        run: |
+          echo "📋 [MOCK] Running Terraform Plan for UAT"
+          echo ""
+          echo "In production, this would:"
+          echo "  - Connect to Azure Backend (tfappuatselfcare storage account)"
+          echo "  - Load state: selfcare-poc.resources.uat.tfstate"
+          echo "  - Plan changes for UAT environment"
+          echo ""
+          echo "UAT resources (terraform_data):"
+          echo "  - module.onboarding_app (env_short: u)"
+          echo "  - module.product_app (env_short: u)"
+          echo "  - module.iam_app (env_short: u)"
+          echo ""
+          echo "✅ Mock plan successful"
+
+      - name: Summary
+        run: |
+          echo "## 🏗️ [PoC Mock] Terraform Plan - UAT" >> $GITHUB_STEP_SUMMARY
+          echo "Mock workflow for UAT infrastructure planning." >> $GITHUB_STEP_SUMMARY
+
+  # PRODUCTION VERSION (commented for PoC):
+  # code_review:
+  #   uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
+  #   name: Terraform Plan
+  #   secrets: inherit
+  #   with:
+  #     environment: uat
+  #     base_path: "infra/resources"
+  #     override_github_environment: infra-uat
+  #     use_private_agent: false

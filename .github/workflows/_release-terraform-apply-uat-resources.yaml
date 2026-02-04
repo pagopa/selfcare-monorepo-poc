@@ -1,0 +1,61 @@
+name: "[PoC Mock] Terraform Apply - UAT Resources"
+
+# PoC MOCK WORKFLOW - For demonstration purposes only
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "infra/resources/uat/**"
+      - "infra/resources/_modules/**"
+      - ".github/workflows/_release-terraform-apply-uat-resources.yaml"
+
+jobs:
+  mock_terraform_apply:
+    name: "[Mock] Terraform Apply UAT"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/resources/uat
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.6"
+
+      - name: Terraform Init (Local Backend)
+        run: |
+          echo "🔧 [MOCK] Initializing Terraform UAT (local backend for PoC)"
+          terraform init -backend=false
+
+      - name: Mock Terraform Apply
+        run: |
+          echo "🚀 [MOCK] Applying Terraform changes to UAT"
+          echo ""
+          echo "In production, this would:"
+          echo "  - Wait for approval in 'infra-uat-cd' environment"
+          echo "  - Apply ALL infrastructure changes to UAT"
+          echo "  - Create/Update Container Apps: selc-u-*-ca"
+          echo ""
+          echo "✅ Mock apply successful"
+
+      - name: Summary
+        run: |
+          echo "## 🏗️ [PoC Mock] Terraform Apply - UAT" >> $GITHUB_STEP_SUMMARY
+          echo "Mock workflow for UAT infrastructure deployment." >> $GITHUB_STEP_SUMMARY
+
+  # PRODUCTION VERSION (commented for PoC):
+  # deploy:
+  #   uses: pagopa/dx/.github/workflows/infra_apply.yaml@main
+  #   name: UAT - Deploy
+  #   secrets: inherit
+  #   with:
+  #     environment: uat
+  #     base_path: "infra/resources/"
+  #     override_github_environment: infra-uat
+  #     use_private_agent: false

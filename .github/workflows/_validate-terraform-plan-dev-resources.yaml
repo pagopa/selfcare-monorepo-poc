@@ -1,0 +1,97 @@
+name: "[PoC Mock] Terraform Plan - DEV Resources"
+
+# PoC MOCK WORKFLOW - For demonstration purposes only
+# This simulates terraform plan without requiring Azure authentication
+#
+# IN PRODUCTION: Uncomment the real DX workflow call below
+
+on:
+  merge_group:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - "infra/resources/dev/**"
+      - "infra/resources/_modules/**"
+      - ".github/workflows/_validate-terraform-plan-dev-resources.yaml"
+
+jobs:
+  mock_terraform_plan:
+    name: "[Mock] Terraform Plan"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/resources/dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.6"
+
+      - name: Terraform Init (Local Backend)
+        run: |
+          echo "🔧 [MOCK] Initializing Terraform (local backend for PoC)"
+          terraform init -backend=false
+
+      - name: Terraform Validate
+        run: |
+          echo "✅ [MOCK] Validating Terraform configuration"
+          terraform validate
+
+      - name: Terraform Format Check
+        run: |
+          echo "📝 [MOCK] Checking Terraform formatting"
+          terraform fmt -check -recursive || echo "Warning: Format check would fail - run 'terraform fmt -recursive'"
+
+      - name: Mock Terraform Plan
+        run: |
+          echo "📋 [MOCK] Running Terraform Plan"
+          echo ""
+          echo "In production, this would:"
+          echo "  1. Connect to Azure Backend (tfappdevselfcare storage account)"
+          echo "  2. Load state: selfcare-poc.resources.dev.tfstate"
+          echo "  3. Plan infrastructure changes for ALL microservices"
+          echo "  4. Post plan output as PR comment"
+          echo ""
+          echo "Current DEV resources (terraform_data):"
+          echo "  - module.onboarding_app (dummy)"
+          echo "  - module.product_app (dummy)"
+          echo "  - module.iam_app (dummy)"
+          echo ""
+          echo "✅ Mock plan successful - NO real resources would be created"
+
+      - name: Summary
+        run: |
+          echo "## 🏗️ [PoC Mock] Terraform Plan - DEV" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This is a **mock workflow** using \`terraform_data\` dummy resources." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### What This Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Terraform configuration is valid" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Module structure is correct" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ No Azure authentication required" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Production Setup" >> $GITHUB_STEP_SUMMARY
+          echo "Uncomment the DX workflow in this file and configure:" >> $GITHUB_STEP_SUMMARY
+          echo "1. GitHub Environment: \`infra-dev\`" >> $GITHUB_STEP_SUMMARY
+          echo "2. Azure Federated Identity" >> $GITHUB_STEP_SUMMARY
+          echo "3. Terraform backend in Azure Storage" >> $GITHUB_STEP_SUMMARY
+
+  # PRODUCTION VERSION (commented for PoC):
+  # code_review:
+  #   uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
+  #   name: Terraform Plan
+  #   secrets: inherit
+  #   with:
+  #     environment: dev
+  #     base_path: "infra/resources"
+  #     override_github_environment: infra-dev
+  #     use_private_agent: false

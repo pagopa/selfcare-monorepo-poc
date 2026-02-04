@@ -7,5 +7,6 @@ module "github_repository" {
     description            = "PoC for SelfCare Monorepo structure"
     topics                 = []
     reviewers_teams        = []
+    environments           = ["dev", "uat"]
   }
 }
