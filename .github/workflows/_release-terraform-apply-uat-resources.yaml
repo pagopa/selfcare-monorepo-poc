@@ -15,18 +15,19 @@ on:
 jobs:
   mock_terraform_apply:
     name: "[Mock] Terraform Apply UAT"
+    environment: infra-uat-cd
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: infra/resources/uat
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
         with:
-          terraform_version: "~1.6"
+          terraform_version: "1.14.4"
 
       - name: Terraform Init (Local Backend)
         run: |

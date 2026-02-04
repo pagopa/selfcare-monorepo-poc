@@ -36,10 +36,10 @@ jobs:
       iam: ${{ steps.filter.outputs.iam }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: Detect changed apps
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: filter
         with:
           filters: |
@@ -63,6 +63,7 @@ jobs:
     if: needs.detect-changes.outputs.onboarding == 'true'
     name: "[Mock] Deploy Onboarding MS to UAT"
     runs-on: ubuntu-latest
+    environment: app-uat-cd
     steps:
       - name: Mock deployment
         run: |
@@ -94,6 +95,7 @@ jobs:
     if: needs.detect-changes.outputs.product == 'true'
     name: "[Mock] Deploy Product MS to UAT"
     runs-on: ubuntu-latest
+    environment: app-uat-cd
     steps:
       - name: Mock deployment
         run: |
@@ -125,6 +127,7 @@ jobs:
     if: needs.detect-changes.outputs.iam == 'true'
     name: "[Mock] Deploy IAM MS to UAT"
     runs-on: ubuntu-latest
+    environment: app-uat-cd
     steps:
       - name: Mock deployment
         run: |
