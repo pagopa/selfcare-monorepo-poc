@@ -29,5 +29,6 @@ locals {
     Environment    = "Dev"
     Source         = "https://github.com/pagopa/selfcare-monorepo-poc/blob/main/infra/resources/dev"
     ManagementTeam = "Developer Experience"
+    TestRun        = "infrastructure-deployment-test"
   }
 }
