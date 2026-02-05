@@ -1,7 +1,7 @@
 {
-  "DB_HOST": "postgres-dev.postgres.database.azure.com",
+  "DB_HOST": "postgres-uat.postgres.database.azure.com",
   "JWT_EXPIRATION_MINUTES": "30",
-  "REFRESH_TOKEN_DAYS": "14",
+  "REFRESH_TOKEN_DAYS": "30",
   "BCRYPT_ROUNDS": "12",
-  "LOG_LEVEL": "INFO"
+  "LOG_LEVEL": "WARN"
 }
