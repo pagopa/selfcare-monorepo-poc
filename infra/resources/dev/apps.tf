@@ -1,3 +1,9 @@
+# To permit easy changes for environments and other configurations
+# module "app_configuration" {
+#   source = "pagopa-dx/azure-app-configuration/azurerm"
+#   ...
+# }
+
 module "onboarding_app" {
   source = "../_modules/dummy-resource"
 

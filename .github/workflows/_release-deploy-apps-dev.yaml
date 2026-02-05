@@ -48,13 +48,45 @@ jobs:
           echo "  product-ms: ${{ steps.filter.outputs.product }}"
           echo "  iam-ms: ${{ steps.filter.outputs.iam }}"
 
-  # Step 2: Mock deploy onboarding-ms
+  # Step 2: Deploy onboarding-ms
   deploy-onboarding:
     needs: detect-changes
     if: needs.detect-changes.outputs.onboarding == 'true'
     name: "[Mock] Deploy Onboarding MS"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update App Configuration
+        run: |
+          echo "⚙️  [MOCK] Updating App Configuration for onboarding-ms in DEV"
+          echo ""
+
+          # Read app-config.json
+          CONFIG_FILE="apps/onboarding-ms/app-config.json"
+          if [ -f "$CONFIG_FILE" ]; then
+            echo "📄 Reading configuration from $CONFIG_FILE"
+            cat $CONFIG_FILE | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read LINE; do
+              KEY=$(echo $LINE | cut -d'=' -f1)
+              VALUE=$(echo $LINE | cut -d'=' -f2-)
+
+              echo "  Setting: onboarding-ms:$KEY = $VALUE"
+
+              # DRY-RUN: In production, uncomment this:
+              # az appconfig kv set \
+              #   --name selfcare-dev-appconfig \
+              #   --key "onboarding-ms:$KEY" \
+              #   --value "$VALUE" \
+              #   --label "dev" \
+              #   --yes
+            done
+            echo ""
+            echo "✅ [DRY-RUN] Would update $(cat $CONFIG_FILE | jq 'length') configuration values"
+          else
+            echo "⚠️  No app-config.json found, skipping configuration update"
+          fi
+
       - name: Mock deployment
         run: |
           echo "🚀 [MOCK] Deploying onboarding-ms to DEV"
@@ -63,6 +95,7 @@ jobs:
           echo "  - Build Docker image from apps/onboarding-ms"
           echo "  - Push to Azure Container Registry"
           echo "  - Deploy to Container App: selc-d-onboarding-ca"
+          echo "  - App reads config from Azure App Configuration"
           echo "  - Health check: /health endpoint"
           echo ""
           echo "✅ Mock deployment successful"
@@ -78,13 +111,44 @@ jobs:
       #   health_check_path: "/health"
       #   use_private_agent: false
 
-  # Step 3: Mock deploy product-ms
+  # Step 3: Deploy product-ms
   deploy-product:
     needs: detect-changes
     if: needs.detect-changes.outputs.product == 'true'
     name: "[Mock] Deploy Product MS"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update App Configuration
+        run: |
+          echo "⚙️  [MOCK] Updating App Configuration for product-ms in DEV"
+          echo ""
+
+          CONFIG_FILE="apps/product-ms/app-config.json"
+          if [ -f "$CONFIG_FILE" ]; then
+            echo "📄 Reading configuration from $CONFIG_FILE"
+            cat $CONFIG_FILE | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read LINE; do
+              KEY=$(echo $LINE | cut -d'=' -f1)
+              VALUE=$(echo $LINE | cut -d'=' -f2-)
+
+              echo "  Setting: product-ms:$KEY = $VALUE"
+
+              # DRY-RUN: In production, uncomment this:
+              # az appconfig kv set \
+              #   --name selfcare-dev-appconfig \
+              #   --key "product-ms:$KEY" \
+              #   --value "$VALUE" \
+              #   --label "dev" \
+              #   --yes
+            done
+            echo ""
+            echo "✅ [DRY-RUN] Would update $(cat $CONFIG_FILE | jq 'length') configuration values"
+          else
+            echo "⚠️  No app-config.json found"
+          fi
+
       - name: Mock deployment
         run: |
           echo "🚀 [MOCK] Deploying product-ms to DEV"
@@ -108,13 +172,44 @@ jobs:
       #   health_check_path: "/health"
       #   use_private_agent: false
 
-  # Step 4: Mock deploy iam-ms
+  # Step 4: Deploy iam-ms
   deploy-iam:
     needs: detect-changes
     if: needs.detect-changes.outputs.iam == 'true'
     name: "[Mock] Deploy IAM MS"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update App Configuration
+        run: |
+          echo "⚙️  [MOCK] Updating App Configuration for iam-ms in DEV"
+          echo ""
+
+          CONFIG_FILE="apps/iam-ms/app-config.json"
+          if [ -f "$CONFIG_FILE" ]; then
+            echo "📄 Reading configuration from $CONFIG_FILE"
+            cat $CONFIG_FILE | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read LINE; do
+              KEY=$(echo $LINE | cut -d'=' -f1)
+              VALUE=$(echo $LINE | cut -d'=' -f2-)
+
+              echo "  Setting: iam-ms:$KEY = $VALUE"
+
+              # DRY-RUN: In production, uncomment this:
+              # az appconfig kv set \
+              #   --name selfcare-dev-appconfig \
+              #   --key "iam-ms:$KEY" \
+              #   --value "$VALUE" \
+              #   --label "dev" \
+              #   --yes
+            done
+            echo ""
+            echo "✅ [DRY-RUN] Would update $(cat $CONFIG_FILE | jq 'length') configuration values"
+          else
+            echo "⚠️  No app-config.json found"
+          fi
+
       - name: Mock deployment
         run: |
           echo "🚀 [MOCK] Deploying iam-ms to DEV"

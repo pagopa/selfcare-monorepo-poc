@@ -20,11 +20,17 @@ The REAL production workflows are commented inside each workflow file.
    - Infrastructure (Terraform): Deploys ALL resources together
    - Applications: Selective deployment of only changed services
 
-2. **Path-Based Change Detection**
+2. **Infrastructure vs Configuration Separation** ⭐ NEW
+   - Infrastructure in Terraform (Container Apps, networking, etc.)
+   - Configuration in Azure App Configuration (env vars, feature flags)
+   - Zero Terraform apply for config changes
+   - Solves main/prod drift problem
+
+3. **Path-Based Change Detection**
    - Automatically detects which apps changed
    - Only triggers deployment for those specific apps
 
-3. **DX-Compliant Structure**
+4. **DX-Compliant Structure**
    - Folder layout: `infra/resources/{env}/`
    - Ready for DX reusable workflows
 
@@ -84,13 +90,8 @@ To use real workflows:
 2. **Setup GitHub Environments**: `infra-dev`, `infra-uat`, `app-dev-cd`, `app-uat-cd`
 3. **Configure Azure Auth**: Federated Identity + secrets
 4. **Replace dummy resources**: Change `terraform_data` to real Azure resources
-5. **Test thoroughly**: Start with DEV, validate, then UAT
-
-## 📚 See Also
-
-- Original README: [README.md](README.md) - Devcontainer and project setup
-- DX Workflows: https://github.com/pagopa/dx
-- Path Filter Action: https://github.com/dorny/paths-filter
+5. **Setup App Configuration**: Enable Azure App Configuration module in Terraform
+6. **Test thoroughly**: Start with DEV, validate, then UAT
 
 ---
 

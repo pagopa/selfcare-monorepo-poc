@@ -1,0 +1,7 @@
+{
+  "DB_HOST": "postgres-dev.postgres.database.azure.com",
+  "JWT_EXPIRATION_MINUTES": "60",
+  "REFRESH_TOKEN_DAYS": "7",
+  "BCRYPT_ROUNDS": "10",
+  "LOG_LEVEL": "DEBUG"
+}

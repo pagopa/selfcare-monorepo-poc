@@ -1,0 +1,7 @@
+{
+  "DB_HOST": "postgres-dev.postgres.database.azure.com",
+  "CACHE_TTL_SECONDS": "300",
+  "API_KEY_HEADER": "X-API-Key",
+  "MAX_RESULTS_PER_PAGE": "50",
+  "LOG_LEVEL": "DEBUG"
+}
