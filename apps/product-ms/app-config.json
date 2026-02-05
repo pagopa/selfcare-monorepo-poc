@@ -3,5 +3,6 @@
   "CACHE_TTL_SECONDS": "600",
   "API_KEY_HEADER": "X-API-Key",
   "MAX_RESULTS_PER_PAGE": "100",
-  "LOG_LEVEL": "INFO"
+  "LOG_LEVEL": "INFO",
+  "ENABLE_METRICS": "true"
 }
