@@ -27,8 +27,10 @@
       "currentVersionResolver": "disk",
       "generatorOptions": {
         "packageRoot": "{projectRoot}",
-        "currentVersionResolver": "disk"
-      }
+        "currentVersionResolver": "disk",
+        "postTargetDependencies": ["sync-pom"]
+      },
+      "generator": "@nx/js:release-version"
     },
     "changelog": {
       "workspaceChangelog": {

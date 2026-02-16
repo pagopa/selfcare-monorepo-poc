@@ -1082,6 +1082,24 @@
         "hash": "sha512-WI0DdZ8xFSbgMjR1sFsKABJ/C5OnRrjT06JXbZKexJGrDuPTzZdDYfFlsgcCXCyf+suG5QU2e/y1Wo2V/OapLQ=="
       }
     },
+    "npm:@isaacs/balanced-match": {
+      "type": "npm",
+      "name": "npm:@isaacs/balanced-match",
+      "data": {
+        "version": "4.0.1",
+        "packageName": "@isaacs/balanced-match",
+        "hash": "sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ=="
+      }
+    },
+    "npm:@isaacs/brace-expansion": {
+      "type": "npm",
+      "name": "npm:@isaacs/brace-expansion",
+      "data": {
+        "version": "5.0.1",
+        "packageName": "@isaacs/brace-expansion",
+        "hash": "sha512-WMz71T1JS624nWj2n2fnYAuPovhv7EUhk69R6i9dsVyzxt5eM3bjwvgk9L+APE1TRscGysAVMANkB0jh0LQZrQ=="
+      }
+    },
     "npm:@jest/schemas": {
       "type": "npm",
       "name": "npm:@jest/schemas",
@@ -1208,6 +1226,15 @@
         "hash": "sha512-A8dCGttbuqgg9P56VTb0ElD2vM5nc5g0aLnX5PSXo4SkFXwd8DV5GgwJKWB1GO9hYyEtbj4gKek0KxnCtdav4g=="
       }
     },
+    "npm:@nx/devkit@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/devkit@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/devkit",
+        "hash": "sha512-1ZJ8pCB+6EWC8X6q8tfBweg92WzFAwliBhtBkOPP8Li8GQq71ulPWRdY4lDd5pH3Ea1zKqhOtBKWdOlyDPOKYA=="
+      }
+    },
     "npm:@nx/js": {
       "type": "npm",
       "name": "npm:@nx/js",
@@ -1215,6 +1242,42 @@
         "version": "19.8.14",
         "packageName": "@nx/js",
         "hash": "sha512-Nk0eEB2F/ZbBkH2iT+cgLWIittY8n5eOrA/uBBG2XMdencJZ9E2HNA/UzSGPZmD4EYVk0R1vm83k5+IMS1VAZA=="
+      }
+    },
+    "npm:@nx/maven": {
+      "type": "npm",
+      "name": "npm:@nx/maven",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/maven",
+        "hash": "sha512-5r/4rlH/lc3HX+tzC7yzR+zc1NP95vEwq4YnmfZqXFmOf7FOUfPMTBuFhtL1UVq2wC2jeYKi0hkQqqzsliPJjA=="
+      }
+    },
+    "npm:minimatch@10.1.1": {
+      "type": "npm",
+      "name": "npm:minimatch@10.1.1",
+      "data": {
+        "version": "10.1.1",
+        "packageName": "minimatch",
+        "hash": "sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ=="
+      }
+    },
+    "npm:minimatch@5.1.6": {
+      "type": "npm",
+      "name": "npm:minimatch@5.1.6",
+      "data": {
+        "version": "5.1.6",
+        "packageName": "minimatch",
+        "hash": "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="
+      }
+    },
+    "npm:minimatch": {
+      "type": "npm",
+      "name": "npm:minimatch",
+      "data": {
+        "version": "9.0.3",
+        "packageName": "minimatch",
+        "hash": "sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg=="
       }
     },
     "npm:@nx/nx-darwin-arm64": {
@@ -1370,15 +1433,6 @@
         "hash": "sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw=="
       }
     },
-    "npm:@types/node": {
-      "type": "npm",
-      "name": "npm:@types/node",
-      "data": {
-        "version": "25.2.3",
-        "packageName": "@types/node",
-        "hash": "sha512-m0jEgYlYz+mDJZ2+F4v8D1AyQb+QzsNqRuI7xg1VQX/KlKS0qT9r1Mo16yo5F/MtifXFgaofIFsdFMox2SxIbQ=="
-      }
-    },
     "npm:@types/parse-json": {
       "type": "npm",
       "name": "npm:@types/parse-json",
@@ -1386,6 +1440,15 @@
         "version": "4.0.2",
         "packageName": "@types/parse-json",
         "hash": "sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw=="
+      }
+    },
+    "npm:@xmldom/xmldom": {
+      "type": "npm",
+      "name": "npm:@xmldom/xmldom",
+      "data": {
+        "version": "0.8.11",
+        "packageName": "@xmldom/xmldom",
+        "hash": "sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw=="
       }
     },
     "npm:@yarnpkg/lockfile": {
@@ -2061,24 +2124,6 @@
         "version": "1.0.4",
         "packageName": "filelist",
         "hash": "sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q=="
-      }
-    },
-    "npm:minimatch@5.1.6": {
-      "type": "npm",
-      "name": "npm:minimatch@5.1.6",
-      "data": {
-        "version": "5.1.6",
-        "packageName": "minimatch",
-        "hash": "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="
-      }
-    },
-    "npm:minimatch": {
-      "type": "npm",
-      "name": "npm:minimatch",
-      "data": {
-        "version": "9.0.3",
-        "packageName": "minimatch",
-        "hash": "sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg=="
       }
     },
     "npm:fill-range": {
@@ -3060,24 +3105,6 @@
         "version": "2.8.1",
         "packageName": "tslib",
         "hash": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
-      }
-    },
-    "npm:typescript": {
-      "type": "npm",
-      "name": "npm:typescript",
-      "data": {
-        "version": "5.9.3",
-        "packageName": "typescript",
-        "hash": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
-      }
-    },
-    "npm:undici-types": {
-      "type": "npm",
-      "name": "npm:undici-types",
-      "data": {
-        "version": "7.16.0",
-        "packageName": "undici-types",
-        "hash": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="
       }
     },
     "npm:unicode-canonical-property-names-ecmascript": {
@@ -5240,6 +5267,13 @@
         "type": "static"
       }
     ],
+    "npm:@isaacs/brace-expansion": [
+      {
+        "source": "npm:@isaacs/brace-expansion",
+        "target": "npm:@isaacs/balanced-match",
+        "type": "static"
+      }
+    ],
     "npm:@jest/schemas": [
       {
         "source": "npm:@jest/schemas",
@@ -5561,6 +5595,67 @@
         "type": "static"
       }
     ],
+    "npm:@nx/maven": [
+      {
+        "source": "npm:@nx/maven",
+        "target": "npm:@nx/devkit@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/maven",
+        "target": "npm:@xmldom/xmldom",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/maven",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@nx/devkit@22.5.1": [
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:@zkochan/js-yaml",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:ejs",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:enquirer",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:minimatch@10.1.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:semver",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:yargs-parser",
+        "type": "static"
+      }
+    ],
+    "npm:minimatch@10.1.1": [
+      {
+        "source": "npm:minimatch@10.1.1",
+        "target": "npm:@isaacs/brace-expansion",
+        "type": "static"
+      }
+    ],
     "npm:@nx/workspace": [
       {
         "source": "npm:@nx/workspace",
@@ -5602,13 +5697,6 @@
       {
         "source": "npm:@tybys/wasm-util",
         "target": "npm:tslib",
-        "type": "static"
-      }
-    ],
-    "npm:@types/node": [
-      {
-        "source": "npm:@types/node",
-        "target": "npm:undici-types",
         "type": "static"
       }
     ],
@@ -6939,16 +7027,6 @@
       }
     ],
     "npm:ts-node": [
-      {
-        "source": "npm:ts-node",
-        "target": "npm:@types/node",
-        "type": "static"
-      },
-      {
-        "source": "npm:ts-node",
-        "target": "npm:typescript",
-        "type": "static"
-      },
       {
         "source": "npm:ts-node",
         "target": "npm:@cspotcode/source-map-support",

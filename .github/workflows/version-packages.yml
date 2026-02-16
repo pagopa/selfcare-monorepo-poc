@@ -98,6 +98,32 @@ jobs:
           echo "$CHANGED" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Sync pom.xml Versions
+        if: steps.check.outputs.has-plans == 'true'
+        run: |
+          echo "🔄 Synchronizing pom.xml files with package.json versions..."
+
+          # Find all apps with both package.json and pom.xml
+          for pkg_file in apps/*/package.json; do
+            if [ -f "$pkg_file" ]; then
+              dir=$(dirname "$pkg_file")
+              pom_file="$dir/pom.xml"
+
+              if [ -f "$pom_file" ]; then
+                # Run sync script
+                node scripts/sync-pom-version.js "$pkg_file"
+              fi
+            fi
+          done
+
+          # Check if pom.xml files were modified
+          if git status --porcelain | grep -q "pom.xml"; then
+            echo "✅ pom.xml files updated"
+            git add apps/*/pom.xml
+          else
+            echo "ℹ️  No pom.xml files to update"
+          fi
+
       - name: Get Version Summary
         if: steps.check.outputs.has-plans == 'true'
         id: summary

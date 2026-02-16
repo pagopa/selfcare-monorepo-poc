@@ -13,14 +13,17 @@
   ],
   "scripts": {
     "changeset": "nx release plan",
-    "release": "nx release --skip-publish",
-    "release:preview": "nx release --dry-run",
+    "release": "npm run release:version && npm run sync-pom",
+    "release:version": "nx release --skip-publish",
+    "release:preview": "node scripts/preview-release.js",
+    "sync-pom": "node scripts/sync-all-poms.js",
     "affected": "nx affected",
     "graph": "nx graph"
   },
   "devDependencies": {
     "nx": "^19.0.0",
     "@nx/js": "^19.0.0",
+    "@nx/maven": "latest",
     "prettier": "^3.2.5"
   }
 }
