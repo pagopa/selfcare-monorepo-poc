@@ -11,6 +11,8 @@ provider "azurerm" {
   features {}
 }
 
+# Comment for test
+
 locals {
   environment = {
     prefix          = "dx"

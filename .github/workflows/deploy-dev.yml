@@ -42,18 +42,18 @@ jobs:
 
           # Get changed files and extract affected projects
           AFFECTED=""
-          
+
           for file in $(git diff HEAD~1 --name-only); do
             # Skip non-deployable files
             if [[ $file =~ (README\.md|CHANGELOG\.md|\.terraform/|\.terraform\.lock\.hcl|package\.json)$ ]]; then
               continue
             fi
-            
+
             # Check apps (only source files, not config)
             if [[ $file =~ ^apps/([^/]+)/src/ ]]; then
               APP="${BASH_REMATCH[1]}"
               AFFECTED="$AFFECTED $APP"
-              
+
             # Check infra dev resources (main.tf or other terraform files)
             elif [[ $file =~ ^infra/resources/dev/([^/]+)/.*\.tf$ ]]; then
               MS="${BASH_REMATCH[1]}"
