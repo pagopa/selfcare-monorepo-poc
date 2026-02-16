@@ -42,6 +42,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Upgrade npm
+        if: steps.check.outputs.is-release == 'true'
+        run: npm install -g npm@11
+
       - name: Install Dependencies
         if: steps.check.outputs.is-release == 'true'
         run: npm ci
