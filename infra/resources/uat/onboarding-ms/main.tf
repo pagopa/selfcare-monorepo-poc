@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "dx-d-itn-tfstate-rg-01"
     storage_account_name = "dxditntfstatest01"
     container_name       = "terraform-state"
-    key                  = "selfcare-poc.resources.dev.tfstate"
+    key                  = "selfcare-poc.resources.uat.onboarding-ms.tfstate"
   }
 }
 
@@ -16,7 +16,7 @@ locals {
     prefix          = "dx"
     location        = "italynorth"
     location_short  = "itn"
-    env_short       = "d"
+    env_short       = "u"
     domain          = "selc"
     app_name        = "poc"
     instance_number = "01"
@@ -26,9 +26,21 @@ locals {
     CostCenter     = "TS000 - Tecnologia e Servizi"
     CreatedBy      = "Terraform"
     Owner          = "DevEx"
-    Environment    = "Dev"
-    Source         = "https://github.com/pagopa/selfcare-monorepo-poc/blob/main/infra/resources/dev"
+    Environment    = "UAT"
+    Source         = "https://github.com/pagopa/selfcare-monorepo-poc/blob/main/infra/resources/uat/onboarding-ms"
     ManagementTeam = "Developer Experience"
-    TestRun        = "infrastructure-deployment-test"
+    MicroService   = "onboarding"
   }
+}
+
+module "onboarding_app" {
+  source = "../../_modules/dummy-resource"
+
+  name        = "onboarding"
+  environment = local.environment
+  tags        = local.tags
+}
+
+output "resource_group_name" {
+  value = module.onboarding_app.resource_group_name
 }

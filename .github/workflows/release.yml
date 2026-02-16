@@ -1,0 +1,161 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/package.json'
+      - '**/CHANGELOG.md'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Create Tags and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if Release Commit
+        id: check
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          if [[ $COMMIT_MSG =~ "chore: version packages" ]] || [[ $COMMIT_MSG =~ "chore(release)" ]]; then
+            echo "is-release=true" >> $GITHUB_OUTPUT
+            echo "✅ Release commit detected"
+          else
+            echo "is-release=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ Not a release commit, skipping"
+          fi
+
+      - name: Setup Node.js
+        if: steps.check.outputs.is-release == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        if: steps.check.outputs.is-release == 'true'
+        run: npm ci
+
+      - name: Create Git Tags
+        if: steps.check.outputs.is-release == 'true'
+        id: tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          TAGS_CREATED=""
+
+          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
+            VERSION=$(jq -r '.version' $file 2>/dev/null)
+            PROJECT=$(echo $file | sed 's|/package.json||' | sed 's|apps/||' | sed 's|infra/.*/||')
+
+            if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
+              TAG_NAME="$PROJECT-v$VERSION"
+              echo "📦 Creating tag: $TAG_NAME"
+
+              git tag "$TAG_NAME" -m "Release $PROJECT v$VERSION"
+              TAGS_CREATED="$TAGS_CREATED $TAG_NAME"
+            fi
+          done
+
+          git push origin --tags
+
+          echo "tags-created<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS_CREATED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Determine Deployment Environment
+        if: steps.check.outputs.is-release == 'true'
+        id: env
+        run: |
+          # Auto-detect RC vs stable from package.json versions
+          if git diff HEAD~1 --name-only | xargs grep -l '"version".*-rc\.' 2>/dev/null; then
+            echo "target=uat" >> $GITHUB_OUTPUT
+            echo "🧪 Detected RC versions → deploying to UAT"
+          else
+            echo "target=prod" >> $GITHUB_OUTPUT
+            echo "🎯 Detected stable versions → deploying to PROD"
+          fi
+
+      - name: Deploy Affected Projects (Mock)
+        if: steps.check.outputs.is-release == 'true'
+        run: |
+          echo "🚀 Deploying to ${{ steps.env.outputs.target }}"
+
+          # In real scenario: npx nx affected --target=deploy --configuration=${{ steps.env.outputs.target }} --base=HEAD~1
+          # For PoC: just show what would be deployed
+
+          echo "📋 Affected projects:"
+          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
+            PROJECT=$(echo $file | sed 's|/package.json||')
+            VERSION=$(jq -r '.version' $file)
+            echo "  - $PROJECT (v$VERSION)"
+          done
+
+          echo ""
+          echo "✅ Mock deployment to ${{ steps.env.outputs.target }} completed"
+
+      - name: Create GitHub Release
+        if: steps.check.outputs.is-release == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+
+            // Read CHANGELOG for release notes
+            let changelogContent = 'See individual project CHANGELOGs for details.';
+            try {
+              if (fs.existsSync('CHANGELOG.md')) {
+                const content = fs.readFileSync('CHANGELOG.md', 'utf8');
+                const sections = content.split(/^## /m);
+                if (sections.length > 1) {
+                  changelogContent = '## ' + sections[1];
+                }
+              }
+            } catch (e) {
+              console.log('No CHANGELOG.md found');
+            }
+
+            // Determine if prerelease
+            const isPrerelease = changelogContent.includes('-rc.');
+
+            // Get latest tag
+            let tagName;
+            try {
+              tagName = execSync('git describe --tags --abbrev=0').toString().trim();
+            } catch (e) {
+              console.log('No tags found yet');
+              return;
+            }
+
+            // Create release
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tagName,
+              name: `${isPrerelease ? '🧪 RC' : '🎯 Release'} ${tagName}`,
+              body: changelogContent,
+              prerelease: isPrerelease
+            });
+
+            console.log(`✅ Created GitHub Release: ${tagName}`);
+
+      - name: Job Summary
+        if: steps.check.outputs.is-release == 'true'
+        run: |
+          echo "### ✅ Release Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: ${{ steps.env.outputs.target }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tags Created**: ${{ steps.tags.outputs.tags-created }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed**: $(date)" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,6 @@
+{
+  "name": "@selfcare/infra-dev-iam-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DEV infrastructure for iam-ms"
+}

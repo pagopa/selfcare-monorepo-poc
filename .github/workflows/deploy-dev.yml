@@ -1,0 +1,93 @@
+name: Deploy DEV
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.nx/version-plans/**'
+      - '**/CHANGELOG.md'
+      - '.github/**'
+      - '**.md'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to DEV
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check Affected Projects
+        id: affected
+        run: |
+          echo "🔍 Detecting affected projects..."
+
+          # Simulate nx affected (for PoC, we just show what changed)
+          AFFECTED=""
+          for file in $(git diff HEAD~1 --name-only | grep -E '(apps|infra/resources)'); do
+            if [[ $file == apps/* ]]; then
+              APP=$(echo $file | cut -d'/' -f2)
+              AFFECTED="$AFFECTED $APP"
+            elif [[ $file == infra/resources/dev/* ]]; then
+              INFRA=$(echo $file | cut -d'/' -f4)
+              AFFECTED="$AFFECTED infra-dev-$INFRA"
+            fi
+          done
+
+          AFFECTED=$(echo $AFFECTED | tr ' ' '\n' | sort -u | tr '\n' ' ')
+
+          if [ -n "$AFFECTED" ]; then
+            echo "has-affected=true" >> $GITHUB_OUTPUT
+            echo "projects=$AFFECTED" >> $GITHUB_OUTPUT
+            echo "📦 Affected: $AFFECTED"
+          else
+            echo "has-affected=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No affected projects"
+          fi
+
+      - name: Deploy Affected to DEV (Mock)
+        if: steps.affected.outputs.has-affected == 'true'
+        run: |
+          echo "🚀 Deploying affected projects to DEV..."
+
+          # In real scenario: npx nx affected --target=deploy --configuration=dev --base=HEAD~1
+
+          for project in ${{ steps.affected.outputs.projects }}; do
+            echo "  ✅ Deployed: $project"
+          done
+
+          echo ""
+          echo "✅ Mock deployment to DEV completed"
+
+      - name: No Affected Projects
+        if: steps.affected.outputs.has-affected == 'false'
+        run: |
+          echo "ℹ️ No affected projects to deploy"
+
+      - name: Job Summary
+        if: steps.affected.outputs.has-affected == 'true'
+        run: |
+          echo "### 🚀 DEV Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Projects**:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          for project in ${{ steps.affected.outputs.projects }}; do
+            echo "- $project" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp**: $(date)" >> $GITHUB_STEP_SUMMARY

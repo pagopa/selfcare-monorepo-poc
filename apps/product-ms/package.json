@@ -1,0 +1,9 @@
+{
+  "name": "@selfcare/product-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Product microservice - Mock for PoC",
+  "scripts": {
+    "deploy": "echo 'Deploying product-ms...'"
+  }
+}

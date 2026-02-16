@@ -1,0 +1,6 @@
+{
+  "name": "@selfcare/infra-prod-onboarding-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PROD infrastructure for onboarding-ms"
+}

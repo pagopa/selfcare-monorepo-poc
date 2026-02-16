@@ -1,0 +1,241 @@
+name: Version Packages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.nx/version-plans/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    name: Create or Update Release PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check for Version Plans
+        id: check
+        run: |
+          if [ -d ".nx/version-plans" ] && [ "$(ls -A .nx/version-plans/*.md 2>/dev/null | wc -l)" -gt 0 ]; then
+            echo "has-plans=true" >> $GITHUB_OUTPUT
+
+            PLAN_COUNT=$(ls -1 .nx/version-plans/*.md 2>/dev/null | wc -l)
+            echo "plan-count=$PLAN_COUNT" >> $GITHUB_OUTPUT
+
+            echo "📦 Found $PLAN_COUNT version plan(s)"
+          else
+            echo "has-plans=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No version plans found"
+          fi
+
+      - name: Check Existing PR
+        if: steps.check.outputs.has-plans == 'true'
+        id: check-pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:changeset-release/main`
+            });
+
+            if (prs.length > 0) {
+              core.setOutput('exists', 'true');
+              core.setOutput('number', prs[0].number);
+              console.log(`Found existing PR #${prs[0].number}`);
+            } else {
+              core.setOutput('exists', 'false');
+              console.log('No existing PR found');
+            }
+
+      - name: Create Release Branch
+        if: steps.check.outputs.has-plans == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git checkout -B changeset-release/main
+
+      - name: Preview Version Changes
+        if: steps.check.outputs.has-plans == 'true'
+        id: preview
+        run: |
+          echo "🔍 Previewing version changes..."
+          npx nx release --dry-run 2>&1 | tee /tmp/release-preview.txt || true
+
+      - name: Apply Version Plans
+        if: steps.check.outputs.has-plans == 'true'
+        id: release
+        run: |
+          echo "📦 Applying version plans..."
+
+          # Apply version plans (updates package.json, generates CHANGELOG, deletes plan files)
+          npx nx release --skip-publish
+
+          # Extract changed projects
+          CHANGED=$(git diff --name-only | grep 'package.json' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/.*/||' | sort -u)
+          echo "changed-projects<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Get Version Summary
+        if: steps.check.outputs.has-plans == 'true'
+        id: summary
+        run: |
+          SUMMARY=""
+
+          for file in $(git diff --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
+            PROJECT=$(echo $file | sed 's|/package.json||' | sed 's|apps/||' | sed 's|infra/.*/||')
+            VERSION=$(jq -r '.version' $file 2>/dev/null)
+
+            if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
+              # Check if RC or stable
+              if [[ $VERSION == *"-rc."* ]]; then
+                BADGE="🧪 RC"
+              else
+                BADGE="🎯 Stable"
+              fi
+
+              SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
+            fi
+          done
+
+          echo "summary<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$SUMMARY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Push Changes to Branch
+        if: steps.check.outputs.has-plans == 'true'
+        run: |
+          git push origin changeset-release/main --force
+
+      - name: Create Pull Request Body
+        if: steps.check.outputs.has-plans == 'true'
+        id: pr-body
+        run: |
+          cat > /tmp/pr-body.md <<'EOFBODY'
+          # 🦋 Release
+
+          This PR was opened by the **Version Packages** workflow. When you're ready to do a release, merge this PR and packages will be released automatically.
+
+          If you're not ready to release yet, that's fine! Whenever you add more version plans to `main`, this PR will be updated.
+
+          ## 📦 Releases
+
+          ${{ steps.summary.outputs.summary }}
+
+          ## 📋 Version Plans Applied
+
+          This release applies **${{ steps.check.outputs.plan-count }}** version plan(s).
+
+          <details>
+          <summary>📝 View Changed Projects</summary>
+
+          ```
+          ${{ steps.release.outputs.changed-projects }}
+          ```
+
+          </details>
+
+          ---
+
+          <details>
+          <summary>ℹ️ About Version Plans</summary>
+
+          Version plans allow you to declare the type of changes in your code:
+
+          - **patch**: Bug fixes (1.0.0 → 1.0.1)
+          - **minor**: New features (1.0.0 → 1.1.0)
+          - **major**: Breaking changes (1.0.0 → 2.0.0)
+          - **prepatch/preminor/premajor**: RC versions (1.0.0 → 1.1.0-rc.0)
+
+          To create a version plan:
+          ```bash
+          npx nx release plan
+          ```
+
+          Multiple version plans are automatically aggregated, with the highest bump type winning.
+
+          </details>
+          EOFBODY
+
+      - name: Create Pull Request
+        if: |
+          steps.check.outputs.has-plans == 'true' &&
+          steps.check-pr.outputs.exists == 'false'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: changeset-release/main
+          title: "chore: Release (Version Packages) 🦋"
+          body-path: /tmp/pr-body.md
+          labels: |
+            release
+            automated
+          commit-message: "chore: version packages"
+          delete-branch: false
+
+      - name: Update Pull Request
+        if: |
+          steps.check.outputs.has-plans == 'true' &&
+          steps.check-pr.outputs.exists == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('/tmp/pr-body.md', 'utf8');
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ steps.check-pr.outputs.number }},
+              body: body
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.check-pr.outputs.number }},
+              body: `🔄 **Version Packages PR Updated**\n\n` +
+                    `**Applied**: ${{ steps.check.outputs.plan-count }} version plan(s)\n` +
+                    `**Updated**: ${new Date().toLocaleString()}\n\n` +
+                    `Merge this PR when ready to release! 🚀`
+            });
+
+      - name: No Version Plans Found
+        if: steps.check.outputs.has-plans == 'false'
+        run: |
+          echo "ℹ️ No version plans found in .nx/version-plans/"
+          echo "Create one with: npx nx release plan"
+
+      - name: Job Summary
+        if: steps.check.outputs.has-plans == 'true'
+        run: |
+          echo "### ✅ Version Packages PR Ready" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status**: ${{ steps.check-pr.outputs.exists == 'true' && 'Updated' || 'Created' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version Plans Applied**: ${{ steps.check.outputs.plan-count }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.summary.outputs.summary }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Merge the PR to release! 🚀" >> $GITHUB_STEP_SUMMARY

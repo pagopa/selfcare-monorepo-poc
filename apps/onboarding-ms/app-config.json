@@ -1,8 +1,0 @@
-{
-  "DB_HOST": "postgres-dev-updated.postgres.database.azure.com",
-  "DB_PORT": "5432",
-  "API_TIMEOUT_MS": "45000",
-  "LOG_LEVEL": "INFO",
-  "CACHE_ENABLED": "true",
-  "NEW_FEATURE_ENABLED": "true"
-}

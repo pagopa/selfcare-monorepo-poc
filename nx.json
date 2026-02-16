@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "main",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/.eslintrc.json"
+    ],
+    "sharedGlobals": []
+  },
+  "targetDefaults": {
+    "deploy": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "build": {
+      "cache": true
+    }
+  },
+  "release": {
+    "versionPlans": true,
+    "projects": ["apps/*", "libs/*", "infra/resources/dev/*", "infra/resources/uat/*", "infra/resources/prod/*"],
+    "version": {
+      "currentVersionResolver": "disk",
+      "generatorOptions": {
+        "packageRoot": "{projectRoot}",
+        "currentVersionResolver": "disk"
+      }
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": false,
+        "file": "CHANGELOG.md",
+        "renderOptions": {
+          "authors": true,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
+      },
+      "projectChangelogs": {
+        "createRelease": false,
+        "file": "{projectRoot}/CHANGELOG.md"
+      }
+    },
+    "git": {
+      "commit": true,
+      "tag": false,
+      "stageChanges": true,
+      "commitMessage": "chore(release): publish {version}"
+    }
+  }
+}

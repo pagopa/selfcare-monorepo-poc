@@ -1,0 +1,6 @@
+{
+  "name": "@selfcare/infra-uat-onboarding-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UAT infrastructure for onboarding-ms"
+}

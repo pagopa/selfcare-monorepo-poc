@@ -1,7 +1,26 @@
 {
   "name": "selfcare-monorepo-poc",
+  "version": "0.0.1",
   "private": true,
-  "type": "module",
-  "description": "PoC for SelfCare Monorepo structure",
-  "license": "UNLICENSED"
+  "description": "PoC for SelfCare Monorepo with Nx Release and Version Plans",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "apps/*",
+    "libs/*",
+    "infra/dev/*",
+    "infra/uat/*",
+    "infra/prod/*"
+  ],
+  "scripts": {
+    "changeset": "nx release plan",
+    "release": "nx release --skip-publish",
+    "release:preview": "nx release --dry-run",
+    "affected": "nx affected",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "nx": "^19.0.0",
+    "@nx/js": "^19.0.0",
+    "prettier": "^3.2.5"
+  }
 }

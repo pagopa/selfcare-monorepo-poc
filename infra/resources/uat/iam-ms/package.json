@@ -1,0 +1,6 @@
+{
+  "name": "@selfcare/infra-uat-iam-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UAT infrastructure for iam-ms"
+}

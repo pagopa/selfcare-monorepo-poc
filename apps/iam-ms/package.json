@@ -1,0 +1,9 @@
+{
+  "name": "@selfcare/iam-ms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "IAM microservice - Mock for PoC",
+  "scripts": {
+    "deploy": "echo 'Deploying iam-ms...'"
+  }
+}
