@@ -96,7 +96,7 @@ jobs:
 
           # Extract changed projects from git log (last commit from nx release)
           CHANGED=$(git log -1 --name-only --pretty=format: | grep 'package.json' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/.*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
-          
+
           echo "changed-projects=$CHANGED" >> $GITHUB_OUTPUT
           echo "📋 Changed projects: $CHANGED"
 
