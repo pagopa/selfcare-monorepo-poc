@@ -7,9 +7,9 @@
   "workspaces": [
     "apps/*",
     "libs/*",
-    "infra/dev/*",
-    "infra/uat/*",
-    "infra/prod/*"
+    "infra/resources/dev/*",
+    "infra/resources/uat/*",
+    "infra/resources/prod/*"
   ],
   "scripts": {
     "changeset": "nx release plan",
