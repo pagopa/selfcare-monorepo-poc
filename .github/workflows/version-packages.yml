@@ -49,28 +49,6 @@ jobs:
             echo "ℹ️ No version plans found"
           fi
 
-      - name: Check Existing PR
-        if: steps.check.outputs.has-plans == 'true'
-        id: check-pr
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { data: prs } = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              head: `${context.repo.owner}:changeset-release/main`
-            });
-
-            if (prs.length > 0) {
-              core.setOutput('exists', 'true');
-              core.setOutput('number', prs[0].number);
-              console.log(`Found existing PR #${prs[0].number}`);
-            } else {
-              core.setOutput('exists', 'false');
-              console.log('No existing PR found');
-            }
-
       - name: Configure Git
         if: steps.check.outputs.has-plans == 'true'
         run: |
@@ -205,10 +183,9 @@ jobs:
           </details>
           EOFBODY
 
-      - name: Create Pull Request
-        if: |
-          steps.check.outputs.has-plans == 'true' &&
-          steps.check-pr.outputs.exists == 'false'
+      - name: Create or Update Pull Request
+        if: steps.check.outputs.has-plans == 'true'
+        id: create-pr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -222,33 +199,6 @@ jobs:
           commit-message: "chore: version packages"
           delete-branch: false
 
-      - name: Update Pull Request
-        if: |
-          steps.check.outputs.has-plans == 'true' &&
-          steps.check-pr.outputs.exists == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const body = fs.readFileSync('/tmp/pr-body.md', 'utf8');
-
-            await github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: ${{ steps.check-pr.outputs.number }},
-              body: body
-            });
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: ${{ steps.check-pr.outputs.number }},
-              body: `🔄 **Version Packages PR Updated**\n\n` +
-                    `**Applied**: ${{ steps.check.outputs.plan-count }} version plan(s)\n` +
-                    `**Updated**: ${new Date().toLocaleString()}\n\n` +
-                    `Merge this PR when ready to release! 🚀`
-            });
-
       - name: No Version Plans Found
         if: steps.check.outputs.has-plans == 'false'
         run: |
@@ -260,7 +210,7 @@ jobs:
         run: |
           echo "### ✅ Version Packages PR Ready" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Status**: ${{ steps.check-pr.outputs.exists == 'true' && 'Updated' || 'Created' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**PR Number**: #${{ steps.create-pr.outputs.pull-request-number }}" >> $GITHUB_STEP_SUMMARY
           echo "**Version Plans Applied**: ${{ steps.check.outputs.plan-count }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.summary.outputs.summary }}" >> $GITHUB_STEP_SUMMARY
