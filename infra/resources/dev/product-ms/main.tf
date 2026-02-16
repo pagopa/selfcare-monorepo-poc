@@ -44,3 +44,4 @@ module "product_app" {
 output "resource_group_name" {
   value = module.product_app.resource_group_name
 }
+# test comment
