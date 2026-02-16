@@ -1,0 +1,14 @@
+{
+  "name": "@selfcare/infra-uat-product-ms",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "infra/resources/uat/product-ms",
+  "targets": {
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Deploying UAT infrastructure for product-ms...'"
+      }
+    }
+  }
+}

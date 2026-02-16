@@ -1,12 +1,310 @@
 {
   "nodes": {
+    "@selfcare/infra-prod-onboarding-ms": {
+      "name": "@selfcare/infra-prod-onboarding-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/prod/onboarding-ms",
+        "sourceRoot": "infra/resources/prod/onboarding-ms",
+        "name": "@selfcare/infra-prod-onboarding-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "PROD infrastructure for onboarding-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying PROD infrastructure for onboarding-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-dev-onboarding-ms": {
+      "name": "@selfcare/infra-dev-onboarding-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/dev/onboarding-ms",
+        "sourceRoot": "infra/resources/dev/onboarding-ms",
+        "name": "@selfcare/infra-dev-onboarding-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "DEV infrastructure for onboarding-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying DEV infrastructure for onboarding-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-uat-onboarding-ms": {
+      "name": "@selfcare/infra-uat-onboarding-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/uat/onboarding-ms",
+        "sourceRoot": "infra/resources/uat/onboarding-ms",
+        "name": "@selfcare/infra-uat-onboarding-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "UAT infrastructure for onboarding-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying UAT infrastructure for onboarding-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-prod-product-ms": {
+      "name": "@selfcare/infra-prod-product-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/prod/product-ms",
+        "sourceRoot": "infra/resources/prod/product-ms",
+        "name": "@selfcare/infra-prod-product-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "PROD infrastructure for product-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying PROD infrastructure for product-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-dev-product-ms": {
+      "name": "@selfcare/infra-dev-product-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/dev/product-ms",
+        "sourceRoot": "infra/resources/dev/product-ms",
+        "name": "@selfcare/infra-dev-product-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "DEV infrastructure for product-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying DEV infrastructure for product-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-uat-product-ms": {
+      "name": "@selfcare/infra-uat-product-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/uat/product-ms",
+        "sourceRoot": "infra/resources/uat/product-ms",
+        "name": "@selfcare/infra-uat-product-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "UAT infrastructure for product-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying UAT infrastructure for product-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-prod-iam-ms": {
+      "name": "@selfcare/infra-prod-iam-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/prod/iam-ms",
+        "sourceRoot": "infra/resources/prod/iam-ms",
+        "name": "@selfcare/infra-prod-iam-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "PROD infrastructure for iam-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying PROD infrastructure for iam-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-dev-iam-ms": {
+      "name": "@selfcare/infra-dev-iam-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/dev/iam-ms",
+        "sourceRoot": "infra/resources/dev/iam-ms",
+        "name": "@selfcare/infra-dev-iam-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "DEV infrastructure for iam-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying DEV infrastructure for iam-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
+    "@selfcare/infra-uat-iam-ms": {
+      "name": "@selfcare/infra-uat-iam-ms",
+      "type": "app",
+      "data": {
+        "root": "infra/resources/uat/iam-ms",
+        "sourceRoot": "infra/resources/uat/iam-ms",
+        "name": "@selfcare/infra-uat-iam-ms",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "description": "UAT infrastructure for iam-ms"
+        },
+        "targets": {
+          "deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "echo 'Deploying UAT infrastructure for iam-ms...'"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "dependsOn": [
+              "build"
+            ],
+            "cache": false
+          }
+        },
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "implicitDependencies": []
+      }
+    },
     "@selfcare/onboarding-ms": {
       "name": "@selfcare/onboarding-ms",
-      "type": "lib",
+      "type": "app",
       "data": {
         "root": "apps/onboarding-ms",
         "sourceRoot": "apps/onboarding-ms",
         "name": "@selfcare/onboarding-ms",
+        "projectType": "application",
         "tags": [
           "npm:private"
         ],
@@ -41,11 +339,12 @@
     },
     "@selfcare/product-ms": {
       "name": "@selfcare/product-ms",
-      "type": "lib",
+      "type": "app",
       "data": {
         "root": "apps/product-ms",
         "sourceRoot": "apps/product-ms",
         "name": "@selfcare/product-ms",
+        "projectType": "application",
         "tags": [
           "npm:private"
         ],
@@ -80,11 +379,12 @@
     },
     "@selfcare/iam-ms": {
       "name": "@selfcare/iam-ms",
-      "type": "lib",
+      "type": "app",
       "data": {
         "root": "apps/iam-ms",
         "sourceRoot": "apps/iam-ms",
         "name": "@selfcare/iam-ms",
+        "projectType": "application",
         "tags": [
           "npm:private"
         ],
@@ -1100,6 +1400,24 @@
         "hash": "sha512-WMz71T1JS624nWj2n2fnYAuPovhv7EUhk69R6i9dsVyzxt5eM3bjwvgk9L+APE1TRscGysAVMANkB0jh0LQZrQ=="
       }
     },
+    "npm:@jest/diff-sequences": {
+      "type": "npm",
+      "name": "npm:@jest/diff-sequences",
+      "data": {
+        "version": "30.0.1",
+        "packageName": "@jest/diff-sequences",
+        "hash": "sha512-n5H8QLDJ47QqbCNn5SuFjCRDrOLEZ0h8vAHCK5RL9Ls7Xa8AQLa/YxAc9UjFqoEDM48muwtBGjtMY5cr0PLDCw=="
+      }
+    },
+    "npm:@jest/get-type": {
+      "type": "npm",
+      "name": "npm:@jest/get-type",
+      "data": {
+        "version": "30.1.0",
+        "packageName": "@jest/get-type",
+        "hash": "sha512-eMbZE2hUnx1WV0pmURZY9XoXPkUYjpc55mb0CrhtdWLtzMQPFvu/rZkTLZFTsdaVQa+Tr4eWAteqcUzoawq/uA=="
+      }
+    },
     "npm:@jest/schemas": {
       "type": "npm",
       "name": "npm:@jest/schemas",
@@ -1107,6 +1425,15 @@
         "version": "29.6.3",
         "packageName": "@jest/schemas",
         "hash": "sha512-mo5j5X+jIZmJQveBKeS/clAueipV7KgiX1vMgCxam1RNYiqE1w62n0/tJJnHtjW8ZHcQco5gY85jA3mi0L+nSA=="
+      }
+    },
+    "npm:@jest/schemas@30.0.5": {
+      "type": "npm",
+      "name": "npm:@jest/schemas@30.0.5",
+      "data": {
+        "version": "30.0.5",
+        "packageName": "@jest/schemas",
+        "hash": "sha512-DmdYgtezMkh3cpU8/1uyXakv3tJRcmcXxBOcO0tbaozPwpmh4YMsnWrQm9ZmZMfa5ocbxzbFk6O4bDPEc/iAnA=="
       }
     },
     "npm:@jridgewell/gen-mapping": {
@@ -1253,6 +1580,276 @@
         "hash": "sha512-5r/4rlH/lc3HX+tzC7yzR+zc1NP95vEwq4YnmfZqXFmOf7FOUfPMTBuFhtL1UVq2wC2jeYKi0hkQqqzsliPJjA=="
       }
     },
+    "npm:@nx/nx-darwin-arm64@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-darwin-arm64@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-darwin-arm64",
+        "hash": "sha512-DuvOwhXPO6l9W7/zM4/BaAbGTIXFyHVcbbCD1c7HfgZ3VfJPmcE7H4+TuQH0cigHHtpg/eGqV100NQbd7N4zwg=="
+      }
+    },
+    "npm:@nx/nx-darwin-arm64": {
+      "type": "npm",
+      "name": "npm:@nx/nx-darwin-arm64",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-darwin-arm64",
+        "hash": "sha512-bZUFf23gAzuwVw71dR8rngye5aCR8Z/ouIo+KayjqB0LWWoi3WzO73s4S69ljftYt4n6z9wvD+Trbb1BKm2fPg=="
+      }
+    },
+    "npm:@nx/nx-darwin-x64@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-darwin-x64@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-darwin-x64",
+        "hash": "sha512-81Lb7+rp3Qltpgy33Kc1qxk+8IWqZLhqvdLdRFSVV1FN1pPSJDFKyPjCn9oMpRryNPSJ8DgZDpfIaVVyP85rUw=="
+      }
+    },
+    "npm:@nx/nx-darwin-x64": {
+      "type": "npm",
+      "name": "npm:@nx/nx-darwin-x64",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-darwin-x64",
+        "hash": "sha512-UXXVea8icFG/3rFwpbLYsD6O4wlyJ1STQfOdhGK1Hyuga70AUUdrjVm7HzigAQP/Sb2Nzd7155YXHzfpRPDFYA=="
+      }
+    },
+    "npm:@nx/nx-freebsd-x64@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-freebsd-x64@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-freebsd-x64",
+        "hash": "sha512-Ig8yQN3lSz9R+Zf3NQWcvEnIzwDX4NSeaFtEliPnC3OHlQXGNXbOUfkExa0U0UUgyxa4rgnCgefmwuc12H9q2Q=="
+      }
+    },
+    "npm:@nx/nx-freebsd-x64": {
+      "type": "npm",
+      "name": "npm:@nx/nx-freebsd-x64",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-freebsd-x64",
+        "hash": "sha512-TK2xuXn+BI6hxGaRK1HRUPWeF/nOtezKSqM+6rbippfCzjES/crmp9l5nbI764MMthtUmykCyWvhEfkDca6kbA=="
+      }
+    },
+    "npm:@nx/nx-linux-arm-gnueabihf@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm-gnueabihf@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-linux-arm-gnueabihf",
+        "hash": "sha512-C7tGoLnR9MjKLJsLMF2VsKcDChPiygAsw6dSVgU4B650H7sBWmkEHM/QjvyRvkcZuoQBDamS/eVs/UaJu9wNhA=="
+      }
+    },
+    "npm:@nx/nx-linux-arm-gnueabihf": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm-gnueabihf",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-linux-arm-gnueabihf",
+        "hash": "sha512-33rptyRraqaeQ2Kq6pcZKQqgnYY/7zcGH8fHXgKK7XzKk+7QuPViq+jMEUZP5E3UzZPkIYhsfmZcZqhNRvepJQ=="
+      }
+    },
+    "npm:@nx/nx-linux-arm64-gnu@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm64-gnu@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-linux-arm64-gnu",
+        "hash": "sha512-GNxei+lwhzhrO9m+nNkibgxLhbkYKyFXPSRpOKLwv9VavNzJn5UmLfKJyhjNQPBOSYuNhiVPbU1Ja/qOBcozYw=="
+      }
+    },
+    "npm:@nx/nx-linux-arm64-gnu": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm64-gnu",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-linux-arm64-gnu",
+        "hash": "sha512-2E70qMKOhh7Fp4JGcRbRLvFKq0+ANVdAgSzH47plxOLygIeVAfIXRSuQbCI0EUFa5Sy6hImLaoRSB2GdgKihAw=="
+      }
+    },
+    "npm:@nx/nx-linux-arm64-musl@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm64-musl@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-linux-arm64-musl",
+        "hash": "sha512-VDJtdJP2nCgS8ommbfWFAKjoZCE51VH7tZyIfh8RFI5fxwoB3Pk6d6f6cmNHI/1t98YI3V7Onuf3Y9KBkYtyfQ=="
+      }
+    },
+    "npm:@nx/nx-linux-arm64-musl": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-arm64-musl",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-linux-arm64-musl",
+        "hash": "sha512-ltty/PDWqkYgu/6Ye65d7v5nh3D6e0n3SacoKRs2Vtfz5oHYRUkSKizKIhEVfRNuHn3d9j8ve1fdcCN4SDPUBQ=="
+      }
+    },
+    "npm:@nx/nx-linux-x64-gnu@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-x64-gnu@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-linux-x64-gnu",
+        "hash": "sha512-BZ/i+KTplEJmE8ZHKgPGD513Zl86DuSGyRAvbDZ7Qf19Tei7Of6vxW+ypvVDIwmDbyXfe13u54M5gDt8iiqFGQ=="
+      }
+    },
+    "npm:@nx/nx-linux-x64-gnu": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-x64-gnu",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-linux-x64-gnu",
+        "hash": "sha512-JzE3BuO9RCBVdgai18CCze6KUzG0AozE0TtYFxRokfSC05NU3nUhd/o62UsOl7s6Bqt/9nwrW7JC8pNDiCi9OQ=="
+      }
+    },
+    "npm:@nx/nx-linux-x64-musl@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-x64-musl@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-linux-x64-musl",
+        "hash": "sha512-e0VdiV6fe88Dbhill2gUjYAD9jMhHjYsafGOPR+/uaGMAYPoI1jKur6uPGY+ik6fvwvDFFl0VT2+HACKVn7RoA=="
+      }
+    },
+    "npm:@nx/nx-linux-x64-musl": {
+      "type": "npm",
+      "name": "npm:@nx/nx-linux-x64-musl",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-linux-x64-musl",
+        "hash": "sha512-2rPvDOQLb7Wd6YiU88FMBiLtYco0dVXF99IJBRGAWv+WTI7MNr47OyK2ze+JOsbYY1d8aOGUvckUvCCZvZKEfg=="
+      }
+    },
+    "npm:@nx/nx-win32-arm64-msvc@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-win32-arm64-msvc@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-win32-arm64-msvc",
+        "hash": "sha512-3vWZO9y7uHKeyepcU55pE8VQTKGome3mLdicvx1TCoKKl0cA3bTR341Jdo2Zl4Waa2ENk7pGQbLWRQ3ZkaA92A=="
+      }
+    },
+    "npm:@nx/nx-win32-arm64-msvc": {
+      "type": "npm",
+      "name": "npm:@nx/nx-win32-arm64-msvc",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-win32-arm64-msvc",
+        "hash": "sha512-JxW+YPS+EjhUsLw9C6wtk9pQTG3psyFwxhab8y/dgk2s4AOTLyIm0XxgcCJVvB6i4uv+s1g0QXRwp6+q3IR6hg=="
+      }
+    },
+    "npm:@nx/nx-win32-x64-msvc@22.5.1": {
+      "type": "npm",
+      "name": "npm:@nx/nx-win32-x64-msvc@22.5.1",
+      "data": {
+        "version": "22.5.1",
+        "packageName": "@nx/nx-win32-x64-msvc",
+        "hash": "sha512-4e5LduuhpBx96JgD1J3fHUGCwC+/lL+tvXp3UVtjh/AOdINGsyI+scinT3uaI9vcB5GKBcybTxbBZzwcH50w9g=="
+      }
+    },
+    "npm:@nx/nx-win32-x64-msvc": {
+      "type": "npm",
+      "name": "npm:@nx/nx-win32-x64-msvc",
+      "data": {
+        "version": "19.8.14",
+        "packageName": "@nx/nx-win32-x64-msvc",
+        "hash": "sha512-RxiPlBWPcGSf9TzIIy62iKRdRhokXMDUsPub9DL2VdVyTMXPZQR25aY/PJeasJN1EQU74hg097LK2wSHi+vzOQ=="
+      }
+    },
+    "npm:@sinclair/typebox@0.34.48": {
+      "type": "npm",
+      "name": "npm:@sinclair/typebox@0.34.48",
+      "data": {
+        "version": "0.34.48",
+        "packageName": "@sinclair/typebox",
+        "hash": "sha512-kKJTNuK3AQOrgjjotVxMrCn1sUJwM76wMszfq1kdU4uYVJjvEWuFQ6HgvLt4Xz3fSmZlTOxJ/Ie13KnIcWQXFA=="
+      }
+    },
+    "npm:@sinclair/typebox": {
+      "type": "npm",
+      "name": "npm:@sinclair/typebox",
+      "data": {
+        "version": "0.27.10",
+        "packageName": "@sinclair/typebox",
+        "hash": "sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA=="
+      }
+    },
+    "npm:@yarnpkg/parsers@3.0.2": {
+      "type": "npm",
+      "name": "npm:@yarnpkg/parsers@3.0.2",
+      "data": {
+        "version": "3.0.2",
+        "packageName": "@yarnpkg/parsers",
+        "hash": "sha512-/HcYgtUSiJiot/XWGLOlGxPYUG65+/31V8oqk17vZLW1xlCoR4PampyePljOxY2n8/3jz9+tIFzICsyGujJZoA=="
+      }
+    },
+    "npm:@yarnpkg/parsers": {
+      "type": "npm",
+      "name": "npm:@yarnpkg/parsers",
+      "data": {
+        "version": "3.0.0-rc.46",
+        "packageName": "@yarnpkg/parsers",
+        "hash": "sha512-aiATs7pSutzda/rq8fnuPwTglyVwjM22bNnK2ZgjrpAjQHSSl3lztd2f9evst1W/qnC58DRz7T7QndUDumAR4Q=="
+      }
+    },
+    "npm:ansi-styles@5.2.0": {
+      "type": "npm",
+      "name": "npm:ansi-styles@5.2.0",
+      "data": {
+        "version": "5.2.0",
+        "packageName": "ansi-styles",
+        "hash": "sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA=="
+      }
+    },
+    "npm:ansi-styles": {
+      "type": "npm",
+      "name": "npm:ansi-styles",
+      "data": {
+        "version": "4.3.0",
+        "packageName": "ansi-styles",
+        "hash": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg=="
+      }
+    },
+    "npm:ignore@7.0.5": {
+      "type": "npm",
+      "name": "npm:ignore@7.0.5",
+      "data": {
+        "version": "7.0.5",
+        "packageName": "ignore",
+        "hash": "sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg=="
+      }
+    },
+    "npm:ignore": {
+      "type": "npm",
+      "name": "npm:ignore",
+      "data": {
+        "version": "5.3.2",
+        "packageName": "ignore",
+        "hash": "sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g=="
+      }
+    },
+    "npm:jest-diff@30.2.0": {
+      "type": "npm",
+      "name": "npm:jest-diff@30.2.0",
+      "data": {
+        "version": "30.2.0",
+        "packageName": "jest-diff",
+        "hash": "sha512-dQHFo3Pt4/NLlG5z4PxZ/3yZTZ1C7s9hveiOj+GCN+uT109NC2QgsoVZsVOAvbJ3RgKkvyLGXZV9+piDpWbm6A=="
+      }
+    },
+    "npm:jest-diff": {
+      "type": "npm",
+      "name": "npm:jest-diff",
+      "data": {
+        "version": "29.7.0",
+        "packageName": "jest-diff",
+        "hash": "sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw=="
+      }
+    },
     "npm:minimatch@10.1.1": {
       "type": "npm",
       "name": "npm:minimatch@10.1.1",
@@ -1280,94 +1877,58 @@
         "hash": "sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg=="
       }
     },
-    "npm:@nx/nx-darwin-arm64": {
+    "npm:nx@22.5.1": {
       "type": "npm",
-      "name": "npm:@nx/nx-darwin-arm64",
+      "name": "npm:nx@22.5.1",
       "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-darwin-arm64",
-        "hash": "sha512-bZUFf23gAzuwVw71dR8rngye5aCR8Z/ouIo+KayjqB0LWWoi3WzO73s4S69ljftYt4n6z9wvD+Trbb1BKm2fPg=="
+        "version": "22.5.1",
+        "packageName": "nx",
+        "hash": "sha512-KIQqOSdoshkav9JuoH/+Vp42niA5MTRtACupe+q8CaB7bHiLsWr5nctQVC7ul3NauAmsoqNWH7t5CIi8KgrPIQ=="
       }
     },
-    "npm:@nx/nx-darwin-x64": {
+    "npm:nx": {
       "type": "npm",
-      "name": "npm:@nx/nx-darwin-x64",
+      "name": "npm:nx",
       "data": {
         "version": "19.8.14",
-        "packageName": "@nx/nx-darwin-x64",
-        "hash": "sha512-UXXVea8icFG/3rFwpbLYsD6O4wlyJ1STQfOdhGK1Hyuga70AUUdrjVm7HzigAQP/Sb2Nzd7155YXHzfpRPDFYA=="
+        "packageName": "nx",
+        "hash": "sha512-yprBOWV16eQntz5h5SShYHMVeN50fUb6yHfzsqNiFneCJeyVjyJ585m+2TuVbE11vT1amU0xCjHcSGfJBBnm8g=="
       }
     },
-    "npm:@nx/nx-freebsd-x64": {
+    "npm:pretty-format@30.2.0": {
       "type": "npm",
-      "name": "npm:@nx/nx-freebsd-x64",
+      "name": "npm:pretty-format@30.2.0",
       "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-freebsd-x64",
-        "hash": "sha512-TK2xuXn+BI6hxGaRK1HRUPWeF/nOtezKSqM+6rbippfCzjES/crmp9l5nbI764MMthtUmykCyWvhEfkDca6kbA=="
+        "version": "30.2.0",
+        "packageName": "pretty-format",
+        "hash": "sha512-9uBdv/B4EefsuAL+pWqueZyZS2Ba+LxfFeQ9DN14HU4bN8bhaxKdkpjpB6fs9+pSjIBu+FXQHImEg8j/Lw0+vA=="
       }
     },
-    "npm:@nx/nx-linux-arm-gnueabihf": {
+    "npm:pretty-format": {
       "type": "npm",
-      "name": "npm:@nx/nx-linux-arm-gnueabihf",
+      "name": "npm:pretty-format",
       "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-linux-arm-gnueabihf",
-        "hash": "sha512-33rptyRraqaeQ2Kq6pcZKQqgnYY/7zcGH8fHXgKK7XzKk+7QuPViq+jMEUZP5E3UzZPkIYhsfmZcZqhNRvepJQ=="
+        "version": "29.7.0",
+        "packageName": "pretty-format",
+        "hash": "sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ=="
       }
     },
-    "npm:@nx/nx-linux-arm64-gnu": {
+    "npm:yaml@2.8.2": {
       "type": "npm",
-      "name": "npm:@nx/nx-linux-arm64-gnu",
+      "name": "npm:yaml@2.8.2",
       "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-linux-arm64-gnu",
-        "hash": "sha512-2E70qMKOhh7Fp4JGcRbRLvFKq0+ANVdAgSzH47plxOLygIeVAfIXRSuQbCI0EUFa5Sy6hImLaoRSB2GdgKihAw=="
+        "version": "2.8.2",
+        "packageName": "yaml",
+        "hash": "sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A=="
       }
     },
-    "npm:@nx/nx-linux-arm64-musl": {
+    "npm:yaml": {
       "type": "npm",
-      "name": "npm:@nx/nx-linux-arm64-musl",
+      "name": "npm:yaml",
       "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-linux-arm64-musl",
-        "hash": "sha512-ltty/PDWqkYgu/6Ye65d7v5nh3D6e0n3SacoKRs2Vtfz5oHYRUkSKizKIhEVfRNuHn3d9j8ve1fdcCN4SDPUBQ=="
-      }
-    },
-    "npm:@nx/nx-linux-x64-gnu": {
-      "type": "npm",
-      "name": "npm:@nx/nx-linux-x64-gnu",
-      "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-linux-x64-gnu",
-        "hash": "sha512-JzE3BuO9RCBVdgai18CCze6KUzG0AozE0TtYFxRokfSC05NU3nUhd/o62UsOl7s6Bqt/9nwrW7JC8pNDiCi9OQ=="
-      }
-    },
-    "npm:@nx/nx-linux-x64-musl": {
-      "type": "npm",
-      "name": "npm:@nx/nx-linux-x64-musl",
-      "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-linux-x64-musl",
-        "hash": "sha512-2rPvDOQLb7Wd6YiU88FMBiLtYco0dVXF99IJBRGAWv+WTI7MNr47OyK2ze+JOsbYY1d8aOGUvckUvCCZvZKEfg=="
-      }
-    },
-    "npm:@nx/nx-win32-arm64-msvc": {
-      "type": "npm",
-      "name": "npm:@nx/nx-win32-arm64-msvc",
-      "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-win32-arm64-msvc",
-        "hash": "sha512-JxW+YPS+EjhUsLw9C6wtk9pQTG3psyFwxhab8y/dgk2s4AOTLyIm0XxgcCJVvB6i4uv+s1g0QXRwp6+q3IR6hg=="
-      }
-    },
-    "npm:@nx/nx-win32-x64-msvc": {
-      "type": "npm",
-      "name": "npm:@nx/nx-win32-x64-msvc",
-      "data": {
-        "version": "19.8.14",
-        "packageName": "@nx/nx-win32-x64-msvc",
-        "hash": "sha512-RxiPlBWPcGSf9TzIIy62iKRdRhokXMDUsPub9DL2VdVyTMXPZQR25aY/PJeasJN1EQU74hg097LK2wSHi+vzOQ=="
+        "version": "1.10.2",
+        "packageName": "yaml",
+        "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
       }
     },
     "npm:@nx/workspace": {
@@ -1377,15 +1938,6 @@
         "version": "19.8.14",
         "packageName": "@nx/workspace",
         "hash": "sha512-Yb3d5WVjCyLill8MycKU+P/kbTyatKKqoUCu5zWokkysABiMWRLlrCYNzqwjTjeIIGj9MMGRHAQEemkBdL4tdg=="
-      }
-    },
-    "npm:@sinclair/typebox": {
-      "type": "npm",
-      "name": "npm:@sinclair/typebox",
-      "data": {
-        "version": "0.27.10",
-        "packageName": "@sinclair/typebox",
-        "hash": "sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA=="
       }
     },
     "npm:@tsconfig/node10": {
@@ -1433,6 +1985,15 @@
         "hash": "sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw=="
       }
     },
+    "npm:@types/node": {
+      "type": "npm",
+      "name": "npm:@types/node",
+      "data": {
+        "version": "25.2.3",
+        "packageName": "@types/node",
+        "hash": "sha512-m0jEgYlYz+mDJZ2+F4v8D1AyQb+QzsNqRuI7xg1VQX/KlKS0qT9r1Mo16yo5F/MtifXFgaofIFsdFMox2SxIbQ=="
+      }
+    },
     "npm:@types/parse-json": {
       "type": "npm",
       "name": "npm:@types/parse-json",
@@ -1458,15 +2019,6 @@
         "version": "1.1.0",
         "packageName": "@yarnpkg/lockfile",
         "hash": "sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ=="
-      }
-    },
-    "npm:@yarnpkg/parsers": {
-      "type": "npm",
-      "name": "npm:@yarnpkg/parsers",
-      "data": {
-        "version": "3.0.0-rc.46",
-        "packageName": "@yarnpkg/parsers",
-        "hash": "sha512-aiATs7pSutzda/rq8fnuPwTglyVwjM22bNnK2ZgjrpAjQHSSl3lztd2f9evst1W/qnC58DRz7T7QndUDumAR4Q=="
       }
     },
     "npm:@zkochan/js-yaml": {
@@ -1521,24 +2073,6 @@
         "version": "5.0.1",
         "packageName": "ansi-regex",
         "hash": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="
-      }
-    },
-    "npm:ansi-styles": {
-      "type": "npm",
-      "name": "npm:ansi-styles",
-      "data": {
-        "version": "4.3.0",
-        "packageName": "ansi-styles",
-        "hash": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg=="
-      }
-    },
-    "npm:ansi-styles@5.2.0": {
-      "type": "npm",
-      "name": "npm:ansi-styles@5.2.0",
-      "data": {
-        "version": "5.2.0",
-        "packageName": "ansi-styles",
-        "hash": "sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA=="
       }
     },
     "npm:arg": {
@@ -2315,15 +2849,6 @@
         "hash": "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
       }
     },
-    "npm:ignore": {
-      "type": "npm",
-      "name": "npm:ignore",
-      "data": {
-        "version": "5.3.2",
-        "packageName": "ignore",
-        "hash": "sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g=="
-      }
-    },
     "npm:import-fresh": {
       "type": "npm",
       "name": "npm:import-fresh",
@@ -2439,15 +2964,6 @@
         "version": "10.9.4",
         "packageName": "jake",
         "hash": "sha512-wpHYzhxiVQL+IV05BLE2Xn34zW1S223hvjtqk0+gsPrwd/8JNLXJgZZM/iPFsYc1xyphF+6M6EvdE5E9MBGkDA=="
-      }
-    },
-    "npm:jest-diff": {
-      "type": "npm",
-      "name": "npm:jest-diff",
-      "data": {
-        "version": "29.7.0",
-        "packageName": "jest-diff",
-        "hash": "sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw=="
       }
     },
     "npm:jest-get-type": {
@@ -2666,15 +3182,6 @@
         "hash": "sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw=="
       }
     },
-    "npm:nx": {
-      "type": "npm",
-      "name": "npm:nx",
-      "data": {
-        "version": "19.8.14",
-        "packageName": "nx",
-        "hash": "sha512-yprBOWV16eQntz5h5SShYHMVeN50fUb6yHfzsqNiFneCJeyVjyJ585m+2TuVbE11vT1amU0xCjHcSGfJBBnm8g=="
-      }
-    },
     "npm:once": {
       "type": "npm",
       "name": "npm:once",
@@ -2781,15 +3288,6 @@
         "version": "3.8.1",
         "packageName": "prettier",
         "hash": "sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg=="
-      }
-    },
-    "npm:pretty-format": {
-      "type": "npm",
-      "name": "npm:pretty-format",
-      "data": {
-        "version": "29.7.0",
-        "packageName": "pretty-format",
-        "hash": "sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ=="
       }
     },
     "npm:proc-log": {
@@ -2907,6 +3405,15 @@
         "version": "4.0.0",
         "packageName": "resolve-from",
         "hash": "sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g=="
+      }
+    },
+    "npm:resolve.exports": {
+      "type": "npm",
+      "name": "npm:resolve.exports",
+      "data": {
+        "version": "2.0.3",
+        "packageName": "resolve.exports",
+        "hash": "sha512-OcXjMsGdhL4XnbShKpAcSqPMzQoYkYyhbEaeSko47MjRP9NfEQMhZkXL1DoFlt9LWQn4YttrdnV6X2OiyzBi+A=="
       }
     },
     "npm:restore-cursor": {
@@ -3080,6 +3587,15 @@
         "hash": "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="
       }
     },
+    "npm:tree-kill": {
+      "type": "npm",
+      "name": "npm:tree-kill",
+      "data": {
+        "version": "1.2.2",
+        "packageName": "tree-kill",
+        "hash": "sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A=="
+      }
+    },
     "npm:ts-node": {
       "type": "npm",
       "name": "npm:ts-node",
@@ -3105,6 +3621,24 @@
         "version": "2.8.1",
         "packageName": "tslib",
         "hash": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
+      }
+    },
+    "npm:typescript": {
+      "type": "npm",
+      "name": "npm:typescript",
+      "data": {
+        "version": "5.9.3",
+        "packageName": "typescript",
+        "hash": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
+      }
+    },
+    "npm:undici-types": {
+      "type": "npm",
+      "name": "npm:undici-types",
+      "data": {
+        "version": "7.16.0",
+        "packageName": "undici-types",
+        "hash": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="
       }
     },
     "npm:unicode-canonical-property-names-ecmascript": {
@@ -3224,15 +3758,6 @@
         "hash": "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="
       }
     },
-    "npm:yaml": {
-      "type": "npm",
-      "name": "npm:yaml",
-      "data": {
-        "version": "1.10.2",
-        "packageName": "yaml",
-        "hash": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
-      }
-    },
     "npm:yargs": {
       "type": "npm",
       "name": "npm:yargs",
@@ -3262,6 +3787,15 @@
     }
   },
   "dependencies": {
+    "@selfcare/infra-prod-onboarding-ms": [],
+    "@selfcare/infra-dev-onboarding-ms": [],
+    "@selfcare/infra-uat-onboarding-ms": [],
+    "@selfcare/infra-prod-product-ms": [],
+    "@selfcare/infra-dev-product-ms": [],
+    "@selfcare/infra-uat-product-ms": [],
+    "@selfcare/infra-prod-iam-ms": [],
+    "@selfcare/infra-dev-iam-ms": [],
+    "@selfcare/infra-uat-iam-ms": [],
     "@selfcare/onboarding-ms": [],
     "@selfcare/product-ms": [],
     "@selfcare/iam-ms": [],
@@ -5612,7 +6146,19 @@
         "type": "static"
       }
     ],
+    "npm:@jest/schemas@30.0.5": [
+      {
+        "source": "npm:@jest/schemas@30.0.5",
+        "target": "npm:@sinclair/typebox@0.34.48",
+        "type": "static"
+      }
+    ],
     "npm:@nx/devkit@22.5.1": [
+      {
+        "source": "npm:@nx/devkit@22.5.1",
+        "target": "npm:nx@22.5.1",
+        "type": "static"
+      },
       {
         "source": "npm:@nx/devkit@22.5.1",
         "target": "npm:@zkochan/js-yaml",
@@ -5649,10 +6195,293 @@
         "type": "static"
       }
     ],
+    "npm:@yarnpkg/parsers@3.0.2": [
+      {
+        "source": "npm:@yarnpkg/parsers@3.0.2",
+        "target": "npm:js-yaml",
+        "type": "static"
+      },
+      {
+        "source": "npm:@yarnpkg/parsers@3.0.2",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:jest-diff@30.2.0": [
+      {
+        "source": "npm:jest-diff@30.2.0",
+        "target": "npm:@jest/diff-sequences",
+        "type": "static"
+      },
+      {
+        "source": "npm:jest-diff@30.2.0",
+        "target": "npm:@jest/get-type",
+        "type": "static"
+      },
+      {
+        "source": "npm:jest-diff@30.2.0",
+        "target": "npm:chalk",
+        "type": "static"
+      },
+      {
+        "source": "npm:jest-diff@30.2.0",
+        "target": "npm:pretty-format@30.2.0",
+        "type": "static"
+      }
+    ],
     "npm:minimatch@10.1.1": [
       {
         "source": "npm:minimatch@10.1.1",
         "target": "npm:@isaacs/brace-expansion",
+        "type": "static"
+      }
+    ],
+    "npm:nx@22.5.1": [
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@napi-rs/wasm-runtime",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@yarnpkg/lockfile",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@yarnpkg/parsers@3.0.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@zkochan/js-yaml",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:axios",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:cli-cursor",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:cli-spinners",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:cliui",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:dotenv",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:dotenv-expand",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:ejs",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:enquirer",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:figures",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:flat",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:front-matter",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:ignore@7.0.5",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:jest-diff@30.2.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:jsonc-parser",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:lines-and-columns",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:minimatch@10.1.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:node-machine-id",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:npm-run-path",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:open",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:ora",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:picocolors",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:resolve.exports",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:semver",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:string-width",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:tar-stream",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:tmp",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:tree-kill",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:tsconfig-paths",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:yaml@2.8.2",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:yargs",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:yargs-parser",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-darwin-arm64@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-darwin-x64@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-freebsd-x64@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-linux-arm-gnueabihf@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-linux-arm64-gnu@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-linux-arm64-musl@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-linux-x64-gnu@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-linux-x64-musl@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-win32-arm64-msvc@22.5.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:nx@22.5.1",
+        "target": "npm:@nx/nx-win32-x64-msvc@22.5.1",
+        "type": "static"
+      }
+    ],
+    "npm:pretty-format@30.2.0": [
+      {
+        "source": "npm:pretty-format@30.2.0",
+        "target": "npm:@jest/schemas@30.0.5",
+        "type": "static"
+      },
+      {
+        "source": "npm:pretty-format@30.2.0",
+        "target": "npm:ansi-styles@5.2.0",
+        "type": "static"
+      },
+      {
+        "source": "npm:pretty-format@30.2.0",
+        "target": "npm:react-is",
         "type": "static"
       }
     ],
@@ -5697,6 +6526,13 @@
       {
         "source": "npm:@tybys/wasm-util",
         "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@types/node": [
+      {
+        "source": "npm:@types/node",
+        "target": "npm:undici-types",
         "type": "static"
       }
     ],
@@ -7027,6 +7863,16 @@
       }
     ],
     "npm:ts-node": [
+      {
+        "source": "npm:ts-node",
+        "target": "npm:@types/node",
+        "type": "static"
+      },
+      {
+        "source": "npm:ts-node",
+        "target": "npm:typescript",
+        "type": "static"
+      },
       {
         "source": "npm:ts-node",
         "target": "npm:@cspotcode/source-map-support",
