@@ -12,48 +12,36 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".node-version",
-        "hash": "3895855084391241356"
+        "file": "README.md",
+        "hash": "7305863568161797493"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5309550512612869604"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "1775665375387268871"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "3896070834466826943"
+      },
+      {
+        "file": "scripts/sync-pom-version.js",
+        "hash": "14708038153204148618"
       },
       {
         "file": "pnpm-workspace.yaml",
         "hash": "11650935292615147861"
       },
       {
+        "file": "infra/repository/outputs.tf",
+        "hash": "15157434267523467669"
+      },
+      {
         "file": ".github/workflows/version-packages.yml",
         "hash": "4664136083479741631"
-      },
-      {
-        "file": "infra/repository/providers.tf",
-        "hash": "3932545540996606629"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "4290183992684620937"
-      },
-      {
-        "file": "package.json",
-        "hash": "3321409653570633126"
-      },
-      {
-        "file": ".github/workflows/deploy-dev.yml",
-        "hash": "7818887810332873357"
-      },
-      {
-        "file": ".pre-commit-config.yaml",
-        "hash": "14575207707319412496"
-      },
-      {
-        "file": "TESTING-MAVEN.md",
-        "hash": "24674563862073636"
-      },
-      {
-        "file": "infra/resources/_modules/dummy-resource/main.tf",
-        "hash": "8460537179458208207"
-      },
-      {
-        "file": ".trivyignore",
-        "hash": "14448727037733588142"
       },
       {
         "file": ".github/workflows/release.yml",
@@ -64,83 +52,67 @@
         "hash": "8535807250840864458"
       },
       {
-        "file": "README.md",
-        "hash": "7305863568161797493"
+        "file": "TESTING-MAVEN.md",
+        "hash": "24674563862073636"
       },
       {
-        "file": ".terraform-version",
-        "hash": "17015069938952498254"
-      },
-      {
-        "file": "nx.json",
-        "hash": "11760161006842351548"
-      },
-      {
-        "file": "infra/repository/main.tf",
-        "hash": "4396565939330767620"
+        "file": ".trivyignore",
+        "hash": "14448727037733588142"
       },
       {
         "file": "scripts/preview-release.js",
         "hash": "8740277968940382754"
       },
       {
-        "file": ".editorconfig",
-        "hash": "5309550512612869604"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "3896070834466826943"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "11333155824092531688"
-      },
-      {
-        "file": "infra/repository/outputs.tf",
-        "hash": "15157434267523467669"
+        "file": ".nx/version-plans/version-plan-1771256991168.md",
+        "hash": "8717367852821274057"
       },
       {
         "file": "scripts/sync-all-poms.js",
         "hash": "13063577974537244493"
       },
       {
-        "file": "scripts/sync-pom-version.js",
-        "hash": "14708038153204148618"
+        "file": ".prettierignore",
+        "hash": "11333155824092531688"
       },
       {
-        "file": ".nx/version-plans/version-plan-1771256931716.md",
-        "hash": "16344242217374287784"
+        "file": ".terraform-version",
+        "hash": "17015069938952498254"
+      },
+      {
+        "file": "infra/repository/providers.tf",
+        "hash": "3932545540996606629"
+      },
+      {
+        "file": ".github/workflows/deploy-dev.yml",
+        "hash": "7818887810332873357"
+      },
+      {
+        "file": ".pre-commit-config.yaml",
+        "hash": "14575207707319412496"
+      },
+      {
+        "file": "nx.json",
+        "hash": "11760161006842351548"
+      },
+      {
+        "file": "package.json",
+        "hash": "3321409653570633126"
+      },
+      {
+        "file": "infra/resources/_modules/dummy-resource/main.tf",
+        "hash": "8460537179458208207"
+      },
+      {
+        "file": ".node-version",
+        "hash": "3895855084391241356"
+      },
+      {
+        "file": "infra/repository/main.tf",
+        "hash": "4396565939330767620"
       }
     ],
     "projectFileMap": {
-      "@selfcare/product-ms": [
-        {
-          "file": "apps/product-ms/README.md",
-          "hash": "4523134239267934118"
-        },
-        {
-          "file": "apps/product-ms/package.json",
-          "hash": "7062304454913899332"
-        },
-        {
-          "file": "apps/product-ms/pom.xml",
-          "hash": "9747130956653119907"
-        }
-      ],
-      "@selfcare/infra-dev-product-ms": [
-        {
-          "file": "infra/resources/dev/product-ms/main.tf",
-          "hash": "10916889662325982400"
-        },
-        {
-          "file": "infra/resources/dev/product-ms/package.json",
-          "hash": "5820450240023960019"
-        },
-        {
-          "file": "infra/resources/dev/product-ms/project.json",
-          "hash": "10202929340292436613"
-        }
-      ],
       "@selfcare/infra-prod-iam-ms": [
         {
           "file": "infra/resources/prod/iam-ms/main.tf",
@@ -155,36 +127,32 @@
           "hash": "6795101719002424432"
         }
       ],
-      "@selfcare/infra-uat-iam-ms": [
+      "@selfcare/infra-prod-onboarding-ms": [
         {
-          "file": "infra/resources/uat/iam-ms/main.tf",
-          "hash": "16784903977662155741"
+          "file": "infra/resources/prod/onboarding-ms/main.tf",
+          "hash": "2634161277707187176"
         },
         {
-          "file": "infra/resources/uat/iam-ms/package.json",
-          "hash": "9734457388314725605"
+          "file": "infra/resources/prod/onboarding-ms/package.json",
+          "hash": "15981891662982476500"
         },
         {
-          "file": "infra/resources/uat/iam-ms/project.json",
-          "hash": "9095784562264750417"
+          "file": "infra/resources/prod/onboarding-ms/project.json",
+          "hash": "10766900365317825375"
         }
       ],
-      "@selfcare/infra-dev-onboarding-ms": [
+      "@selfcare/infra-dev-product-ms": [
         {
-          "file": "infra/resources/dev/onboarding-ms/CHANGELOG.md",
-          "hash": "16607037362527091968"
+          "file": "infra/resources/dev/product-ms/main.tf",
+          "hash": "10916889662325982400"
         },
         {
-          "file": "infra/resources/dev/onboarding-ms/main.tf",
-          "hash": "12480979866961853046"
+          "file": "infra/resources/dev/product-ms/package.json",
+          "hash": "5820450240023960019"
         },
         {
-          "file": "infra/resources/dev/onboarding-ms/package.json",
-          "hash": "16454571354853897805"
-        },
-        {
-          "file": "infra/resources/dev/onboarding-ms/project.json",
-          "hash": "379537855320305481"
+          "file": "infra/resources/dev/product-ms/project.json",
+          "hash": "10202929340292436613"
         }
       ],
       "@selfcare/onboarding-ms": [
@@ -209,34 +177,6 @@
           "hash": "5245758582312543136"
         }
       ],
-      "@selfcare/infra-uat-product-ms": [
-        {
-          "file": "infra/resources/uat/product-ms/main.tf",
-          "hash": "144367453569527075"
-        },
-        {
-          "file": "infra/resources/uat/product-ms/package.json",
-          "hash": "9781591936906106141"
-        },
-        {
-          "file": "infra/resources/uat/product-ms/project.json",
-          "hash": "12154375926278453554"
-        }
-      ],
-      "@selfcare/infra-prod-onboarding-ms": [
-        {
-          "file": "infra/resources/prod/onboarding-ms/main.tf",
-          "hash": "2634161277707187176"
-        },
-        {
-          "file": "infra/resources/prod/onboarding-ms/package.json",
-          "hash": "15981891662982476500"
-        },
-        {
-          "file": "infra/resources/prod/onboarding-ms/project.json",
-          "hash": "10766900365317825375"
-        }
-      ],
       "@selfcare/infra-uat-onboarding-ms": [
         {
           "file": "infra/resources/uat/onboarding-ms/main.tf",
@@ -251,6 +191,24 @@
           "hash": "12210001433475752751"
         }
       ],
+      "@selfcare/product-ms": [
+        {
+          "file": "apps/product-ms/CHANGELOG.md",
+          "hash": "4040552656230652101"
+        },
+        {
+          "file": "apps/product-ms/README.md",
+          "hash": "4523134239267934118"
+        },
+        {
+          "file": "apps/product-ms/package.json",
+          "hash": "4363282165674463381"
+        },
+        {
+          "file": "apps/product-ms/pom.xml",
+          "hash": "5040210639210619686"
+        }
+      ],
       "@selfcare/infra-dev-iam-ms": [
         {
           "file": "infra/resources/dev/iam-ms/main.tf",
@@ -263,6 +221,56 @@
         {
           "file": "infra/resources/dev/iam-ms/project.json",
           "hash": "15993723982701705729"
+        }
+      ],
+      "@selfcare/infra-uat-product-ms": [
+        {
+          "file": "infra/resources/uat/product-ms/CHANGELOG.md",
+          "hash": "4040552656230652101"
+        },
+        {
+          "file": "infra/resources/uat/product-ms/main.tf",
+          "hash": "144367453569527075"
+        },
+        {
+          "file": "infra/resources/uat/product-ms/package.json",
+          "hash": "7075353663737163778"
+        },
+        {
+          "file": "infra/resources/uat/product-ms/project.json",
+          "hash": "12154375926278453554"
+        }
+      ],
+      "@selfcare/infra-dev-onboarding-ms": [
+        {
+          "file": "infra/resources/dev/onboarding-ms/CHANGELOG.md",
+          "hash": "16607037362527091968"
+        },
+        {
+          "file": "infra/resources/dev/onboarding-ms/main.tf",
+          "hash": "12480979866961853046"
+        },
+        {
+          "file": "infra/resources/dev/onboarding-ms/package.json",
+          "hash": "16454571354853897805"
+        },
+        {
+          "file": "infra/resources/dev/onboarding-ms/project.json",
+          "hash": "379537855320305481"
+        }
+      ],
+      "@selfcare/infra-uat-iam-ms": [
+        {
+          "file": "infra/resources/uat/iam-ms/main.tf",
+          "hash": "16784903977662155741"
+        },
+        {
+          "file": "infra/resources/uat/iam-ms/package.json",
+          "hash": "9734457388314725605"
+        },
+        {
+          "file": "infra/resources/uat/iam-ms/project.json",
+          "hash": "9095784562264750417"
         }
       ],
       "@selfcare/iam-ms": [
