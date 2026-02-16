@@ -12,8 +12,60 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": ".nx/version-plans/version-plan-1771256991168.md",
+        "hash": "8717367852821274057"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "1775665375387268871"
+      },
+      {
+        "file": "TESTING-MAVEN.md",
+        "hash": "24674563862073636"
+      },
+      {
+        "file": ".trivyignore",
+        "hash": "14448727037733588142"
+      },
+      {
+        "file": "nx.json",
+        "hash": "11760161006842351548"
+      },
+      {
+        "file": "scripts/sync-all-poms.js",
+        "hash": "13063577974537244493"
+      },
+      {
         "file": "pnpm-workspace.yaml",
         "hash": "11650935292615147861"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "3896070834466826943"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "11333155824092531688"
+      },
+      {
+        "file": ".terraform-version",
+        "hash": "17015069938952498254"
+      },
+      {
+        "file": "infra/repository/main.tf",
+        "hash": "4396565939330767620"
+      },
+      {
+        "file": "infra/repository/.terraform.lock.hcl",
+        "hash": "8535807250840864458"
+      },
+      {
+        "file": ".node-version",
+        "hash": "3895855084391241356"
+      },
+      {
+        "file": "scripts/preview-release.js",
+        "hash": "8740277968940382754"
       },
       {
         "file": ".editorconfig",
@@ -24,92 +76,40 @@
         "hash": "14575207707319412496"
       },
       {
-        "file": "scripts/sync-all-poms.js",
-        "hash": "13063577974537244493"
-      },
-      {
-        "file": "infra/repository/.terraform.lock.hcl",
-        "hash": "8535807250840864458"
-      },
-      {
         "file": "package.json",
         "hash": "3321409653570633126"
-      },
-      {
-        "file": ".github/workflows/release.yml",
-        "hash": "4492081119116718254"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "3896070834466826943"
-      },
-      {
-        "file": "infra/repository/providers.tf",
-        "hash": "3932545540996606629"
-      },
-      {
-        "file": ".terraform-version",
-        "hash": "17015069938952498254"
-      },
-      {
-        "file": "scripts/sync-pom-version.js",
-        "hash": "14708038153204148618"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "11333155824092531688"
-      },
-      {
-        "file": "scripts/preview-release.js",
-        "hash": "8740277968940382754"
-      },
-      {
-        "file": "infra/resources/_modules/dummy-resource/main.tf",
-        "hash": "8460537179458208207"
-      },
-      {
-        "file": "nx.json",
-        "hash": "11760161006842351548"
-      },
-      {
-        "file": "infra/repository/main.tf",
-        "hash": "4396565939330767620"
-      },
-      {
-        "file": ".github/workflows/deploy-dev.yml",
-        "hash": "7818887810332873357"
-      },
-      {
-        "file": ".node-version",
-        "hash": "3895855084391241356"
-      },
-      {
-        "file": ".trivyignore",
-        "hash": "14448727037733588142"
       },
       {
         "file": ".github/workflows/version-packages.yml",
         "hash": "4664136083479741631"
       },
       {
-        "file": "infra/repository/outputs.tf",
-        "hash": "15157434267523467669"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "1775665375387268871"
-      },
-      {
         "file": "README.md",
         "hash": "7305863568161797493"
       },
       {
-        "file": ".nx/version-plans/version-plan-1771256991168.md",
-        "hash": "8717367852821274057"
+        "file": "infra/repository/outputs.tf",
+        "hash": "15157434267523467669"
       },
       {
-        "file": "TESTING-MAVEN.md",
-        "hash": "24674563862073636"
+        "file": ".github/workflows/release.yml",
+        "hash": "4492081119116718254"
+      },
+      {
+        "file": "scripts/sync-pom-version.js",
+        "hash": "14708038153204148618"
+      },
+      {
+        "file": ".github/workflows/deploy-dev.yml",
+        "hash": "7818887810332873357"
+      },
+      {
+        "file": "infra/resources/_modules/dummy-resource/main.tf",
+        "hash": "8460537179458208207"
+      },
+      {
+        "file": "infra/repository/providers.tf",
+        "hash": "3932545540996606629"
       }
     ],
     "projectFileMap": {
@@ -202,7 +202,7 @@
         },
         {
           "file": "apps/product-ms/README.md",
-          "hash": "4523134239267934118"
+          "hash": "4733019947261321275"
         },
         {
           "file": "apps/product-ms/package.json",
