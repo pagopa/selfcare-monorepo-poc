@@ -37,27 +37,37 @@ jobs:
         run: |
           echo "🔍 Detecting affected projects..."
 
-          # Simulate nx affected (for PoC, we just show what changed)
+          # Get changed files and extract affected projects
           AFFECTED=""
-          for file in $(git diff HEAD~1 --name-only | grep -E '(apps|infra/resources)'); do
-            if [[ $file == apps/* ]]; then
-              APP=$(echo $file | cut -d'/' -f2)
+          
+          for file in $(git diff HEAD~1 --name-only); do
+            # Skip non-deployable files
+            if [[ $file =~ (README\.md|CHANGELOG\.md|\.terraform/|\.terraform\.lock\.hcl|package\.json)$ ]]; then
+              continue
+            fi
+            
+            # Check apps (only source files, not config)
+            if [[ $file =~ ^apps/([^/]+)/src/ ]]; then
+              APP="${BASH_REMATCH[1]}"
               AFFECTED="$AFFECTED $APP"
-            elif [[ $file == infra/resources/dev/* ]]; then
-              INFRA=$(echo $file | cut -d'/' -f4)
-              AFFECTED="$AFFECTED infra-dev-$INFRA"
+              
+            # Check infra dev resources (main.tf or other terraform files)
+            elif [[ $file =~ ^infra/resources/dev/([^/]+)/.*\.tf$ ]]; then
+              MS="${BASH_REMATCH[1]}"
+              AFFECTED="$AFFECTED infra-dev-$MS"
             fi
           done
 
-          AFFECTED=$(echo $AFFECTED | tr ' ' '\n' | sort -u | tr '\n' ' ')
+          # Remove duplicates and sort
+          AFFECTED=$(echo $AFFECTED | tr ' ' '\n' | sort -u | tr '\n' ' ' | xargs)
 
           if [ -n "$AFFECTED" ]; then
             echo "has-affected=true" >> $GITHUB_OUTPUT
             echo "projects=$AFFECTED" >> $GITHUB_OUTPUT
-            echo "📦 Affected: $AFFECTED"
+            echo "📦 Affected projects: $AFFECTED"
           else
             echo "has-affected=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No affected projects"
+            echo "ℹ️ No affected projects (only non-deployable files changed)"
           fi
 
       - name: Deploy Affected to DEV (Mock)
