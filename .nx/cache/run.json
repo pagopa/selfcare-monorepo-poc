@@ -1,9 +1,0 @@
-{
-  "run": {
-    "command": "nx affected --target=deploy --configuration=dev",
-    "startTime": "2026-02-16T15:32:37.144Z",
-    "endTime": "2026-02-16T15:32:37.161Z",
-    "inner": false
-  },
-  "tasks": []
-}
