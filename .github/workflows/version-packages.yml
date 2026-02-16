@@ -90,11 +90,11 @@ jobs:
           # Apply version plans (updates package.json, generates CHANGELOG, deletes plan files)
           npx nx release --skip-publish
 
-          # Extract changed projects
-          CHANGED=$(git diff --name-only | grep 'package.json' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/.*/||' | sort -u)
-          echo "changed-projects<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGED" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # Extract changed projects from git log (last commit from nx release)
+          CHANGED=$(git log -1 --name-only --pretty=format: | grep 'package.json' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/.*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
+          
+          echo "changed-projects=$CHANGED" >> $GITHUB_OUTPUT
+          echo "📋 Changed projects: $CHANGED"
 
       - name: Sync pom.xml Versions
         if: steps.check.outputs.has-plans == 'true'
