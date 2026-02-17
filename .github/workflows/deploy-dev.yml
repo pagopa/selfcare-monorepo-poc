@@ -38,54 +38,34 @@ jobs:
       - name: Check Affected Projects
         id: affected
         run: |
-          echo "🔍 Detecting affected projects..."
+          echo "🔍 Detecting affected projects with Nx..."
 
-          # Get changed files and extract affected projects
-          AFFECTED=""
-
-          for file in $(git diff HEAD~1 --name-only); do
-            # Skip non-deployable files
-            if [[ $file =~ (README\.md|CHANGELOG\.md|\.terraform/|\.terraform\.lock\.hcl|package\.json)$ ]]; then
-              continue
-            fi
-
-            # Check apps (only source files, not config)
-            if [[ $file =~ ^apps/([^/]+)/src/ ]]; then
-              APP="${BASH_REMATCH[1]}"
-              AFFECTED="$AFFECTED $APP"
-
-            # Check infra dev resources (main.tf or other terraform files)
-            elif [[ $file =~ ^infra/resources/dev/([^/]+)/.*\.tf$ ]]; then
-              MS="${BASH_REMATCH[1]}"
-              AFFECTED="$AFFECTED infra-dev-$MS"
-            fi
-          done
-
-          # Remove duplicates and sort
-          AFFECTED=$(echo $AFFECTED | tr ' ' '\n' | sort -u | tr '\n' ' ' | xargs)
-
-          if [ -n "$AFFECTED" ]; then
+          # Use Nx to detect affected projects
+          AFFECTED_LIST=$(npx nx show projects --affected --base=HEAD~1 --head=HEAD)
+          
+          if [ -n "$AFFECTED_LIST" ]; then
             echo "has-affected=true" >> $GITHUB_OUTPUT
-            echo "projects=$AFFECTED" >> $GITHUB_OUTPUT
-            echo "📦 Affected projects: $AFFECTED"
+            # Convert newline-separated list to space-separated for output
+            PROJECTS=$(echo "$AFFECTED_LIST" | tr '\n' ' ' | xargs)
+            echo "projects=$PROJECTS" >> $GITHUB_OUTPUT
+            echo "📦 Affected projects:"
+            echo "$AFFECTED_LIST" | sed 's/^/  - /'
           else
             echo "has-affected=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No affected projects (only non-deployable files changed)"
+            echo "ℹ️ No affected projects"
           fi
 
-      - name: Deploy Affected to DEV (Mock)
+      - name: Deploy Affected to DEV
         if: steps.affected.outputs.has-affected == 'true'
         run: |
           echo "🚀 Deploying affected projects to DEV..."
-
-          # In real scenario: npx nx affected --target=deploy --configuration=dev --base=HEAD~1
-
-          for project in ${{ steps.affected.outputs.projects }}; do
-            echo "  ✅ Deployed: $project"
-          done
-
           echo ""
-          echo "✅ Mock deployment to DEV completed"
+          
+          # Use Nx to run deploy target on affected projects
+          npx nx affected --target=deploy --configuration=dev --base=HEAD~1 --head=HEAD
+          
+          echo ""
+          echo "✅ Deployment to DEV completed"
 
       - name: No Affected Projects
         if: steps.affected.outputs.has-affected == 'false'
