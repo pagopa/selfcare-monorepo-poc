@@ -1,6 +1,6 @@
 {
   "name": "@selfcare/onboarding-ms",
-  "version": "1.0.2",
+  "version": "1.0.3-0",
   "private": true,
   "description": "Onboarding microservice - Mock for PoC",
   "scripts": {
