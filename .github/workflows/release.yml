@@ -112,9 +112,6 @@ jobs:
               console.log('No CHANGELOG.md found');
             }
 
-            // Determine if prerelease
-            const isPrerelease = changelogContent.includes('-rc.');
-
             // Get latest tag
             let tagName;
             try {
@@ -123,6 +120,10 @@ jobs:
               console.log('No tags found yet');
               return;
             }
+
+            // Determine if prerelease by checking tag name for any prerelease suffix
+            // Matches: -0, -1, -rc.0, -alpha.1, -beta.2, etc.
+            const isPrerelease = /-[a-z0-9]+(\.[0-9]+)?$/i.test(tagName);
 
             // Create release
             await github.rest.repos.createRelease({
