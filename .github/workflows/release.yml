@@ -64,10 +64,11 @@ jobs:
       - name: Determine Deployment Environment
         id: env
         run: |
-          # Auto-detect RC vs stable from package.json versions
-          if git diff HEAD~1 --name-only | xargs grep -l '"version".*-rc\.' 2>/dev/null; then
+          # Auto-detect RC/prerelease vs stable from package.json versions
+          # Matches: -rc.0, -0, -alpha.1, -beta.2, etc.
+          if git diff HEAD~1 --name-only | xargs grep -E '"version".*-[a-z0-9]+' 2>/dev/null; then
             echo "target=uat" >> $GITHUB_OUTPUT
-            echo "🧪 Detected RC versions → deploying to UAT"
+            echo "🧪 Detected prerelease versions → deploying to UAT"
           else
             echo "target=prod" >> $GITHUB_OUTPUT
             echo "🎯 Detected stable versions → deploying to PROD"
