@@ -6,8 +6,11 @@
   "tags": ["type:app", "stack:java"],
   "targets": {
     "build": {
-      "executor": "@nx/maven:build",
-      "options": {}
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "mvn clean install -DskipTests",
+        "cwd": "apps/iam-ms"
+      }
     },
     "deploy": {
       "executor": "nx:run-commands",

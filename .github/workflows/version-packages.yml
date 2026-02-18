@@ -60,7 +60,7 @@ jobs:
         id: preview
         run: |
           echo "🔍 Previewing version changes..."
-          npx nx release --dry-run 2>&1 | tee /tmp/release-preview.txt || true
+          npx nx release version --dry-run 2>&1 | tee /tmp/release-preview.txt || true
 
       - name: Apply Version Plans
         if: steps.check.outputs.has-plans == 'true'
@@ -69,7 +69,7 @@ jobs:
           echo "📦 Applying version plans..."
 
           # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
-          npx nx release --skip-publish
+          npx nx release version --skip-publish
 
           # Regenerate package-lock.json with updated workspace versions
           echo "🔄 Regenerating package-lock.json..."
