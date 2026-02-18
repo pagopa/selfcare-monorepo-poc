@@ -87,10 +87,16 @@ function setVersionInPom(projectRoot, newVersion, tree) {
     throw new Error(`pom.xml not found at ${pomPath}`);
   }
 
+  // For tree operations, use relative path from workspace root
+  const relativePomPath = path.relative(process.cwd(), pomPath);
+
   // Read from tree if available, otherwise from fs
-  let pomContent = tree && tree.exists(pomPath)
-    ? tree.read(pomPath, 'utf-8')
-    : fs.readFileSync(pomPath, 'utf-8');
+  let pomContent;
+  if (tree && tree.exists(relativePomPath)) {
+    pomContent = tree.read(relativePomPath, 'utf-8');
+  } else {
+    pomContent = fs.readFileSync(pomPath, 'utf-8');
+  }
 
   // Replace only the first <version> tag (the project version)
   // This pattern matches: <artifactId>...</artifactId><version>...</version>
@@ -99,14 +105,14 @@ function setVersionInPom(projectRoot, newVersion, tree) {
     `$1${newVersion}$2`
   );
 
-  // Write to tree or fs
+  // Write to tree or fs (tree uses relative paths!)
   if (tree) {
-    tree.write(pomPath, pomContent);
+    tree.write(relativePomPath, pomContent);
   } else {
     fs.writeFileSync(pomPath, pomContent, 'utf-8');
   }
 
-  console.log(`[Maven] Updated ${path.relative(process.cwd(), pomPath)} to version ${newVersion}`);
+  console.log(`[Maven] Updated ${relativePomPath} to version ${newVersion}`);
 }
 
 /**
@@ -123,24 +129,30 @@ function setVersionInPackageJson(projectRoot, newVersion, tree) {
     throw new Error(`package.json not found at ${packagePath}`);
   }
 
+  // For tree operations, use relative path from workspace root
+  const relativePackagePath = path.relative(process.cwd(), packagePath);
+
   // Read from tree if available, otherwise from fs
-  const content = tree && tree.exists(packagePath)
-    ? tree.read(packagePath, 'utf-8')
-    : fs.readFileSync(packagePath, 'utf-8');
+  let content;
+  if (tree && tree.exists(relativePackagePath)) {
+    content = tree.read(relativePackagePath, 'utf-8');
+  } else {
+    content = fs.readFileSync(packagePath, 'utf-8');
+  }
 
   const packageJson = JSON.parse(content);
   packageJson.version = newVersion;
 
   const newContent = JSON.stringify(packageJson, null, 2) + '\n';
 
-  // Write to tree or fs
+  // Write to tree or fs (tree uses relative paths!)
   if (tree) {
-    tree.write(packagePath, newContent);
+    tree.write(relativePackagePath, newContent);
   } else {
     fs.writeFileSync(packagePath, newContent, 'utf-8');
   }
 
-  console.log(`[Package.json] Updated ${path.relative(process.cwd(), packagePath)} to version ${newVersion}`);
+  console.log(`[Package.json] Updated ${relativePackagePath} to version ${newVersion}`);
 }
 
 /**

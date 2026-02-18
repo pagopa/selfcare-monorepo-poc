@@ -19,13 +19,13 @@ function parseVersionPlans(workspaceRoot) {
 
   for (const file of planFiles) {
     const content = fs.readFileSync(path.join(versionPlansDir, file), 'utf-8');
-    
+
     // Extract YAML front matter between ---
     const match = content.match(/^---\s*\n([\s\S]*?)\n---/);
     if (!match) continue;
 
     const yamlContent = match[1];
-    
+
     // Simple YAML parser for lines like "'@scope/project': patch"
     const lines = yamlContent.split('\n');
     for (const line of lines) {
@@ -58,7 +58,7 @@ async function versionGenerator(tree, options) {
   }
 
   const workspaceRoot = process.cwd();
-  
+
   // Parse version plans if using version-plans source
   let specifierMap = {};
   if (specifierSource === 'version-plans') {
@@ -75,7 +75,7 @@ async function versionGenerator(tree, options) {
     const resolvedPackageRoot = path.join(workspaceRoot, projectRoot);
 
     // Get specifier for this specific project (from version plan or global)
-    const projectSpecifier = specifierSource === 'version-plans' 
+    const projectSpecifier = specifierSource === 'version-plans'
       ? (specifierMap[projectName] || '')
       : specifier;
 
@@ -145,8 +145,33 @@ async function versionGenerator(tree, options) {
   return {
     data: results,
     callback: async (tree, opts) => {
-      // Future: add lockfile updates or version plan cleanup here if needed
-      return { changedFiles: [], deletedFiles: [] };
+      // Delete applied version plans so Nx can track them as deleted
+      const deletedFiles = [];
+
+      if (specifierSource === 'version-plans') {
+        const versionPlansDir = '.nx/version-plans';
+
+        try {
+          // Get all .md files in version plans directory
+          const planFiles = fs.readdirSync(path.join(workspaceRoot, versionPlansDir))
+            .filter(f => f.endsWith('.md'));
+
+          for (const file of planFiles) {
+            const planPath = path.join(versionPlansDir, file);
+
+            // Delete from tree (Nx will track this for git)
+            if (tree.exists(planPath)) {
+              tree.delete(planPath);
+              deletedFiles.push(planPath);
+              console.log(`[Maven Generator] 🗑️  Deleted version plan: ${planPath}`);
+            }
+          }
+        } catch (error) {
+          console.warn(`[Maven Generator] Warning: Could not delete version plans: ${error.message}`);
+        }
+      }
+
+      return { changedFiles: [], deletedFiles };
     },
   };
 }
