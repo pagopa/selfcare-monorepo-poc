@@ -1,3 +1,15 @@
+## 1.1.0 (2026-02-18)
+
+
+### 🚀 Features
+
+- Release as stable ([d1c4f33](https://github.com/pagopa/selfcare-monorepo-poc/commit/d1c4f33))
+
+
+### ❤️  Thank You
+
+- Mario Mupo
+
 ## 1.1.0-0 (2026-02-18)
 
 
