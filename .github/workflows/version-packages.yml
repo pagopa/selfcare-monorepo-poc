@@ -62,6 +62,19 @@ jobs:
           echo "🔍 Previewing version changes..."
           npx nx release version --dry-run 2>&1 | tee /tmp/release-preview.txt || true
 
+      - name: Detect Prerelease
+        if: steps.check.outputs.has-plans == 'true'
+        id: detect-prerelease
+        run: |
+          # Check if any version plan contains prerelease keywords
+          if grep -qE "':(prepatch|preminor|premajor|prerelease)" .nx/version-plans/*.md 2>/dev/null; then
+            echo "is-prerelease=true" >> $GITHUB_OUTPUT
+            echo "🧪 Detected prerelease version plan"
+          else
+            echo "is-prerelease=false" >> $GITHUB_OUTPUT
+            echo "🎯 Detected stable version plan"
+          fi
+
       - name: Apply Version Plans
         if: steps.check.outputs.has-plans == 'true'
         id: release
@@ -69,7 +82,14 @@ jobs:
           echo "📦 Applying version plans..."
 
           # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
-          npx nx release version
+          if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
+            echo "🧪 Applying with --preid rc"
+            npx nx release version --preid rc
+          else
+            echo "🎯 Applying stable version"
+            npx nx release version
+          fi
+
           npx nx release changelog
 
           # Regenerate package-lock.json with updated workspace versions
