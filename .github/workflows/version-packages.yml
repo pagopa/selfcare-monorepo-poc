@@ -69,7 +69,8 @@ jobs:
           echo "📦 Applying version plans..."
 
           # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
-          npx nx release version --skip-publish
+          npx nx release version
+          npx nx release changelog
 
           # Regenerate package-lock.json with updated workspace versions
           echo "🔄 Regenerating package-lock.json..."
