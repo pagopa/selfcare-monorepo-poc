@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "version": {
+      "factory": "./src/generators/version/generator",
+      "schema": "./src/generators/version/schema.json",
+      "description": "Version generator that supports Maven pom.xml files"
+    }
+  }
+}

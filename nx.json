@@ -29,13 +29,17 @@
     "projectsRelationship": "independent",
     "projects": ["apps/*", "libs/*", "infra/resources/dev/*", "infra/resources/uat/*", "infra/resources/prod/*"],
     "version": {
-      "currentVersionResolver": "disk",
+      "generator": "@dx/nx-maven-version:version",
       "generatorOptions": {
         "packageRoot": "{projectRoot}",
-        "currentVersionResolver": "disk",
-        "postTargetDependencies": ["sync-pom"]
+        "currentVersionResolver": "disk"
       },
-      "generator": "@nx/js:release-version"
+      "git": {
+        "commit": true,
+        "tag": false,
+        "stageChanges": true,
+        "commitMessage": "chore(release): publish {version}"
+      }
     },
     "changelog": {
       "workspaceChangelog": {
@@ -51,12 +55,6 @@
         "createRelease": false,
         "file": "{projectRoot}/CHANGELOG.md"
       }
-    },
-    "git": {
-      "commit": true,
-      "tag": false,
-      "stageChanges": true,
-      "commitMessage": "chore(release): publish {version}"
     }
   }
 }

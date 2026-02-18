@@ -5,11 +5,11 @@
   "description": "PoC for SelfCare Monorepo with Nx Release and Version Plans",
   "license": "UNLICENSED",
   "workspaces": [
-    "apps/*",
     "libs/*",
     "infra/resources/dev/*",
     "infra/resources/uat/*",
-    "infra/resources/prod/*"
+    "infra/resources/prod/*",
+    "tools/*"
   ],
   "scripts": {
     "changeset": "nx release plan",

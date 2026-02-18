@@ -1,0 +1,19 @@
+{
+  "name": "@selfcare/iam-ms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/iam-ms",
+  "projectType": "application",
+  "tags": ["type:app", "stack:java"],
+  "targets": {
+    "build": {
+      "executor": "@nx/maven:build",
+      "options": {}
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Deploy iam-ms'"
+      }
+    }
+  }
+}

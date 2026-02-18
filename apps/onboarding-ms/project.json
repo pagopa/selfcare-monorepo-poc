@@ -1,0 +1,19 @@
+{
+  "name": "@selfcare/onboarding-ms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/onboarding-ms",
+  "projectType": "application",
+  "tags": ["type:app", "stack:java"],
+  "targets": {
+    "build": {
+      "executor": "@nx/maven:build",
+      "options": {}
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Deploy onboarding-ms'"
+      }
+    }
+  }
+}
