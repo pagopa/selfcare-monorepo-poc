@@ -82,6 +82,7 @@ jobs:
           echo "📦 Applying version plans..."
 
           # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
+          # Note: nx release version automatically generates changelogs based on nx.json config
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
             npx nx release version --preid rc
@@ -89,8 +90,6 @@ jobs:
             echo "🎯 Applying stable version"
             npx nx release version
           fi
-
-          npx nx release changelog
 
           # Regenerate package-lock.json with updated workspace versions
           echo "🔄 Regenerating package-lock.json..."
