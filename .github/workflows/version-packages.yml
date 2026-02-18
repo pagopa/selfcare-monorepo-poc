@@ -83,20 +83,21 @@ jobs:
 
           # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
           # Note: nx release version automatically generates changelogs based on nx.json config
+          # Disable auto-commit so the workflow can create a PR with all changes
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            npx nx release version --preid rc
+            npx nx release version --preid rc --git-commit=false --stage-changes=false
           else
             echo "🎯 Applying stable version"
-            npx nx release version
+            npx nx release version --git-commit=false --stage-changes=false
           fi
 
           # Regenerate package-lock.json with updated workspace versions
           echo "🔄 Regenerating package-lock.json..."
           npm install --package-lock-only
 
-          # Extract changed projects from git log (last commit from nx release)
-          CHANGED=$(git log -1 --name-only --pretty=format: | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/.*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
+          # Extract changed projects from modified files
+          CHANGED=$(git status --porcelain | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | awk '{print $2}' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/[^/]*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
 
           echo "changed-projects=$CHANGED" >> $GITHUB_OUTPUT
           echo "📋 Changed projects: $CHANGED"
@@ -130,7 +131,8 @@ jobs:
           # Check infra projects (still use package.json)
           for file in infra/resources/*/*/package.json; do
             if [ -f "$file" ]; then
-              PROJECT=$(echo $file | sed 's|infra/resources/.*/||' | sed 's|/package.json||')
+              # Extract project name from path: infra/resources/dev/onboarding-ms/package.json -> onboarding-ms
+              PROJECT=$(basename $(dirname "$file"))
               VERSION=$(jq -r '.version' $file 2>/dev/null)
 
               if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
