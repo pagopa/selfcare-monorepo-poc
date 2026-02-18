@@ -8,8 +8,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "mvn clean install -DskipTests",
-        "cwd": "apps/product-ms"
+        "command": "echo '🔨 Building product-ms (mock)'"
       }
     },
     "deploy": {

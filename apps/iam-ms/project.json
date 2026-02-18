@@ -8,8 +8,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "mvn clean install -DskipTests",
-        "cwd": "apps/iam-ms"
+        "command": "echo '🔨 Building iam-ms (mock)'"
       }
     },
     "deploy": {

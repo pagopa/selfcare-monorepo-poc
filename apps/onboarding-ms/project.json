@@ -8,8 +8,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "mvn clean install -DskipTests",
-        "cwd": "apps/onboarding-ms"
+        "command": "echo '🔨 Building onboarding-ms (mock)'"
       }
     },
     "deploy": {
