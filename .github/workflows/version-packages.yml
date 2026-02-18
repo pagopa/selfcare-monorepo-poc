@@ -68,7 +68,7 @@ jobs:
         run: |
           echo "📦 Applying version plans..."
 
-          # Apply version plans (updates package.json, generates CHANGELOG, deletes plan files)
+          # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
           npx nx release --skip-publish
 
           # Regenerate package-lock.json with updated workspace versions
@@ -76,36 +76,10 @@ jobs:
           npm install --package-lock-only
 
           # Extract changed projects from git log (last commit from nx release)
-          CHANGED=$(git log -1 --name-only --pretty=format: | grep 'package.json' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/.*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
+          CHANGED=$(git log -1 --name-only --pretty=format: | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/.*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
 
           echo "changed-projects=$CHANGED" >> $GITHUB_OUTPUT
           echo "📋 Changed projects: $CHANGED"
-
-      - name: Sync pom.xml Versions
-        if: steps.check.outputs.has-plans == 'true'
-        run: |
-          echo "🔄 Synchronizing pom.xml files with package.json versions..."
-
-          # Find all apps with both package.json and pom.xml
-          for pkg_file in apps/*/package.json; do
-            if [ -f "$pkg_file" ]; then
-              dir=$(dirname "$pkg_file")
-              pom_file="$dir/pom.xml"
-
-              if [ -f "$pom_file" ]; then
-                # Run sync script
-                node scripts/sync-pom-version.js "$pkg_file"
-              fi
-            fi
-          done
-
-          # Check if pom.xml files were modified
-          if git status --porcelain | grep -q "pom.xml"; then
-            echo "✅ pom.xml files updated"
-            git add apps/*/pom.xml
-          else
-            echo "ℹ️  No pom.xml files to update"
-          fi
 
       - name: Get Version Summary
         if: steps.check.outputs.has-plans == 'true'
@@ -113,19 +87,42 @@ jobs:
         run: |
           SUMMARY=""
 
-          for file in $(git diff --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
-            PROJECT=$(echo $file | sed 's|/package.json||' | sed 's|apps/||' | sed 's|infra/.*/||')
-            VERSION=$(jq -r '.version' $file 2>/dev/null)
+          # Check apps (Maven projects with pom.xml)
+          for pom_file in apps/*/pom.xml; do
+            if [ -f "$pom_file" ]; then
+              PROJECT=$(echo $pom_file | sed 's|apps/||' | sed 's|/pom.xml||')
+              # Extract version from pom.xml
+              VERSION=$(grep -A 1 "<artifactId>$PROJECT</artifactId>" "$pom_file" | grep "<version>" | sed 's/.*<version>\(.*\)<\/version>.*/\1/' | head -1)
 
-            if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
-              # Check if RC or stable
-              if [[ $VERSION == *"-rc."* ]]; then
-                BADGE="🧪 RC"
-              else
-                BADGE="🎯 Stable"
+              if [ -n "$VERSION" ]; then
+                # Check if RC or stable
+                if [[ $VERSION == *"-rc."* ]]; then
+                  BADGE="🧪 RC"
+                else
+                  BADGE="🎯 Stable"
+                fi
+
+                SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
               fi
+            fi
+          done
 
-              SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
+          # Check infra projects (still use package.json)
+          for file in infra/resources/*/*/package.json; do
+            if [ -f "$file" ]; then
+              PROJECT=$(echo $file | sed 's|infra/resources/.*/||' | sed 's|/package.json||')
+              VERSION=$(jq -r '.version' $file 2>/dev/null)
+
+              if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
+                # Check if RC or stable
+                if [[ $VERSION == *"-rc."* ]]; then
+                  BADGE="🧪 RC"
+                else
+                  BADGE="🎯 Stable"
+                fi
+
+                SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
+              fi
             fi
           done
 

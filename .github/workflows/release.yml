@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - '**/pom.xml'
       - '**/package.json'
       - '**/CHANGELOG.md'
 
@@ -42,13 +43,29 @@ jobs:
 
           TAGS_CREATED=""
 
-          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
+          # Process Maven projects (apps with pom.xml)
+          for file in $(git diff HEAD~1 --name-only | grep 'pom.xml' | grep -E '(apps)'); do
+            PROJECT=$(echo $file | sed 's|apps/||' | sed 's|/pom.xml||')
+            # Extract version from pom.xml
+            VERSION=$(grep -A 1 "<artifactId>$PROJECT</artifactId>" "$file" | grep "<version>" | sed 's/.*<version>\(.*\)<\/version>.*/\1/' | head -1)
+
+            if [ -n "$VERSION" ]; then
+              TAG_NAME="$PROJECT-v$VERSION"
+              echo "📦 Creating tag: $TAG_NAME (from pom.xml)"
+
+              git tag "$TAG_NAME" -m "Release $PROJECT v$VERSION"
+              TAGS_CREATED="$TAGS_CREATED $TAG_NAME"
+            fi
+          done
+
+          # Process infra projects (package.json)
+          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(infra)'); do
             VERSION=$(jq -r '.version' $file 2>/dev/null)
-            PROJECT=$(echo $file | sed 's|/package.json||' | sed 's|apps/||' | sed 's|infra/.*/||')
+            PROJECT=$(echo $file | sed 's|/package.json||' | sed 's|infra/.*/||')
 
             if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
               TAG_NAME="$PROJECT-v$VERSION"
-              echo "📦 Creating tag: $TAG_NAME"
+              echo "📦 Creating tag: $TAG_NAME (from package.json)"
 
               git tag "$TAG_NAME" -m "Release $PROJECT v$VERSION"
               TAGS_CREATED="$TAGS_CREATED $TAG_NAME"
@@ -64,9 +81,9 @@ jobs:
       - name: Determine Deployment Environment
         id: env
         run: |
-          # Auto-detect RC/prerelease vs stable from package.json versions
+          # Auto-detect RC/prerelease vs stable from pom.xml and package.json versions
           # Matches: -rc.0, -0, -alpha.1, -beta.2, etc.
-          if git diff HEAD~1 --name-only | xargs grep -E '"version".*-[a-z0-9]+' 2>/dev/null; then
+          if git diff HEAD~1 --name-only | xargs grep -E '(<version>.*-[a-z0-9]+</version>|"version".*-[a-z0-9]+)' 2>/dev/null; then
             echo "target=uat" >> $GITHUB_OUTPUT
             echo "🧪 Detected prerelease versions → deploying to UAT"
           else
@@ -82,10 +99,19 @@ jobs:
           # For PoC: just show what would be deployed
 
           echo "📋 Affected projects:"
-          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(apps|infra)'); do
+          
+          # Maven projects (apps)
+          for file in $(git diff HEAD~1 --name-only | grep 'pom.xml' | grep -E '(apps)'); do
+            PROJECT=$(echo $file | sed 's|apps/||' | sed 's|/pom.xml||')
+            VERSION=$(grep -A 1 "<artifactId>$PROJECT</artifactId>" "$file" | grep "<version>" | sed 's/.*<version>\(.*\)<\/version>.*/\1/' | head -1)
+            echo "  - $PROJECT (v$VERSION) [Maven]"
+          done
+          
+          # Infra projects (package.json)
+          for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(infra)'); do
             PROJECT=$(echo $file | sed 's|/package.json||')
             VERSION=$(jq -r '.version' $file)
-            echo "  - $PROJECT (v$VERSION)"
+            echo "  - $PROJECT (v$VERSION) [Node]"
           done
 
           echo ""
