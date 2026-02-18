@@ -1,3 +1,17 @@
+## 1.1.0-0 (2026-02-18)
+
+
+### 🚀 Features
+
+- Test: preminor 2 ([b3193a6](https://github.com/pagopa/selfcare-monorepo-poc/commit/b3193a6))
+
+- Test minor ([21e9003](https://github.com/pagopa/selfcare-monorepo-poc/commit/21e9003))
+
+
+### ❤️  Thank You
+
+- Mario Mupo
+
 ## 1.0.3 (2026-02-18)
 
 
