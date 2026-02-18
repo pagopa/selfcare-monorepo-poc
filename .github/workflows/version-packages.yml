@@ -81,26 +81,33 @@ jobs:
         run: |
           echo "📦 Applying version plans..."
 
-          # Apply version plans (updates pom.xml and package.json, generates CHANGELOG, deletes plan files)
-          # Note: nx release version automatically generates changelogs based on nx.json config
-          # Disable auto-commit so the workflow can create a PR with all changes
+          # Apply version plans (updates pom.xml/package.json, generates CHANGELOG, deletes version plans, commits)
+          # Note: Nx MUST commit to generate changelogs (needs git history)
+          # We let Nx commit, then extract changes and reset for PR creation
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            npx nx release version --preid rc --git-commit=false --stage-changes=false
+            npx nx release version --preid rc
           else
             echo "🎯 Applying stable version"
-            npx nx release version --git-commit=false --stage-changes=false
+            npx nx release version
           fi
 
           # Regenerate package-lock.json with updated workspace versions
           echo "🔄 Regenerating package-lock.json..."
           npm install --package-lock-only
 
-          # Extract changed projects from modified files
-          CHANGED=$(git status --porcelain | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | awk '{print $2}' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/[^/]*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
+          # Extract changed projects from the Nx commit
+          CHANGED=$(git diff --name-only HEAD~1 | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/[^/]*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
 
           echo "changed-projects=$CHANGED" >> $GITHUB_OUTPUT
           echo "📋 Changed projects: $CHANGED"
+
+          # Reset the commit but keep all changes staged (including CHANGELOGs)
+          # This allows create-pull-request action to create its own commit
+          git reset --soft HEAD~1
+          git add -A
+
+          echo "✅ Changes prepared for PR (CHANGELOGs included)"
 
       - name: Get Version Summary
         if: steps.check.outputs.has-plans == 'true'
