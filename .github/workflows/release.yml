@@ -99,14 +99,14 @@ jobs:
           # For PoC: just show what would be deployed
 
           echo "📋 Affected projects:"
-          
+
           # Maven projects (apps)
           for file in $(git diff HEAD~1 --name-only | grep 'pom.xml' | grep -E '(apps)'); do
             PROJECT=$(echo $file | sed 's|apps/||' | sed 's|/pom.xml||')
             VERSION=$(grep -A 1 "<artifactId>$PROJECT</artifactId>" "$file" | grep "<version>" | sed 's/.*<version>\(.*\)<\/version>.*/\1/' | head -1)
             echo "  - $PROJECT (v$VERSION) [Maven]"
           done
-          
+
           # Infra projects (package.json)
           for file in $(git diff HEAD~1 --name-only | grep 'package.json' | grep -E '(infra)'); do
             PROJECT=$(echo $file | sed 's|/package.json||')
