@@ -4,13 +4,6 @@
   "private": true,
   "description": "PoC for SelfCare Monorepo with Nx Release and Version Plans",
   "license": "UNLICENSED",
-  "workspaces": [
-    "libs/*",
-    "infra/resources/dev/*",
-    "infra/resources/uat/*",
-    "infra/resources/prod/*",
-    "tools/*"
-  ],
   "scripts": {
     "changeset": "nx release plan",
     "release:version": "nx release --skip-publish",
@@ -18,9 +11,13 @@
     "graph": "nx graph"
   },
   "devDependencies": {
-    "@nx/js": "^22.5.1",
-    "@nx/maven": "latest",
-    "nx": "^19.0.0",
+    "@nx/js": "22.5.1",
+    "@nx/maven": "22.5.1",
+    "@swc-node/register": "~1.11.1",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.18",
+    "nx": "22.5.1",
     "prettier": "^3.2.5"
-  }
+  },
+  "packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937"
 }
