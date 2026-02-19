@@ -6,7 +6,10 @@
     "libsDir": "libs"
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -17,7 +20,9 @@
   },
   "targetDefaults": {
     "deploy": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": false
     },
     "build": {
@@ -27,7 +32,13 @@
   "release": {
     "versionPlans": true,
     "projectsRelationship": "independent",
-    "projects": ["apps/*", "libs/*", "infra/resources/dev/*", "infra/resources/uat/*", "infra/resources/prod/*"],
+    "projects": [
+      "apps/*",
+      "libs/*",
+      "infra/resources/dev/*",
+      "infra/resources/uat/*",
+      "infra/resources/prod/*"
+    ],
     "version": {
       "generator": "@dx/nx-maven-version:version",
       "generatorOptions": {
@@ -56,5 +67,22 @@
       "stageChanges": false,
       "commitMessage": "chore(release): publish {version}"
     }
-  }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json",
+          "buildDepsName": "build-deps",
+          "watchDepsName": "watch-deps"
+        }
+      }
+    },
+    "@nx/maven"
+  ]
 }
