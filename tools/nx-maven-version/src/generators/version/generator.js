@@ -140,11 +140,11 @@ async function versionGenerator(tree, options) {
   }
 
   // Nx expects an object with a 'data' property containing project version data
-  // Note: Version plan deletion is handled by scripts/release-version.js
+  // Note: Version plan deletion is handled by nx release command
   return {
     data: results,
     callback: async (tree, opts) => {
-      // Minimal callback - no cleanup needed (handled by custom script)
+      // Minimal callback - no cleanup needed
       return {
         changedFiles: [],
         deletedFiles: []
