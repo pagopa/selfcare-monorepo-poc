@@ -90,13 +90,14 @@ jobs:
 
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            npx nx release --preid rc
+            npx nx release --preid rc --skip-publish
           else
             echo "🎯 Applying stable version"
-            npx nx release
+            npx nx release --skip-publish
           fi
 
           # Update package-lock.json
+          echo "🔄 Regenerating package-lock.json..."
           npm install --package-lock-only
 
           # Extract changed projects from modified files
