@@ -90,10 +90,10 @@ jobs:
 
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            node run release:alpha --preid rc
+            npm run release:alpha --preid rc
           else
             echo "🎯 Applying stable version"
-            node run release:alpha
+            npm run release:alpha
           fi
 
           # Extract changed projects from modified files
