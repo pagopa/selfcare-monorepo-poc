@@ -60,7 +60,7 @@ jobs:
         id: preview
         run: |
           echo "🔍 Previewing version changes..."
-          npx nx release version --dry-run 2>&1 | tee /tmp/release-preview.txt || true
+          npx nx release --dry-run 2>&1 | tee /tmp/release-preview.txt || true
 
       - name: Detect Prerelease
         if: steps.check.outputs.has-plans == 'true'
@@ -90,11 +90,14 @@ jobs:
 
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            npm run release:alpha --preid rc
+            npx nx release --preid rc
           else
             echo "🎯 Applying stable version"
-            npm run release:alpha
+            npx nx release
           fi
+
+          # Update package-lock.json
+          npm install --package-lock-only
 
           # Extract changed projects from modified files
           CHANGED=$(git status --porcelain | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | awk '{print $2}' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/[^/]*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
@@ -103,56 +106,6 @@ jobs:
           echo "📋 Changed projects: $CHANGED"
 
           echo "✅ Release script completed - changes ready for PR"
-
-      - name: Get Version Summary
-        if: steps.check.outputs.has-plans == 'true'
-        id: summary
-        run: |
-          SUMMARY=""
-
-          # Check apps (Maven projects with pom.xml)
-          for pom_file in apps/*/pom.xml; do
-            if [ -f "$pom_file" ]; then
-              PROJECT=$(echo $pom_file | sed 's|apps/||' | sed 's|/pom.xml||')
-              # Extract version from pom.xml
-              VERSION=$(grep -A 1 "<artifactId>$PROJECT</artifactId>" "$pom_file" | grep "<version>" | sed 's/.*<version>\(.*\)<\/version>.*/\1/' | head -1)
-
-              if [ -n "$VERSION" ]; then
-                # Check if RC or stable
-                if [[ $VERSION == *"-rc."* ]]; then
-                  BADGE="🧪 RC"
-                else
-                  BADGE="🎯 Stable"
-                fi
-
-                SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
-              fi
-            fi
-          done
-
-          # Check infra projects (still use package.json)
-          for file in infra/resources/*/*/package.json; do
-            if [ -f "$file" ]; then
-              # Extract project name from path: infra/resources/dev/onboarding-ms/package.json -> onboarding-ms
-              PROJECT=$(basename $(dirname "$file"))
-              VERSION=$(jq -r '.version' $file 2>/dev/null)
-
-              if [ "$VERSION" != "null" ] && [ -n "$VERSION" ]; then
-                # Check if RC or stable
-                if [[ $VERSION == *"-rc."* ]]; then
-                  BADGE="🧪 RC"
-                else
-                  BADGE="🎯 Stable"
-                fi
-
-                SUMMARY="${SUMMARY}\n- **${PROJECT}**: \`${VERSION}\` ${BADGE}"
-              fi
-            fi
-          done
-
-          echo "summary<<EOF" >> $GITHUB_OUTPUT
-          echo -e "$SUMMARY" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request Body
         if: steps.check.outputs.has-plans == 'true'
@@ -164,10 +117,6 @@ jobs:
           This PR was opened by the **Version Packages** workflow. When you're ready to do a release, merge this PR and packages will be released automatically.
 
           If you're not ready to release yet, that's fine! Whenever you add more version plans to `main`, this PR will be updated.
-
-          ## 📦 Releases
-
-          ${{ steps.summary.outputs.summary }}
 
           ## 📋 Version Plans Applied
 

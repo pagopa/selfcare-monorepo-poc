@@ -33,20 +33,9 @@
       "generatorOptions": {
         "packageRoot": "{projectRoot}",
         "currentVersionResolver": "disk"
-      },
-      "git": {
-        "commit": false,
-        "tag": false,
-        "stageChanges": false,
-        "commitMessage": "chore(release): publish {version}"
       }
     },
     "changelog": {
-      "git": {
-        "commit": false,
-        "stageChanges": false,
-        "tag": false
-      },
       "workspaceChangelog": {
         "createRelease": false,
         "file": "CHANGELOG.md",
@@ -60,6 +49,12 @@
         "createRelease": false,
         "file": "{projectRoot}/CHANGELOG.md"
       }
+    },
+    "git": {
+      "commit": false,
+      "tag": false,
+      "stageChanges": false,
+      "commitMessage": "chore(release): publish {version}"
     }
   }
 }
