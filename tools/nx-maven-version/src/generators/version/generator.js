@@ -138,42 +138,6 @@ async function versionGenerator(tree, options) {
       projectRoot: projectRoot,
     };
   }
-
-  // Nx expects an object with a 'data' property containing project version data
-  // and optionally a 'callback' for cleanup operations
-
-  return {
-    data: results,
-    callback: async (tree, opts) => {
-      // Delete applied version plans so Nx can track them as deleted
-      const deletedFiles = [];
-
-      if (specifierSource === 'version-plans') {
-        const versionPlansDir = '.nx/version-plans';
-
-        try {
-          // Get all .md files in version plans directory
-          const planFiles = fs.readdirSync(path.join(workspaceRoot, versionPlansDir))
-            .filter(f => f.endsWith('.md'));
-
-          for (const file of planFiles) {
-            const planPath = path.join(versionPlansDir, file);
-
-            // Delete from tree (Nx will track this for git)
-            if (tree.exists(planPath)) {
-              tree.delete(planPath);
-              deletedFiles.push(planPath);
-              console.log(`[Maven Generator] 🗑️  Deleted version plan: ${planPath}`);
-            }
-          }
-        } catch (error) {
-          console.warn(`[Maven Generator] Warning: Could not delete version plans: ${error.message}`);
-        }
-      }
-
-      return { changedFiles: [], deletedFiles };
-    },
-  };
 }
 
 module.exports = versionGenerator;

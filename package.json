@@ -15,15 +15,14 @@
     "changeset": "nx release plan",
     "release": "npm run release:version && npm run sync-pom",
     "release:version": "nx release --skip-publish",
-    "release:preview": "node scripts/preview-release.js",
-    "sync-pom": "node scripts/sync-all-poms.js",
+    "release:alpha": "node scripts/release-version.js",
     "affected": "nx affected",
     "graph": "nx graph"
   },
   "devDependencies": {
-    "nx": "^19.0.0",
-    "@nx/js": "^19.0.0",
+    "@nx/js": "^18.3.5",
     "@nx/maven": "latest",
+    "nx": "^19.0.0",
     "prettier": "^3.2.5"
   }
 }
