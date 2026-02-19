@@ -69,8 +69,8 @@ if (projectsToRelease.size === 0) {
 console.log('\n📝 Step 1: Applying version changes...');
 
 const versionCmd = preid
-  ? `npx nx release version --preid ${preid} --git-commit=false --stage-changes=false`
-  : `npx nx release version --git-commit=false --stage-changes=false`;
+  ? `npx nx release version --preid ${preid}`
+  : `npx nx release version`;
 
 try {
   if (!isDryRun) {
@@ -149,7 +149,7 @@ console.log('\n📝 Step 3: Generating changelogs...');
 
 for (const [projectName, version] of updatedVersions) {
   try {
-    const changelogCmd = `npx nx release changelog ${version} --projects="${projectName}" --git-commit=false`;
+    const changelogCmd = `npx nx release changelog ${version} -p ${projectName}`;
 
     if (!isDryRun) {
       console.log(`   Generating changelog for ${projectName} v${version}...`);
@@ -164,23 +164,8 @@ for (const [projectName, version] of updatedVersions) {
   }
 }
 
-// Step 6: Delete version plans
-console.log('\n🗑️  Step 4: Deleting version plans...');
-
-if (!isDryRun) {
-  for (const file of planFiles) {
-    const planPath = path.join(versionPlansDir, file);
-    fs.unlinkSync(planPath);
-    console.log(`   ✅ Deleted ${file}`);
-  }
-} else {
-  for (const file of planFiles) {
-    console.log(`   [DRY RUN] Would delete ${file}`);
-  }
-}
-
-// Step 7: Regenerate package-lock.json
-console.log('\n🔄 Step 5: Regenerating package-lock.json...');
+// Step 4: Regenerate package-lock.json
+console.log('\n🔄 Step 4: Regenerating package-lock.json...');
 
 try {
   if (!isDryRun) {

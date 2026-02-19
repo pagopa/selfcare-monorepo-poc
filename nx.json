@@ -35,13 +35,18 @@
         "currentVersionResolver": "disk"
       },
       "git": {
-        "commit": true,
+        "commit": false,
         "tag": false,
-        "stageChanges": true,
+        "stageChanges": false,
         "commitMessage": "chore(release): publish {version}"
       }
     },
     "changelog": {
+      "git": {
+        "commit": false,
+        "stageChanges": false,
+        "tag": false
+      },
       "workspaceChangelog": {
         "createRelease": false,
         "file": "CHANGELOG.md",
