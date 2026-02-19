@@ -32,20 +32,22 @@
   "release": {
     "versionPlans": true,
     "projectsRelationship": "independent",
-    "projects": [
-      "apps/*",
-      "libs/*",
-      "infra/resources/dev/*",
-      "infra/resources/uat/*",
-      "infra/resources/prod/*"
-    ],
-    "version": {
-      "generator": "@dx/nx-maven-version:version",
-      "generatorOptions": {
-        "packageRoot": "{projectRoot}",
-        "currentVersionResolver": "disk"
+    "groups": {
+      "maven": {
+        "projects": [
+          "name:it.pagopa.selfcare:*"
+        ],
+        "version": {
+          "versionActions": "tools/nx-maven-version/src/release-version-actions.js"
+        }
+      },
+      "infra": {
+        "projects": [
+          "@selfcare/*"
+        ]
       }
     },
+    "version": {},
     "changelog": {
       "workspaceChangelog": {
         "createRelease": false,
