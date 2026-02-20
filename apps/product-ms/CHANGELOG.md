@@ -1,3 +1,14 @@
+## 1.1.1 (2026-02-20)
+
+### 🩹 Fixes
+
+- test ([cb52d79](https://github.com/pagopa/selfcare-monorepo-poc/commit/cb52d79))
+- Move to prod ([62bf21f](https://github.com/pagopa/selfcare-monorepo-poc/commit/62bf21f))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.1-0 (2026-02-19)
 
 
