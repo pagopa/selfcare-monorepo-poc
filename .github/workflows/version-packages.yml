@@ -26,13 +26,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - name: Upgrade npm
-        run: npm install -g npm@11
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.30.0 --activate
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Check for Version Plans
         id: check
@@ -60,14 +62,14 @@ jobs:
         id: preview
         run: |
           echo "🔍 Previewing version changes..."
-          npx nx release --dry-run 2>&1 | tee /tmp/release-preview.txt || true
+          pnpm exec nx release --dry-run 2>&1 | tee /tmp/release-preview.txt || true
 
       - name: Detect Prerelease
         if: steps.check.outputs.has-plans == 'true'
         id: detect-prerelease
         run: |
           # Check if any version plan contains prerelease keywords
-          if grep -qE "':(prepatch|preminor|premajor|prerelease)" .nx/version-plans/*.md 2>/dev/null; then
+          if grep -qE ':(prepatch|preminor|premajor|prerelease)' .nx/version-plans/*.md 2>/dev/null; then
             echo "is-prerelease=true" >> $GITHUB_OUTPUT
             echo "🧪 Detected prerelease version plan"
           else
@@ -90,15 +92,15 @@ jobs:
 
           if [ "${{ steps.detect-prerelease.outputs.is-prerelease }}" = "true" ]; then
             echo "🧪 Applying with --preid rc"
-            npx nx release --preid rc --skip-publish
+            pnpm exec nx release --preid rc --skip-publish
           else
             echo "🎯 Applying stable version"
-            npx nx release --skip-publish
+            pnpm exec nx release --skip-publish
           fi
 
-          # Update package-lock.json
-          echo "🔄 Regenerating package-lock.json..."
-          npm install --package-lock-only
+          # Ensure pnpm lockfile is aligned after manifest updates
+          echo "🔄 Refreshing pnpm-lock.yaml..."
+          pnpm install --lockfile-only
 
           # Extract changed projects from modified files
           CHANGED=$(git status --porcelain | grep -E '(pom.xml|package.json)' | grep -E '(apps|infra)' | awk '{print $2}' | xargs -I {} dirname {} | sed 's|^apps/||' | sed 's|^infra/resources/[^/]*/||' | sort -u | tr '\n' ', ' | sed 's/,$//')
