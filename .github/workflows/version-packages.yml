@@ -68,7 +68,7 @@ jobs:
         id: detect-prerelease
         run: |
           # Check if any version plan contains prerelease keywords
-          if grep -qE ':(prepatch|preminor|premajor|prerelease)' .nx/version-plans/*.md 2>/dev/null; then
+          if grep -qE ':\s*(prepatch|preminor|premajor|prerelease)' .nx/version-plans/*.md 2>/dev/null; then
             echo "is-prerelease=true" >> $GITHUB_OUTPUT
             echo "🧪 Detected prerelease version plan"
           else

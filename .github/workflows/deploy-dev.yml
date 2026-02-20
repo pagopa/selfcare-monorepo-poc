@@ -43,30 +43,56 @@ jobs:
 
           # Use Nx to detect affected projects
           AFFECTED_LIST=$(pnpm exec nx show projects --affected --base=HEAD~1 --head=HEAD)
+          MAVEN_LIST=$(echo "$AFFECTED_LIST" | grep '^it\.pagopa\.selfcare:' || true)
+          NON_MAVEN_LIST=$(echo "$AFFECTED_LIST" | grep -v '^it\.pagopa\.selfcare:' || true)
 
           if [ -n "$AFFECTED_LIST" ]; then
             echo "has-affected=true" >> $GITHUB_OUTPUT
+            if [ -n "$MAVEN_LIST" ]; then
+              echo "has-maven=true" >> $GITHUB_OUTPUT
+            else
+              echo "has-maven=false" >> $GITHUB_OUTPUT
+            fi
+            if [ -n "$NON_MAVEN_LIST" ]; then
+              echo "has-non-maven=true" >> $GITHUB_OUTPUT
+            else
+              echo "has-non-maven=false" >> $GITHUB_OUTPUT
+            fi
             # Convert newline-separated list to space-separated for output
             PROJECTS=$(echo "$AFFECTED_LIST" | tr '\n' ' ' | xargs)
+            MAVEN_PROJECTS=$(echo "$MAVEN_LIST" | tr '\n' ' ' | xargs)
+            NON_MAVEN_PROJECTS=$(echo "$NON_MAVEN_LIST" | tr '\n' ' ' | xargs)
             echo "projects=$PROJECTS" >> $GITHUB_OUTPUT
+            echo "maven-projects=$MAVEN_PROJECTS" >> $GITHUB_OUTPUT
+            echo "non-maven-projects=$NON_MAVEN_PROJECTS" >> $GITHUB_OUTPUT
             echo "📦 Affected projects:"
             echo "$AFFECTED_LIST" | sed 's/^/  - /'
           else
             echo "has-affected=false" >> $GITHUB_OUTPUT
+            echo "has-maven=false" >> $GITHUB_OUTPUT
+            echo "has-non-maven=false" >> $GITHUB_OUTPUT
             echo "ℹ️ No affected projects"
           fi
 
       - name: Deploy Affected to DEV
-        if: steps.affected.outputs.has-affected == 'true'
+        if: steps.affected.outputs.has-non-maven == 'true'
         run: |
           echo "🚀 Deploying affected projects to DEV..."
           echo ""
 
           # Use Nx to run deploy target on affected projects
-          pnpm exec nx affected --target=deploy --configuration=dev --base=HEAD~1 --head=HEAD
+          pnpm exec nx run-many --target=deploy --configuration=dev --projects=${{ steps.affected.outputs.non-maven-projects }}
 
           echo ""
           echo "✅ Deployment to DEV completed"
+
+      - name: Mock Deploy Maven Projects
+        if: steps.affected.outputs.has-maven == 'true'
+        run: |
+          echo "🧪 Mock deploy for Maven projects (PoC)"
+          for project in ${{ steps.affected.outputs.maven-projects }}; do
+            echo "  - $project (mock deploy)"
+          done
 
       - name: No Affected Projects
         if: steps.affected.outputs.has-affected == 'false'
@@ -78,9 +104,15 @@ jobs:
         run: |
           echo "### 🚀 DEV Deployment" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Deployed Projects**:" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Projects (non-Maven)**:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          for project in ${{ steps.affected.outputs.projects }}; do
+          for project in ${{ steps.affected.outputs.non-maven-projects }}; do
+            echo "- $project" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Mock Deployed Projects (Maven)**:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          for project in ${{ steps.affected.outputs.maven-projects }}; do
             echo "- $project" >> $GITHUB_STEP_SUMMARY
           done
           echo "" >> $GITHUB_STEP_SUMMARY
