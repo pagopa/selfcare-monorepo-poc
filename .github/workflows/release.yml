@@ -27,13 +27,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Upgrade npm
-        run: npm install -g npm@11
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.30.0 --activate
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Create Git Tags
         id: tags
@@ -95,7 +96,7 @@ jobs:
         run: |
           echo "🚀 Deploying to ${{ steps.env.outputs.target }}"
 
-          # In real scenario: npx nx affected --target=deploy --configuration=${{ steps.env.outputs.target }} --base=HEAD~1
+          # In real scenario: pnpm exec nx affected --target=deploy --configuration=${{ steps.env.outputs.target }} --base=HEAD~1
           # For PoC: just show what would be deployed
 
           echo "📋 Affected projects:"

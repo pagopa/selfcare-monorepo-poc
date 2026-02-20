@@ -27,13 +27,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Upgrade npm
-        run: npm install -g npm@11
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.30.0 --activate
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Check Affected Projects
         id: affected
@@ -41,8 +42,8 @@ jobs:
           echo "🔍 Detecting affected projects with Nx..."
 
           # Use Nx to detect affected projects
-          AFFECTED_LIST=$(npx nx show projects --affected --base=HEAD~1 --head=HEAD)
-          
+          AFFECTED_LIST=$(pnpm exec nx show projects --affected --base=HEAD~1 --head=HEAD)
+
           if [ -n "$AFFECTED_LIST" ]; then
             echo "has-affected=true" >> $GITHUB_OUTPUT
             # Convert newline-separated list to space-separated for output
@@ -60,10 +61,10 @@ jobs:
         run: |
           echo "🚀 Deploying affected projects to DEV..."
           echo ""
-          
+
           # Use Nx to run deploy target on affected projects
-          npx nx affected --target=deploy --configuration=dev --base=HEAD~1 --head=HEAD
-          
+          pnpm exec nx affected --target=deploy --configuration=dev --base=HEAD~1 --head=HEAD
+
           echo ""
           echo "✅ Deployment to DEV completed"
 
