@@ -44,7 +44,7 @@ jobs:
           # Use Nx to detect affected projects
           AFFECTED_LIST=$(pnpm exec nx show projects --affected --base=HEAD~1 --head=HEAD)
           MAVEN_LIST=$(echo "$AFFECTED_LIST" | grep '^it\.pagopa\.selfcare:' || true)
-          NON_MAVEN_LIST=$(echo "$AFFECTED_LIST" | grep '^@selfcare:' || true)
+          NON_MAVEN_LIST=$(echo "$AFFECTED_LIST" | grep '^@selfcare/' || true)
 
           if [ -n "$AFFECTED_LIST" ]; then
             echo "has-affected=true" >> $GITHUB_OUTPUT
