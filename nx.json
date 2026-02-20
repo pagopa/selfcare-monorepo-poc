@@ -38,7 +38,7 @@
           "name:it.pagopa.selfcare:*"
         ],
         "version": {
-          "versionActions": "tools/nx-maven-version/src/release-version-actions.js"
+          "versionActions": "tools/nx-maven-version/release-version-actions.js"
         }
       },
       "infra": {

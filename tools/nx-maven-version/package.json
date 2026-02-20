@@ -1,9 +1,6 @@
 {
   "name": "@dx/nx-maven-version",
   "version": "0.0.1",
-  "description": "Nx plugin to manage Maven pom.xml versioning with nx release",
-  "generators": "./generators.json",
-  "dependencies": {
-    "semver": "^7.5.4"
-  }
+  "description": "Nx Version Action to manage Maven pom.xml versioning with nx release",
+  "dependencies": {}
 }
