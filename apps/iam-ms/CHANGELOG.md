@@ -1,3 +1,13 @@
+## 1.0.2-rc.0 (2026-02-20)
+
+### 🩹 Fixes
+
+- tesy ([807f5eb](https://github.com/pagopa/selfcare-monorepo-poc/commit/807f5eb))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.0.2-0 (2026-02-20)
 
 ### 🩹 Fixes
