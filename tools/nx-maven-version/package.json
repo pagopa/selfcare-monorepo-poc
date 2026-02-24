@@ -1,6 +1,7 @@
 {
   "name": "@dx/nx-maven-version",
   "version": "0.0.1",
+  "private": true,
   "description": "Nx Version Action to manage Maven pom.xml versioning with nx release",
   "dependencies": {}
 }

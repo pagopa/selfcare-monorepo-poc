@@ -9,6 +9,12 @@
       "options": {
         "command": "echo 'Deploying PROD infrastructure for product-ms...'"
       }
+    },
+    "nx-release-publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo '[nx-release-publish] Mock publish for @selfcare/infra-prod-product-ms (PoC)'"
+      }
     }
   }
 }

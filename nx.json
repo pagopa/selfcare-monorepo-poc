@@ -29,11 +29,7 @@
       "cache": true
     },
     "nx-release-publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "echo 'Skipping publish for private/unconfigured project'",
-        "parallel": false
-      }
+      "dependsOn": ["^nx-release-publish"]
     }
   },
   "release": {
@@ -72,7 +68,7 @@
     },
     "git": {
       "commit": false,
-      "tag": false,
+      "tag": true,
       "stageChanges": false,
       "commitMessage": "chore(release): publish {version}"
     }
