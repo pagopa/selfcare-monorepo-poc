@@ -1,11 +1,12 @@
 name: Version Packages
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '.nx/version-plans/**'
+  workflow_dispatch: # Remove after testing
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - '.nx/version-plans/**'
 
 permissions:
   contents: write

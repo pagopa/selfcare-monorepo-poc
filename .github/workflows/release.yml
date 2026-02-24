@@ -1,13 +1,14 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/pom.xml'
-      - '**/package.json'
-      - '**/CHANGELOG.md'
+  workflow_dispatch: # Remove after testing
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - '**/pom.xml'
+  #     - '**/package.json'
+  #     - '**/CHANGELOG.md'
 
 permissions:
   contents: write
