@@ -1,3 +1,13 @@
+## 1.0.2-rc.1 (2026-02-20)
+
+### 🩹 Fixes
+
+- New prerelease ([f949a1a](https://github.com/pagopa/selfcare-monorepo-poc/commit/f949a1a))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.0.2-rc.0 (2026-02-20)
 
 ### 🩹 Fixes
