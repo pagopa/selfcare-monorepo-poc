@@ -1,3 +1,13 @@
+## 1.0.2-rc.5 (2026-02-25)
+
+### 🩹 Fixes
+
+- Test update 2 ([efee320](https://github.com/pagopa/selfcare-monorepo-poc/commit/efee320))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.0.2-rc.4 (2026-02-24)
 
 ### 🩹 Fixes

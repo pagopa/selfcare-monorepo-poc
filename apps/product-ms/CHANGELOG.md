@@ -1,3 +1,13 @@
+## 1.1.2 (2026-02-25)
+
+### 🩹 Fixes
+
+- Test Patch ([b123b17](https://github.com/pagopa/selfcare-monorepo-poc/commit/b123b17))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.1 (2026-02-20)
 
 ### 🩹 Fixes
