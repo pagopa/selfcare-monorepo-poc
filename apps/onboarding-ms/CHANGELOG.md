@@ -1,3 +1,9 @@
+## 1.2.0
+
+### 🚀 Features
+
+- test ([5ebaac8](https://github.com/pagopa/selfcare-monorepo-poc/commit/5ebaac8))
+
 ## 1.1.1 (2026-02-24)
 
 ### 🩹 Fixes
