@@ -57,13 +57,20 @@
         "file": "CHANGELOG.md",
         "renderOptions": {
           "authors": false,
+          "applyUsernameToAuthors": false,
           "commitReferences": true,
           "versionTitleDate": false
         }
       },
       "projectChangelogs": {
         "createRelease": false,
-        "file": "{projectRoot}/CHANGELOG.md"
+        "file": "{projectRoot}/CHANGELOG.md",
+        "renderOptions": {
+          "authors": false,
+          "applyUsernameToAuthors": true,
+          "commitReferences": true,
+          "versionTitleDate": false
+        }
       }
     },
     "git": {
