@@ -56,9 +56,10 @@
         "createRelease": false,
         "file": "CHANGELOG.md",
         "renderOptions": {
-          "authors": true,
+          "authors": false,
           "commitReferences": true,
-          "versionTitleDate": true
+          "versionTitleDate": false
+
         }
       },
       "projectChangelogs": {
