@@ -1,3 +1,13 @@
+## 1.0.2-rc.6 (2026-02-25)
+
+### 🩹 Fixes
+
+- Test prerelease ([0fa84ca](https://github.com/pagopa/selfcare-monorepo-poc/commit/0fa84ca))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.0.2-rc.5 (2026-02-25)
 
 ### 🩹 Fixes
