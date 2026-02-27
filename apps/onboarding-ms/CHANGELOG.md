@@ -1,3 +1,9 @@
+## 1.2.1-rc.1
+
+### 🩹 Fixes
+
+- Test ([87c0f42](https://github.com/pagopa/selfcare-monorepo-poc/commit/87c0f42))
+
 ## 1.2.1-rc.0
 
 ### 🩹 Fixes
