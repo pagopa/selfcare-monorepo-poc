@@ -1,3 +1,9 @@
+## 1.0.2-rc.10
+
+### 🩹 Fixes
+
+- test ([ce44342](https://github.com/pagopa/selfcare-monorepo-poc/commit/ce44342))
+
 ## 1.0.2-rc.9
 
 ### 🩹 Fixes
