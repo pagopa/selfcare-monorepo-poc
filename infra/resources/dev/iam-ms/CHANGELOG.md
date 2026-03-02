@@ -1,3 +1,9 @@
+## 1.1.0-rc.3
+
+### 🩹 Fixes
+
+- Test 1 ([ec60a64](https://github.com/pagopa/selfcare-monorepo-poc/commit/ec60a64))
+
 ## 1.1.0-rc.2
 
 ### 🩹 Fixes
