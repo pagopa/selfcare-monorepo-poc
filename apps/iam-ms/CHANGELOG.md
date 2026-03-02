@@ -1,3 +1,9 @@
+## 1.0.3-rc.4
+
+### 🩹 Fixes
+
+- Test 1 ([f3eb560](https://github.com/pagopa/selfcare-monorepo-poc/commit/f3eb560))
+
 ## 1.0.3-rc.3
 
 ### 🩹 Fixes
