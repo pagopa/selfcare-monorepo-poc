@@ -52,21 +52,11 @@
     },
     "version": {},
     "changelog": {
-      "workspaceChangelog": {
-        "createRelease": false,
-        "file": "CHANGELOG.md",
-        "renderOptions": {
-          "authors": false,
-          "applyUsernameToAuthors": false,
-          "commitReferences": true,
-          "versionTitleDate": false
-        }
-      },
       "projectChangelogs": {
         "createRelease": false,
         "file": "{projectRoot}/CHANGELOG.md",
         "renderOptions": {
-          "authors": false,
+          "authors": true,
           "applyUsernameToAuthors": true,
           "commitReferences": true,
           "versionTitleDate": false
@@ -75,9 +65,8 @@
     },
     "git": {
       "commit": false,
-      "tag": true,
-      "stageChanges": false,
-      "commitMessage": "chore(release): publish {version}"
+      "tag": false,
+      "stageChanges": false
     }
   },
   "plugins": [
