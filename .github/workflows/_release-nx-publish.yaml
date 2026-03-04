@@ -17,8 +17,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  pr:
-    if: github.event_name == 'push' && contains(toJSON(github.event.head_commit.added), '.nx/version-plans/')
+  version-packages-pr:
+    if: github.event_name == 'push'
+    name: Create/Update Version Packages PR
     permissions:
       contents: write
       id-token: write
@@ -32,6 +33,7 @@ jobs:
 
   release:
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'nx-release/')
+    name: Publish Release
     permissions:
       contents: write
       id-token: write
