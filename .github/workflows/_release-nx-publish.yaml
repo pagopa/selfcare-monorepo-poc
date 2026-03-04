@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   version-packages-pr:
-    if: github.event_name == 'push' && github.event.pull_request == null
+    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
     name: Create/Update Version Packages PR
     permissions:
       contents: write
