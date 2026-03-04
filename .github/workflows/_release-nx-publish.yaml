@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   pr:
-    if: github.event_name == 'push' && github.event.pull_request.merged == false
+    if: github.event_name == 'push' && contains(toJSON(github.event.head_commit.added), '.nx/version-plans/')
     permissions:
       contents: write
       id-token: write
