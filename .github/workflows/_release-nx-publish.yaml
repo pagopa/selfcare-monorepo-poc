@@ -21,4 +21,4 @@ jobs:
       environment: infra-dev-ci
       mode: publish
     secrets:
-      github-token: ${{ secrets.BOT_GH_TOKEN }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
