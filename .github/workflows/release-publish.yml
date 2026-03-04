@@ -13,7 +13,7 @@ jobs:
       contents: write
       id-token: write
       pull-requests: write
-    uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support
+    uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support-test
     with:
       environment: infra-dev-ci
     secrets:
