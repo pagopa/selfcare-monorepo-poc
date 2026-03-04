@@ -6,7 +6,7 @@
 
     <groupId>it.pagopa.selfcare</groupId>
     <artifactId>iam-ms</artifactId>
-    <version>1.0.3-rc.9</version>
+    <version>1.0.3-rc.10</version>
     <packaging>jar</packaging>
 
     <name>IAM Microservice</name>
