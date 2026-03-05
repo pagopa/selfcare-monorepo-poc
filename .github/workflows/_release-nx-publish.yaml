@@ -17,23 +17,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  version-packages-pr:
-    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
-    name: Create/Update Version Packages PR
-    permissions:
-      contents: write
-      id-token: write
-      pull-requests: write
-    uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support-test
-    with:
-      environment: infra-dev-ci
-      mode: 'create-pr'
-    secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
-
   release:
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'nx-release/')
-    name: Publish Release
+    name: Nx Release
     permissions:
       contents: write
       id-token: write
@@ -41,6 +26,5 @@ jobs:
     uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support-test
     with:
       environment: infra-dev-ci
-      mode: 'publish'
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
