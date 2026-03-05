@@ -6,7 +6,7 @@
 
     <groupId>it.pagopa.selfcare</groupId>
     <artifactId>onboarding-ms</artifactId>
-    <version>1.2.1-rc.8</version>
+    <version>1.2.1-rc.9</version>
     <packaging>jar</packaging>
 
     <name>Onboarding Microservice</name>
