@@ -1,3 +1,13 @@
+## 1.2.1-rc.13
+
+### 🩹 Fixes
+
+- Test PR ([e55ac1e](https://github.com/pagopa/selfcare-monorepo-poc/commit/e55ac1e))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.2.1-rc.12
 
 ### 🩹 Fixes
