@@ -11,6 +11,16 @@ on:
       - closed
     branches:
       - main
+  # workflow_dispatch:
+  #   inputs:
+  #     from-ref:
+  #       description: "Git ref to use as 'from' for tag/release sync (default: HEAD~1)"
+  #       required: false
+  #       default: "HEAD~1"
+  #     to-ref:
+  #       description: "Git ref to use as 'to' for tag/release sync (default: HEAD)"
+  #       required: false
+  #       default: "HEAD"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}
@@ -23,7 +33,7 @@ jobs:
       contents: write
       id-token: write
       pull-requests: write
-    uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support-test
+    uses: pagopa/dx/.github/workflows/release-v1.yaml@feat-add-nx-release-support-refactor
     with:
       environment: infra-dev-ci
     secrets:
