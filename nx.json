@@ -50,13 +50,7 @@
         ]
       }
     },
-    "version": {
-      "git": {
-        "commit": false,
-        "tag": false,
-        "stageChanges": false
-      }
-    },
+    "version": {},
     "changelog": {
       "projectChangelogs": {
         "createRelease": false,
@@ -67,12 +61,12 @@
           "commitReferences": true,
           "versionTitleDate": false
         }
-      },
-      "git": {
-        "commit": false,
-        "tag": false,
-        "stageChanges": false
       }
+    },
+    "git": {
+      "commit": false,
+      "tag": true,
+      "stageChanges": false
     }
   },
   "plugins": [
