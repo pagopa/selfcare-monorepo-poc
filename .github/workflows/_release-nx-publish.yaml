@@ -11,16 +11,7 @@ on:
       - closed
     branches:
       - main
-  # workflow_dispatch:
-  #   inputs:
-  #     from-ref:
-  #       description: "Git ref to use as 'from' for tag/release sync (default: HEAD~1)"
-  #       required: false
-  #       default: "HEAD~1"
-  #     to-ref:
-  #       description: "Git ref to use as 'to' for tag/release sync (default: HEAD)"
-  #       required: false
-  #       default: "HEAD"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}
