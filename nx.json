@@ -42,12 +42,18 @@
         ],
         "version": {
           "versionActions": "tools/nx-maven-version/release-version-actions.js"
+        },
+        "releaseTag": {
+          "pattern": "{projectName}@{version}"
         }
       },
       "infra": {
         "projects": [
           "@selfcare/*"
-        ]
+        ],
+        "releaseTag": {
+          "pattern": "{projectName}@{version}"
+        }
       }
     },
     "version": {},
