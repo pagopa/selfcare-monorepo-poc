@@ -1,0 +1,27 @@
+diff --git a/dist/plugins/dependencies.js b/dist/plugins/dependencies.js
+index 57a3ad6117661350e100ff6115f9df06a67e5ba9..ca2c4de30d227857c9a4e3ab49ce633615f1e77d 100644
+--- a/dist/plugins/dependencies.js
++++ b/dist/plugins/dependencies.js
+@@ -17,12 +17,18 @@ const createDependencies = async (options, context) => {
+     devkit_1.logger.verbose('[Maven Dependencies] Found Maven data with', mavenData.createDependenciesResults.length, 'dependencies');
+     // Create a mapping from project root to project name
+     const rootToProjectMap = (0, internal_1.createProjectRootMappingsFromProjectConfigurations)(context.projects);
+-    // Extract and transform dependencies from the mavenData
+-    const transformedDependencies = mavenData.createDependenciesResults.map((dep) => ({
++    // Extract and transform dependencies from the mavenData.
++    // Note: `source` is always a project root path that must be remapped.
++    // `target` can be an external node name (e.g. "maven:org.example:artifact")
++    // which is NOT in rootToProjectMap, so we fall back to the original value
++    // to avoid pushing `undefined` into file deps and crashing fileDataDepTarget.
++    const transformedDependencies = mavenData.createDependenciesResults
++        .map((dep) => ({
+         ...dep,
+         source: rootToProjectMap.get(dep.source),
+-        target: rootToProjectMap.get(dep.target),
+-    }));
++        target: rootToProjectMap.get(dep.target) ?? dep.target,
++    }))
++        .filter((dep) => dep.source !== undefined && dep.target !== undefined);
+     return transformedDependencies;
+ };
+ exports.createDependencies = createDependencies;

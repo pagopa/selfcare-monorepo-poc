@@ -2,6 +2,11 @@ packages:
   - packages/*
   - apps/*
 
-linkWorkspacePackages: true
-packageImportMethod: "clone-or-copy"
 cleanupUnusedCatalogs: true
+
+linkWorkspacePackages: true
+
+packageImportMethod: clone-or-copy
+
+patchedDependencies:
+  '@nx/maven@22.5.1': patches/@nx__maven@22.5.1.patch
