@@ -1,3 +1,13 @@
+## 1.1.0-rc.12
+
+### 🩹 Fixes
+
+- Test 1 ([6beec3d](https://github.com/pagopa/selfcare-monorepo-poc/commit/6beec3d))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.0-rc.11
 
 ### 🩹 Fixes
