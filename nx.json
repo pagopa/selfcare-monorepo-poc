@@ -29,7 +29,7 @@
       "cache": true
     },
     "nx-release-publish": {
-      "dependsOn": ["^nx-release-publish"]
+      "dependsOn": ["build", "^nx-release-publish"]
     }
   },
   "release": {
