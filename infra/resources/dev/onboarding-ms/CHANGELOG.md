@@ -1,3 +1,13 @@
+## 1.1.1-rc.2
+
+### 🩹 Fixes
+
+- Test 2 ([449380c](https://github.com/pagopa/selfcare-monorepo-poc/commit/449380c))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.1-rc.1
 
 ### 🩹 Fixes
