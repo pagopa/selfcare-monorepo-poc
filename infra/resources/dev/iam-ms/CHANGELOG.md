@@ -1,3 +1,13 @@
+## 1.1.0-rc.23
+
+### 🩹 Fixes
+
+- Test 1 ([fbfd754](https://github.com/pagopa/selfcare-monorepo-poc/commit/fbfd754))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.0-rc.22
 
 ### 🩹 Fixes
