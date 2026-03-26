@@ -6,11 +6,6 @@ on:
       - main
     paths:
       - ".nx/version-plans/**"
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
   workflow_dispatch:
 
 concurrency:
