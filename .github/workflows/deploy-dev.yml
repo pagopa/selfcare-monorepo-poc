@@ -1,14 +1,15 @@
 name: Deploy DEV
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '.nx/version-plans/**'
-      - '**/CHANGELOG.md'
-      - '.github/**'
-      - '**.md'
+  workflow_dispatch: # Remove after testing
+  # push:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - '.nx/version-plans/**'
+  #     - '**/CHANGELOG.md'
+  #     - '.github/**'
+  #     - '**.md'
 
 permissions:
   contents: read
