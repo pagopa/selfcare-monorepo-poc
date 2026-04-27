@@ -1,3 +1,13 @@
+## 1.1.4-rc.10
+
+### 🩹 Fixes
+
+- Test ([#89](https://github.com/pagopa/selfcare-monorepo-poc/pull/89))
+
+### ❤️ Thank You
+
+- Mario Mupo @mamu0
+
 ## 1.1.4-rc.9
 
 ### 🩹 Fixes
