@@ -38,7 +38,8 @@
     "groups": {
       "maven": {
         "projects": [
-          "name:it.pagopa.selfcare:*"
+          "name:it.pagopa.selfcare:*",
+          "!it.pagopa.selfcare:root"
         ],
         "version": {
           "versionActions": "tools/nx-maven-version/release-version-actions.js"
