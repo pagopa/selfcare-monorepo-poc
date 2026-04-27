@@ -45,4 +45,4 @@ output "resource_group_name" {
   value = module.onboarding_app.resource_group_name
 }
 
-# Test change 2
+# Test change
