@@ -1,0 +1,42 @@
+{
+  "name": "dockerapp",
+  "version": "0.12.36",
+  "private": true,
+  "description": "SelfCare Docker App",
+  "repository": "https://github.com/pagopa/selfcare-monorepo-poc",
+  "nx": {
+    "release": {
+      "docker": {
+        "repositoryName": "pagopa/dx-slc-dockerapp"
+      }
+    },
+    "targets": {
+      "docker:build": {
+        "options": {
+          "args": [
+            "--tag",
+            "latest",
+            "--platform",
+            "linux/arm64,linux/amd64",
+            "--label",
+            "org.opencontainers.image.title={projectName}",
+            "--label",
+            "org.opencontainers.image.description=SelfCareDockerApp",
+            "--label",
+            "org.opencontainers.image.source=https://github.com/pagopa/selfcare-monorepo-poc",
+            "--label",
+            "org.opencontainers.image.url=https://github.com/pagopa/selfcare-monorepo-poc",
+            "--label",
+            "org.opencontainers.image.revision={commitSha}",
+            "--label",
+            "org.opencontainers.image.created={currentDate}",
+            "--provenance=false"
+          ],
+          "env": {
+            "DOCKER_BUILDKIT": "1"
+          }
+        }
+      }
+    }
+  }
+}

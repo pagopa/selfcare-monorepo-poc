@@ -29,32 +29,24 @@
       "cache": true
     },
     "nx-release-publish": {
-      "dependsOn": ["build", "^nx-release-publish"]
+      "dependsOn": [
+        "build",
+        "^nx-release-publish"
+      ]
     }
   },
   "release": {
     "versionPlans": true,
     "projectsRelationship": "independent",
-    "groups": {
-      "maven": {
-        "projects": [
-          "name:it.pagopa.selfcare:*"
-        ],
-        "version": {
-          "versionActions": "tools/nx-maven-version/release-version-actions.js"
-        },
-        "releaseTag": {
-          "pattern": "{projectName}@{version}"
-        }
+    "projects": [
+      "apps/**"
+    ],
+    "docker": {
+      "registryUrl": "ghcr.io",
+      "versionSchemes": {
+        "production": "{versionActionsVersion}"
       },
-      "infra": {
-        "projects": [
-          "@selfcare/*"
-        ],
-        "releaseTag": {
-          "pattern": "{projectName}@{version}"
-        }
-      }
+      "groupPreVersionCommand": "echo Building docker images before publish && pnpm nx affected -t docker:build"
     },
     "version": {},
     "changelog": {
@@ -73,9 +65,19 @@
       "commit": false,
       "tag": true,
       "stageChanges": false
+    },
+    "releaseTag": {
+      "pattern": "{projectName}@{version}",
+      "requireSemver": true,
+      "preferDockerVersion": true,
+      "strictPreid": false
     }
   },
   "plugins": [
+    {
+      "plugin": "@nx/docker",
+      "exclude": []
+    },
     {
       "plugin": "@nx/js/typescript",
       "options": {
@@ -89,7 +91,7 @@
           "watchDepsName": "watch-deps"
         }
       }
-    },
-    "@nx/maven"
-  ]
+    }
+  ],
+  "analytics": false
 }

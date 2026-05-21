@@ -1,7 +1,3 @@
-# Onboarding Microservice
+# Onboarding TypeScript Source
 
-This is a mock source directory for the onboarding microservice.
-
-## Changes Log
-
-- **2026-02-05**: Initial test - trigger selective deployment
+This folder contains the source code for the onboarding dummy app.

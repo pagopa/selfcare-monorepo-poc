@@ -1,0 +1,16 @@
+{
+  "name": "dockerapp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/dockerapp/src",
+  "targets": {
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "node tools/docker/build-image.mjs apps/dockerapp"
+      }
+    }
+  },
+  "tags": []
+}
