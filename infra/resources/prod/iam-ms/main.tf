@@ -11,6 +11,7 @@ provider "azurerm" {
   features {}
 }
 
+
 locals {
   environment = {
     prefix          = "dx"

@@ -29,7 +29,10 @@
       "cache": true
     },
     "nx-release-publish": {
-      "dependsOn": ["build", "^nx-release-publish"]
+      "dependsOn": [
+        "build",
+        "^nx-release-publish"
+      ]
     }
   },
   "release": {
@@ -92,5 +95,6 @@
       }
     },
     "@nx/maven"
-  ]
+  ],
+  "analytics": false
 }
