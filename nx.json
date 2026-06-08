@@ -76,7 +76,25 @@
   "plugins": [
     {
       "plugin": "@nx/docker",
-      "exclude": []
+      "exclude": [],
+      "options": {
+        "buildTarget": {
+          "name": "docker:build",
+          "args": [
+            "--platform linux/arm64,linux/amd64",
+            "--label org.opencontainers.image.title={projectName}",
+            "--label org.opencontainers.image.description=\"$(desc=$(grep -m1 '\"description\"' package.json | cut -d '\"' -f4); if [ -n \"$desc\" ]; then printf '%s' \"$desc\"; else grep -m1 '\"name\"' package.json | cut -d '\"' -f4; fi)\"",
+            "--label org.opencontainers.image.source=https://github.com/pagopa/selfcare-monorepo-poc",
+            "--label org.opencontainers.image.url=https://github.com/pagopa/selfcare-monorepo-poc",
+            "--label org.opencontainers.image.revision={commitSha}",
+            "--label org.opencontainers.image.created={currentDate}",
+            "--provenance=false"
+          ],
+          "env": {
+            "DOCKER_BUILDKIT": "1"
+          }
+        }
+      }
     },
     {
       "plugin": "@nx/js/typescript",

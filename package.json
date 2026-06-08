@@ -11,7 +11,7 @@
     "graph": "nx graph"
   },
   "devDependencies": {
-    "@nx/docker": "22.6.5",
+    "@nx/docker": "22.7.5",
     "@nx/js": "22.6.5",
     "@swc-node/register": "~1.11.1",
     "@swc/core": "~1.15.5",

@@ -1,3 +1,45 @@
+## 0.12.44
+
+### 🩹 Fixes
+
+- qweasf ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.43
+
+### 🩹 Fixes
+
+- asdzxc ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.42
+
+### 🩹 Fixes
+
+- asderewr ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.41
+
+### 🩹 Fixes
+
+- zxcaswe ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.40
+
+### 🩹 Fixes
+
+- adzxcgad ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.38
+
+### 🩹 Fixes
+
+- asda ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.12.37
+
+### 🩹 Fixes
+
+- Test new ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
 ## 0.12.36
 
 ### 🩹 Fixes
