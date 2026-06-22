@@ -1,3 +1,74 @@
+## 1.1.1-rc.0
+
+### 🩹 Fixes
+
+- Test ([#89](https://github.com/pagopa/selfcare-monorepo-poc/pull/89))
+
+### ❤️ Thank You
+
+- Mario Mupo @mamu0
+
+## 1.1.0
+
+### 🩹 Fixes
+
+- Test 2 ([#87](https://github.com/pagopa/selfcare-monorepo-poc/pull/87))
+- Test 3 ([#87](https://github.com/pagopa/selfcare-monorepo-poc/pull/87))
+
+### ❤️ Thank You
+
+- Mario Mupo @mamu0
+
+## 1.1.0-rc.34
+
+### 🩹 Fixes
+
+- Test 2 ([4eafc0b](https://github.com/pagopa/selfcare-monorepo-poc/commit/4eafc0b))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
+## 1.1.0-rc.33
+
+### 🩹 Fixes
+
+- Test 2 ([9935c73](https://github.com/pagopa/selfcare-monorepo-poc/commit/9935c73))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
+## 1.1.0-rc.32
+
+### 🩹 Fixes
+
+- Test 2 ([12dfe7c](https://github.com/pagopa/selfcare-monorepo-poc/commit/12dfe7c))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
+## 1.1.0-rc.31
+
+### 🩹 Fixes
+
+- Test 2 ([f9fd09d](https://github.com/pagopa/selfcare-monorepo-poc/commit/f9fd09d))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
+## 1.1.0-rc.30
+
+### 🩹 Fixes
+
+- Test 2 ([0ae8187](https://github.com/pagopa/selfcare-monorepo-poc/commit/0ae8187))
+
+### ❤️ Thank You
+
+- Mario Mupo
+
 ## 1.1.0-rc.29
 
 ### 🩹 Fixes

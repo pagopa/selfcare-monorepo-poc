@@ -1,6 +1,15 @@
 name: Nx Release
 
 on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - ".nx/version-plans/**"
   push:
     branches:
       - main
@@ -19,8 +28,9 @@ jobs:
       contents: write
       id-token: write
       pull-requests: write
-    uses: pagopa/dx/.github/workflows/release-v2.yaml@feat-add-nx-release-support-test
+    uses: pagopa/dx/.github/workflows/release-v2.yaml@use-regex-for-tags-release-website-to-azure
     with:
       environment: infra-dev-ci
     secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+      app-client-id: ${{ secrets.GH_APP_RELEASE_CLIENT_ID }}
+      app-private-key: ${{ secrets.GH_APP_RELEASE_APP_KEY }}

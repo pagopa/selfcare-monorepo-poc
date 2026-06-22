@@ -1,0 +1,14 @@
+name: "Code Review"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  validate:
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: write
+    uses: pagopa/dx/.github/workflows/validate-v1.yaml@feat-add-summary-comment-pr-nx-release-action
