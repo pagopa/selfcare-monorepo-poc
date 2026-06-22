@@ -37,6 +37,22 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Load Docker Project Metadata
+        run: |
+          echo "📦 Loading Docker project metadata for labels..."
+          
+          # Check if dockerapp exists and read its package.json
+          if [ -f "apps/dockerapp/package.json" ]; then
+            VERSION=$(jq -r '.version' apps/dockerapp/package.json)
+            DESCRIPTION=$(jq -r '.description // "SelfCare Docker App"' apps/dockerapp/package.json)
+            
+            echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+            echo "APP_DESCRIPTION=$DESCRIPTION" >> $GITHUB_ENV
+            
+            echo "  ✅ dockerapp version: $VERSION"
+            echo "  ✅ dockerapp description: $DESCRIPTION"
+          fi
+
       - name: Create Git Tags
         id: tags
         run: |
@@ -118,6 +134,47 @@ jobs:
 
           echo ""
           echo "✅ Mock deployment to ${{ steps.env.outputs.target }} completed"
+
+      - name: Tag and Push Latest for Docker Images
+        if: always()
+        run: |
+          echo "🐳 Checking for released Docker images..."
+
+          # Find all .docker-version files created by nx release
+          docker_version_files=$(find tmp -name ".docker-version" 2>/dev/null || true)
+
+          if [ -z "$docker_version_files" ]; then
+            echo "⏭️  No Docker images found (tmp/*/.docker-version not present)"
+            echo "    This is normal if no Docker projects were released in this commit"
+            exit 0
+          fi
+
+          # Iterate through each released Docker image
+          for version_file in $docker_version_files; do
+            # Read the full image reference (e.g., ghcr.io/org/app:2501.14.abc1234)
+            version_image_ref=$(cat "$version_file")
+            
+            # Extract repository and version
+            # version_image_ref format: registry.io/org/app:version
+            repo_with_tag="${version_image_ref}"
+            repo="${repo_with_tag%:*}"  # Remove :version
+            version="${repo_with_tag##*:}"  # Extract version
+            
+            echo "📦 Processing: $version_image_ref"
+            
+            # Tag the image with 'latest'
+            latest_tag="$repo:latest"
+            echo "  → Creating tag: $latest_tag"
+            docker tag "$version_image_ref" "$latest_tag"
+            
+            # Push the latest tag
+            echo "  → Pushing: $latest_tag"
+            docker push "$latest_tag"
+            
+            echo "  ✅ Pushed $latest_tag"
+          done
+          
+          echo "✅ All Docker latest tags pushed successfully"
 
       - name: Create GitHub Release
         uses: actions/github-script@v7

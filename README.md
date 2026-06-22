@@ -15,11 +15,57 @@ This is a Proof of Concept (PoC) demonstrating a monorepo setup using **Nx** wit
 - [Architecture Overview](#architecture-overview)
 - [How Version Plans Work](#how-version-plans-work)
 - [Workflow Automation](#workflow-automation)
+- [Docker with Nx (DRY Configuration)](#docker-with-nx-dry-configuration)
 - [Getting Started](#getting-started)
 - [Testing Scenarios](#testing-scenarios)
 - [Configuration Details](#configuration-details)
 - [Commands Reference](#commands-reference)
 - [Validation Checklist](#validation-checklist)
+
+---
+
+## 🐳 Docker with Nx (DRY Configuration)
+
+To keep Docker release configuration consistent and avoid per-project duplication:
+
+- `@nx/docker` is disabled in the active workspace configuration.
+- `docker:build` is inferred from each app `Dockerfile` by `@nx-tools/nx-container`.
+- Common Docker defaults are defined once in `nx.json` via `targetDefaults` and `@nx-tools/nx-container` plugin options.
+- `org.opencontainers.image.description` is resolved from each app `package.json` (`description` field).
+- Each Docker app keeps only the per-project `release.docker.repositoryName` and minimal target stubs for targets that are not inferred.
+- Example projects in this repo: `apps/dockerapp` and `apps/dockerapp2`.
+- `latest` tags are pushed by each Docker app `nx-release-publish` target during `nx release publish`.
+- Image names follow the root convention `ghcr.io/pagopa/dx-slc-{projectName}`.
+
+### Minimal Docker App Configuration
+
+`apps/<app>/package.json`
+
+```json
+{
+  "name": "my-docker-app",
+  "version": "0.1.0",
+  "nx": {
+    "release": {
+      "docker": {
+        "repositoryName": "pagopa/my-docker-app"
+      }
+    },
+    "targets": {
+      "docker:run": {
+        "options": {}
+      },
+      "nx-release-publish": {
+        "options": {}
+      }
+    }
+  }
+}
+```
+
+`docker:build` is inferred from `Dockerfile`. `docker:run` and `nx-release-publish` are enabled by the stubs above and completed from root `targetDefaults`.
+
+This way, adding a new Docker-released project is a convention-based setup instead of copying command blocks and labels across files.
 
 ---
 

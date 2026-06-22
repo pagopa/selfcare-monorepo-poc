@@ -1,17 +1,16 @@
-# Onboarding Microservice - PoC
+# Onboarding TypeScript Dummy App
 
-This is a dummy microservice for testing the PoC.
+This app replaces the previous onboarding placeholder with a minimal TypeScript project.
 
-## Structure
-
-- Modify this file to trigger selective deploy
-- Terraform will detect the change and deploy only this MS
-
-## Test
+## Commands
 
 ```bash
-# Modify this file to test selective deploy
-echo "test" >> README.md
-git add README.md
-git commit -m "test: onboarding change"
+pnpm --filter onboarding-ms build
+pnpm --filter onboarding-ms typecheck
+pnpm --filter onboarding-ms start
 ```
+
+## Project Layout
+
+- `src/index.ts`: dummy entrypoint
+- `tsconfig.json`: TypeScript compiler config

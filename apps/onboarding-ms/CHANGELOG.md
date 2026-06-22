@@ -1,3 +1,141 @@
+## 0.8.4
+
+### 🩹 Fixes
+
+- asdzxcv ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.8.3
+
+### 🩹 Fixes
+
+- fsdfcv ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.8.2
+
+### 🩹 Fixes
+
+- asdzxczxc ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.8.1
+
+### 🩹 Fixes
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.8.0
+
+### 🚀 Features
+
+- cxzcz ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.7.4
+
+### 🩹 Fixes
+
+- zkjxcjkziwq ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.7.3
+
+### 🩹 Fixes
+
+- akjlsdmnkajsnd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.7.2
+
+### 🩹 Fixes
+
+- xzczsdas ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.7.1
+
+### 🩹 Fixes
+
+- xzxc ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.7.0
+
+### 🚀 Features
+
+- xcvxcv ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.5
+
+### 🩹 Fixes
+
+- kmadasda ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.4
+
+### 🩹 Fixes
+
+- dajsdjasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.3
+
+### 🩹 Fixes
+
+- gxchxcb ht ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.2
+
+### 🩹 Fixes
+
+- asdasffzx ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.1
+
+### 🩹 Fixes
+
+- gaszxc ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.6.0
+
+### 🚀 Features
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.5.0
+
+### 🚀 Features
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.4.0
+
+### 🚀 Features
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.3.0
+
+### 🚀 Features
+
+- asasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.2.0
+
+### 🚀 Features
+
+- asdas ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.1.0
+
+### 🚀 Features
+
+- asdas ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.1.2
+
+### 🩹 Fixes
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.1.1
+
+### 🩹 Fixes
+
+- asdasd ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
 ## 1.2.1-rc.14
 
 ### 🩹 Fixes
@@ -160,68 +298,57 @@
 
 ## 1.1.0-0 (2026-02-18)
 
-
 ### 🚀 Features
 
 - Test: preminor 2 ([b3193a6](https://github.com/pagopa/selfcare-monorepo-poc/commit/b3193a6))
 
 - Test minor ([21e9003](https://github.com/pagopa/selfcare-monorepo-poc/commit/21e9003))
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Mario Mupo
 
 ## 1.0.3 (2026-02-18)
 
-
 ### 🩹 Fixes
 
 - Test patch ([f983663](https://github.com/pagopa/selfcare-monorepo-poc/commit/f983663))
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Mario Mupo
 
 ## 1.0.3-1 (2026-02-17)
 
-
 ### 🩹 Fixes
 
 - Test prerelease ([32d8c31](https://github.com/pagopa/selfcare-monorepo-poc/commit/32d8c31))
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Mario Mupo
 
 ## 1.0.3-0 (2026-02-17)
 
-
 ### 🩹 Fixes
 
 - Test prerelease ([9d2cb38](https://github.com/pagopa/selfcare-monorepo-poc/commit/9d2cb38))
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Mario Mupo
 
 ## 1.0.2 (2026-02-16)
 
-
 ### 🩹 Fixes
 
 - First version plan ([cccd9eb](https://github.com/pagopa/selfcare-monorepo-poc/commit/cccd9eb))
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Mario Mupo
 
 ## 1.0.1 (2026-02-16)
-
 
 ### 🩹 Fixes
 
