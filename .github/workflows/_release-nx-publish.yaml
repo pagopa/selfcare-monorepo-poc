@@ -28,7 +28,7 @@ jobs:
       contents: write
       id-token: write
       pull-requests: write
-    uses: pagopa/dx/.github/workflows/release-v2.yaml@use-regex-for-tags-release-website-to-azure
+    uses: pagopa/dx/.github/workflows/release-v2.yaml@main
     with:
       environment: infra-dev-ci
     secrets:
