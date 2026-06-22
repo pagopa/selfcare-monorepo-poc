@@ -1,6 +1,6 @@
 {
   "name": "dockerapp",
-  "version": "0.12.44",
+  "version": "0.12.79",
   "private": true,
   "description": "SelfCare Docker App",
   "repository": "https://github.com/pagopa/selfcare-monorepo-poc",
@@ -8,6 +8,14 @@
     "release": {
       "docker": {
         "repositoryName": "pagopa/dx-slc-dockerapp"
+      }
+    },
+    "targets": {
+      "docker:run": {
+        "options": {}
+      },
+      "nx-release-publish": {
+        "options": {}
       }
     }
   }

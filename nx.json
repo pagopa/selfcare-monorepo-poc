@@ -28,11 +28,73 @@
     "build": {
       "cache": true
     },
+    "docker:build": {
+      "options": {
+        "provenance": "false",
+        "tags": [
+          "ghcr.io/pagopa/dx-slc-{projectName}:dev"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "platforms": [
+            "linux/arm64",
+            "linux/amd64"
+          ],
+          "metadata": {
+            "images": [
+              "ghcr.io/pagopa/dx-slc-{projectName}"
+            ],
+            "tags": [
+              "type=raw,value=latest,enable={{is_default_branch}}",
+              "type=match,pattern=.*@(\\d+\\.\\d+\\.\\d+)$,group=1",
+              "type=match,pattern=.*@(\\d+\\.\\d+)\\.\\d+$,group=1",
+              "type=match,pattern=.*@([1-9]\\d*)\\.\\d+\\.\\d+$,group=1",
+              "type=ref,event=branch",
+              "type=sha,prefix=sha-"
+            ]
+          }
+        }
+      }
+    },
+    "docker:run": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "docker:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "docker run {args} ghcr.io/pagopa/dx-slc-{projectName}:dev"
+      }
+    },
     "nx-release-publish": {
+      "executor": "@nx-tools/nx-container:build",
       "dependsOn": [
         "build",
         "^nx-release-publish"
-      ]
+      ],
+      "options": {
+        "load": false,
+        "platforms": [
+          "linux/arm64",
+          "linux/amd64"
+        ],
+        "provenance": "false",
+        "push": true,
+        "metadata": {
+          "images": [
+            "ghcr.io/pagopa/dx-slc-{projectName}"
+          ],
+          "tags": [
+            "type=raw,value=latest,enable={{is_default_branch}}",
+            "type=match,pattern=.*@(\\d+\\.\\d+\\.\\d+)$,group=1",
+            "type=match,pattern=.*@(\\d+\\.\\d+)\\.\\d+$,group=1",
+            "type=match,pattern=.*@([1-9]\\d*)\\.\\d+\\.\\d+$,group=1",
+            "type=ref,event=branch",
+            "type=sha,prefix=sha-"
+          ]
+        }
+      }
     }
   },
   "release": {
@@ -46,7 +108,7 @@
       "versionSchemes": {
         "production": "{versionActionsVersion}"
       },
-      "groupPreVersionCommand": "echo Building docker images before publish && pnpm nx affected -t docker:build"
+      "preVersionCommand": "echo Building docker images before publish && pnpm nx affected -t docker:build"
     },
     "version": {},
     "changelog": {
@@ -75,28 +137,6 @@
   },
   "plugins": [
     {
-      "plugin": "@nx/docker",
-      "exclude": [],
-      "options": {
-        "buildTarget": {
-          "name": "docker:build",
-          "args": [
-            "--platform linux/arm64,linux/amd64",
-            "--label org.opencontainers.image.title={projectName}",
-            "--label org.opencontainers.image.description=\"$(desc=$(grep -m1 '\"description\"' package.json | cut -d '\"' -f4); if [ -n \"$desc\" ]; then printf '%s' \"$desc\"; else grep -m1 '\"name\"' package.json | cut -d '\"' -f4; fi)\"",
-            "--label org.opencontainers.image.source=https://github.com/pagopa/selfcare-monorepo-poc",
-            "--label org.opencontainers.image.url=https://github.com/pagopa/selfcare-monorepo-poc",
-            "--label org.opencontainers.image.revision={commitSha}",
-            "--label org.opencontainers.image.created={currentDate}",
-            "--provenance=false"
-          ],
-          "env": {
-            "DOCKER_BUILDKIT": "1"
-          }
-        }
-      }
-    },
-    {
       "plugin": "@nx/js/typescript",
       "options": {
         "typecheck": {
@@ -108,6 +148,14 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
+      }
+    },
+    {
+      "plugin": "@nx-tools/nx-container",
+      "options": {
+        "defaultEngine": "docker",
+        "defaultRegistry": "ghcr.io",
+        "buildTargetName": "docker:build"
       }
     }
   ],

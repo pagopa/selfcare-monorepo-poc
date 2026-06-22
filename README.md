@@ -28,11 +28,14 @@ This is a Proof of Concept (PoC) demonstrating a monorepo setup using **Nx** wit
 
 To keep Docker release configuration consistent and avoid per-project duplication:
 
-- Common Docker build args/labels/env are defined once in `nx.json` via `@nx/docker` plugin options.
+- `@nx/docker` is disabled in the active workspace configuration.
+- `docker:build` is inferred from each app `Dockerfile` by `@nx-tools/nx-container`.
+- Common Docker defaults are defined once in `nx.json` via `targetDefaults` and `@nx-tools/nx-container` plugin options.
 - `org.opencontainers.image.description` is resolved from each app `package.json` (`description` field).
-- Each Docker app only needs a `Dockerfile` and `nx.release.docker.repositoryName` in `package.json`.
+- Each Docker app keeps only the per-project `release.docker.repositoryName` and minimal target stubs for targets that are not inferred.
 - Example projects in this repo: `apps/dockerapp` and `apps/dockerapp2`.
-- `latest` tags are updated automatically by `.github/workflows/_release-nx-publish.yaml` after Nx release.
+- `latest` tags are pushed by each Docker app `nx-release-publish` target during `nx release publish`.
+- Image names follow the root convention `ghcr.io/pagopa/dx-slc-{projectName}`.
 
 ### Minimal Docker App Configuration
 
@@ -47,12 +50,20 @@ To keep Docker release configuration consistent and avoid per-project duplicatio
       "docker": {
         "repositoryName": "pagopa/my-docker-app"
       }
+    },
+    "targets": {
+      "docker:run": {
+        "options": {}
+      },
+      "nx-release-publish": {
+        "options": {}
+      }
     }
   }
 }
 ```
 
-No custom `docker:build` target is required in `project.json`: Nx infers it from the Docker plugin.
+`docker:build` is inferred from `Dockerfile`. `docker:run` and `nx-release-publish` are enabled by the stubs above and completed from root `targetDefaults`.
 
 This way, adding a new Docker-released project is a convention-based setup instead of copying command blocks and labels across files.
 

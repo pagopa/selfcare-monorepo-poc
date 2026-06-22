@@ -1,3 +1,15 @@
+## 0.8.4
+
+### 🩹 Fixes
+
+- asdzxcv ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
+## 0.8.3
+
+### 🩹 Fixes
+
+- fsdfcv ([](https://github.com/pagopa/selfcare-monorepo-poc/commit/))
+
 ## 0.8.2
 
 ### 🩹 Fixes
